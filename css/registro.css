@@ -14,10 +14,12 @@ body, html {
   background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
 }
 
-/* Sección centrada */
+/* Sección principal */
 .registro-section {
   min-height: 100vh;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  padding: 40px 20px;
 }
 
 /* Caja del formulario */
@@ -27,11 +29,22 @@ body, html {
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 40px;
-  width: 100%;
-  max-width: 400px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   color: white;
+}
+
+/* Imagen decorativa */
+.imagen-box {
+  text-align: center;
+  padding: 20px;
+}
+
+.imagen-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo */
@@ -106,7 +119,7 @@ a:hover {
 }
 
 /* Responsive */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .registro-box {
     padding: 20px;
   }
@@ -117,5 +130,9 @@ a:hover {
 
   h2 {
     font-size: 1.5rem;
+  }
+
+  .imagen-box {
+    display: none;
   }
 }
