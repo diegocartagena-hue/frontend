@@ -1,0 +1,107 @@
+:root {
+  --verde-oscuro: #1B3300;
+  --verde-medio: #4A8000;
+  --verde-suave: #B3D88C;
+  --verde-limon: #D6E800;
+  --vidrio-claro: rgba(255, 255, 255, 0.2);
+  --vidrio-hover: rgba(255, 255, 255, 0.4);
+}
+
+/* Fondo general */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
+}
+
+/* Sección centrada */
+.registro-section {
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Caja del formulario */
+.registro-box {
+  background-color: var(--vidrio-claro);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* Logo */
+.logo-registro {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Etiquetas */
+.form-label {
+  font-weight: 500;
+  color: white;
+}
+
+/* Campos */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  border-radius: 8px;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: var(--verde-oscuro);
+  outline: none;
+  box-shadow: none;
+}
+
+/* Radios */
+.form-check-label {
+  color: white;
+}
+
+.form-check-input {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Botón */
+.btn-glass {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-glass:hover {
+  background-color: var(--vidrio-hover);
+  color: var(--verde-limon);
+  transform: scale(1.05);
+}
+
+/* Enlace inferior */
+a {
+  color: var(--verde-limon);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
