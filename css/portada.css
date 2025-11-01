@@ -3,8 +3,8 @@
   --verde-medio: #4A8000;
   --verde-suave: #B3D88C;
   --verde-limon: #D6E800;
-  --vidrio-claro: rgba(255, 255, 255, 0.6);
-  --vidrio-hover: rgba(255, 255, 255, 0.8);
+  --vidrio-claro: rgba(255, 255, 255, 0.2);
+  --vidrio-hover: rgba(255, 255, 255, 0.4);
 }
 
 /* Reset general */
@@ -13,7 +13,7 @@ body, html {
   padding: 0;
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
-  background-color: var(--verde-suave);
+  background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
 }
 
 /* Menú con efecto vidrio */
@@ -25,7 +25,7 @@ body, html {
   background-color: var(--vidrio-claro);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   border-radius: 0 0 16px 16px;
@@ -38,31 +38,26 @@ body, html {
   border-radius: 8px;
 }
 
-.logo-hero {
-  width: 120px;
-  height: auto;
-}
-
 /* Enlaces del menú */
 .navbar-nav .nav-link {
-  color: var(--verde-oscuro);
+  color: white;
   font-weight: 500;
   padding: 8px 12px;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
   background-color: var(--vidrio-hover);
-  color: var(--verde-medio);
+  color: var(--verde-limon);
 }
 
 /* Botones estilo login */
 .btn-glass,
 .btn {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: var(--verde-oscuro);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
   font-weight: bold;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -75,7 +70,7 @@ body, html {
 .btn-glass:hover,
 .btn:hover {
   background-color: var(--vidrio-hover);
-  color: var(--verde-medio);
+  color: var(--verde-limon);
   transform: scale(1.05);
 }
 
@@ -98,7 +93,7 @@ body, html {
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -127,7 +122,9 @@ body, html {
 
 /* Secciones con vidrio */
 .glass-section {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--verde-oscuro);
   border-radius: 16px;
   padding: 60px 20px;
@@ -136,7 +133,7 @@ body, html {
 
 /* Títulos */
 .titulo-verde {
-  color: var(--verde-medio);
+  color: var(--verde-limon);
   font-weight: 700;
   font-size: 2.2rem;
   margin-bottom: 1rem;
@@ -151,7 +148,7 @@ body, html {
 
 /* Pie de página */
 .glass-footer {
-  background-color: rgba(27, 51, 0, 0.8);
+  background-color: rgba(27, 51, 0, 0.7);
   color: white;
   font-size: 0.9rem;
   border-radius: 16px 16px 0 0;
