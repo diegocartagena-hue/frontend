@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClasiYA - Plataforma Educativa</title>
+  <link rel="stylesheet" href="css/portada.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" href="assets/logo.ico" type="image/x-icon" />
+</head>
+<body>
+
+  <!-- 🧊 Menú institucional con efecto vidrio -->
+  <nav class="navbar navbar-expand-lg glass-nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-nav" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#quienes">Quiénes somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#mision">Misión</a></li>
+          <li class="nav-item"><a class="nav-link" href="#vision">Visión</a></li>
+          <li class="nav-item"><a class="nav-link" href="#valores">Valores</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+        </ul>
+        <a href="login.html" class="btn btn-outline-light me-2">Iniciar sesión</a>
+        <a href="registro.html" class="btn btn-light">Registrarse</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🖼️ Hero principal -->
+  <header class="hero-section d-flex align-items-center justify-content-center text-center">
+    <div class="glass-box p-4">
+      <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-hero mb-3" />
+      <p class="lead">Tu espacio educativo para aprender, enseñar y crecer juntos.</p>
+      <a href="#quienes" class="btn btn-efecto mt-3">Explorar</a>
+    </div>
+  </header>
+
+  <!-- 🧩 Sección: Quiénes somos -->
+  <section id="quienes" class="parallax-section">
+    <div class="container text-center py-5">
+      <h2 class="titulo-verde">¿Qué es ClasiYA?</h2>
+      <p>ClasiYA es una plataforma educativa que conecta alumnos y maestros en un entorno digital accesible, dinámico y seguro.</p>
+    </div>
+  </section>
+
+  <!-- 💡 Misión -->
+  <section id="mision" class="glass-section">
+    <div class="container text-center py-5">
+      <h2 class="titulo-verde">Misión</h2>
+      <p>Facilitar el acceso a la educación digital mediante herramientas intuitivas, inclusivas y colaborativas para todos los usuarios.</p>
+    </div>
+  </section>
+
+  <!-- 🎯 Visión -->
+  <section id="vision" class="parallax-section">
+    <div class="container text-center py-5">
+      <h2 class="titulo-verde">Visión</h2>
+      <p>Ser la plataforma educativa líder en Latinoamérica, reconocida por su innovación, accesibilidad y compromiso con el aprendizaje.</p>
+    </div>
+  </section>
+
+  <!-- 🌟 Valores -->
+  <section id="valores" class="glass-section">
+    <div class="container text-center py-5">
+      <h2 class="titulo-verde">Valores</h2>
+      <ul class="list-unstyled">
+        <li>📚 Educación para todos</li>
+        <li>🤝 Inclusión y respeto</li>
+        <li>🚀 Innovación constante</li>
+        <li>🔒 Seguridad y confianza</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🎠 Galería con carrusel -->
+  <section id="galeria" class="parallax-section">
+    <div class="container py-5">
+      <h2 class="text-center titulo-verde mb-4">Galería de ClasiYA</h2>
+      <div id="carouselClasiya" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/imagen1.jpg" class="d-block w-100" alt="Imagen 1">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/imagen2.jpg" class="d-block w-100" alt="Imagen 2">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/imagen3.jpg" class="d-block w-100" alt="Imagen 3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselClasiya" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselClasiya" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📞 Footer -->
+  <footer class="text-center py-4 glass-footer">
+    <p>&copy; 2025 ClasiYA. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

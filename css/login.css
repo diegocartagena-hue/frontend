@@ -1,0 +1,101 @@
+:root {
+  --verde-oscuro: #1B3300;
+  --verde-medio: #4A8000;
+  --verde-suave: #B3D88C;
+  --verde-limon: #D6E800;
+  --verde-mostaza: #B3A93A;
+}
+
+/* Reset y fuente base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Poppins', sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--verde-oscuro) 0%,
+    var(--verde-medio) 25%,
+    var(--verde-suave) 50%,
+    var(--verde-limon) 75%,
+    var(--verde-mostaza) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Fondo contenedor */
+.background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Contenedor con efecto vidrio */
+.login-form-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  transition: transform 0.3s ease;
+}
+
+.login-form-container:hover {
+  transform: scale(1.02);
+}
+
+/* Campos */
+.form-control {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid #ccc;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 10px rgba(74, 128, 0, 0.5);
+  border-color: var(--verde-medio);
+}
+
+/* Botón */
+.btn-efecto {
+  background-color: var(--verde-medio);
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  padding: 12px;
+}
+
+.btn-efecto:hover {
+  background-color: var(--verde-limon);
+  color: var(--verde-oscuro);
+  transform: scale(1.03);
+}
+
+/* Enlace */
+.link-registro {
+  color: var(--verde-oscuro);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-registro:hover {
+  text-decoration: underline;
+  color: var(--verde-medio);
+}
+
+/* Logo */
+.logo-clasiya {
+  max-width: 60%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
