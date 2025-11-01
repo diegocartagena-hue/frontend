@@ -3,11 +3,11 @@
   --verde-medio: #4A8000;
   --verde-suave: #B3D88C;
   --verde-limon: #D6E800;
-  --verde-mostaza: #B3A93A;
-  --blanco-transparente: rgba(255, 255, 255, 0.2);
+  --vidrio-claro: rgba(255, 255, 255, 0.6);
+  --vidrio-hover: rgba(255, 255, 255, 0.8);
 }
 
-/* Reset */
+/* Reset general */
 body, html {
   margin: 0;
   padding: 0;
@@ -16,68 +16,22 @@ body, html {
   background-color: var(--verde-suave);
 }
 
-/* Efecto vidrio base */
-.glass-box,
-.glass-section,
-.glass-footer {
-  background: var(--blanco-transparente);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* 🟢 Menú con transparencia (sin hover) */
+/* Menú con efecto vidrio */
 .glass-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(27, 51, 0, 0.5);
+  background-color: var(--vidrio-claro);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  border-radius: 0 0 16px 16px;
 }
 
-/* 🔗 Enlaces del menú */
-.navbar-nav .nav-link {
-  color: white;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  color: var(--verde-limon);
-}
-
-/* 🟢 Botones estilo vidrio (todos iguales) */
-.btn,
-.btn-efecto {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 12px 24px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover,
-.btn-efecto:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  color: var(--verde-oscuro);
-  transform: scale(1.05);
-}
-
-/* 🖼️ Logo */
+/* Logo del menú */
 .logo-nav {
   width: 40px;
   height: auto;
@@ -89,15 +43,66 @@ body, html {
   height: auto;
 }
 
-/* 🖼️ Hero principal */
+/* Enlaces del menú */
+.navbar-nav .nav-link {
+  color: var(--verde-oscuro);
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: var(--vidrio-hover);
+  color: var(--verde-medio);
+}
+
+/* Botones estilo login */
+.btn-glass,
+.btn {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--verde-oscuro);
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-glass:hover,
+.btn:hover {
+  background-color: var(--vidrio-hover);
+  color: var(--verde-medio);
+  transform: scale(1.05);
+}
+
+/* Hero principal */
 .hero-section {
   height: 100vh;
   background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-medio));
   color: white;
   text-shadow: 1px 1px 2px #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* 🧩 Secciones parallax */
+/* Caja de bienvenida */
+.glass-box {
+  background-color: var(--vidrio-claro);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Secciones con fondo fijo */
 .parallax-section {
   background-attachment: fixed;
   background-size: cover;
@@ -105,6 +110,7 @@ body, html {
   background-repeat: no-repeat;
   color: white;
   text-shadow: 1px 1px 2px #000;
+  padding: 60px 20px;
 }
 
 #quienes {
@@ -119,13 +125,16 @@ body, html {
   background-image: url('../assets/galeria.jpg');
 }
 
-/* 📦 Secciones con vidrio */
+/* Secciones con vidrio */
 .glass-section {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.7);
   color: var(--verde-oscuro);
+  border-radius: 16px;
+  padding: 60px 20px;
+  margin: 40px auto;
 }
 
-/* 📝 Títulos destacados */
+/* Títulos */
 .titulo-verde {
   color: var(--verde-medio);
   font-weight: 700;
@@ -133,21 +142,23 @@ body, html {
   margin-bottom: 1rem;
 }
 
-/* 🎠 Carrusel */
+/* Carrusel */
 .carousel-item img {
   border-radius: 12px;
   max-height: 400px;
   object-fit: cover;
 }
 
-/* 📞 Footer */
+/* Pie de página */
 .glass-footer {
-  background-color: rgba(27, 51, 0, 0.7);
+  background-color: rgba(27, 51, 0, 0.8);
   color: white;
   font-size: 0.9rem;
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
 }
 
-/* 📱 Responsive ajustes */
+/* Responsive */
 @media (max-width: 768px) {
   .hero-section h1 {
     font-size: 2rem;
@@ -167,5 +178,9 @@ body, html {
 
   .navbar-nav .nav-link {
     margin-bottom: 8px;
+  }
+
+  .glass-box {
+    padding: 20px;
   }
 }
