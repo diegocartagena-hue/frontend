@@ -16,44 +16,117 @@ body, html {
   background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
 }
 
-/* Menú con efecto vidrio */
-.glass-nav {
+/* Menú tipo glass pill */
+.glass-pill-nav {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  background-color: var(--vidrio-claro);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  border-radius: 0 0 16px 16px;
+  padding: 10px 20px;
 }
 
-/* Logo del menú */
-.logo-nav {
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo-link .logo-nav {
   width: 40px;
   height: auto;
   border-radius: 8px;
 }
 
-/* Enlaces del menú */
-.navbar-nav .nav-link {
+/* Botón hamburguesa */
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menú expandible */
+.pill-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: var(--vidrio-claro);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 220px;
+}
+
+.pill-menu.active {
+  display: flex;
+}
+
+/* Enlaces */
+.pill-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+
+.pill-links li {
+  margin-bottom: 10px;
+}
+
+.pill-links a {
   color: white;
   font-weight: 500;
+  text-decoration: none;
   padding: 8px 12px;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.1);
+  display: block;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
+.pill-links a:hover {
   background-color: var(--vidrio-hover);
   color: var(--verde-limon);
 }
 
-/* Botones estilo login */
+/* Botones */
+.pill-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
 .btn-glass,
 .btn {
   background-color: rgba(255, 255, 255, 0.3);
@@ -64,6 +137,7 @@ body, html {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 10px 20px;
+  text-align: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -95,6 +169,12 @@ body, html {
   padding: 40px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo en hero */
+.logo-hero {
+  width: 120px;
+  height: auto;
 }
 
 /* Secciones con fondo fijo */
@@ -173,11 +253,58 @@ body, html {
     font-size: 1.8rem;
   }
 
-  .navbar-nav .nav-link {
-    margin-bottom: 8px;
-  }
-
   .glass-box {
     padding: 20px;
+  }
+
+  .pill-menu {
+    right: 10px;
+    top: 60px;
+    min-width: 180px;
+  }
+
+  .pill-links a {
+    font-size: 0.95rem;
+  }
+
+  .btn-glass {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .pill-menu {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    background: none;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .pill-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: 0;
+  }
+
+  .pill-links a {
+    background: none;
+    padding: 0;
+  }
+
+  .pill-buttons {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    display: none;
   }
 }
