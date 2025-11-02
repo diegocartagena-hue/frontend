@@ -6,26 +6,17 @@
   --verde-mostaza: #B3A93A;
 }
 
-/* Fondo general como login */
+/* Fondo principal blanco */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', 'Poppins', sans-serif;
-  background: linear-gradient(
-    135deg,
-    var(--verde-oscuro) 0%,
-    var(--verde-medio) 25%,
-    var(--verde-suave) 50%,
-    var(--verde-limon) 75%,
-    var(--verde-mostaza) 100%
-  );
-  background-attachment: fixed;
-  background-size: cover;
+  background-color: white;
   overflow-x: hidden;
 }
 
-/* Fondo contenedor principal */
+/* Fondo contenedor central */
 .background {
   min-height: 100vh;
   display: flex;
@@ -34,9 +25,16 @@ html, body {
   padding-top: 80px;
 }
 
-/* Contenedor con efecto vidrio */
+/* Contenedor con fondo degradado y efecto vidrio */
 .login-form-container {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    135deg,
+    var(--verde-oscuro) 0%,
+    var(--verde-medio) 25%,
+    var(--verde-suave) 50%,
+    var(--verde-limon) 75%,
+    var(--verde-mostaza) 100%
+  );
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -295,7 +293,6 @@ html, body {
   }
 }
 
-/* Responsive: escritorio */
 @media (min-width: 992px) {
   .pill-menu {
     position: static;
