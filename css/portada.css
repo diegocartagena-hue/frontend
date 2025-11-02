@@ -3,26 +3,59 @@
   --verde-medio: #4A8000;
   --verde-suave: #B3D88C;
   --verde-limon: #D6E800;
-  --vidrio-claro: rgba(255, 255, 255, 0.2);
-  --vidrio-hover: rgba(255, 255, 255, 0.4);
+  --verde-mostaza: #B3A93A;
 }
 
-/* Reset general */
-body, html {
+/* Fondo general como login */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
-  background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
+  font-family: 'Segoe UI', 'Poppins', sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--verde-oscuro) 0%,
+    var(--verde-medio) 25%,
+    var(--verde-suave) 50%,
+    var(--verde-limon) 75%,
+    var(--verde-mostaza) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Fondo contenedor principal */
+.background {
+  min-height: 100vh;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+/* Contenedor con efecto vidrio */
+.login-form-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 100%;
+  max-width: 1400px;
+  transition: transform 0.3s ease;
+}
+
+.login-form-container:hover {
+  transform: scale(1.01);
 }
 
 /* Menú tipo glass pill */
 .glass-pill-nav {
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 1000;
-  padding: 10px 20px;
+  margin-bottom: 20px;
 }
 
 .nav-container {
@@ -74,10 +107,10 @@ body, html {
   position: absolute;
   top: 70px;
   right: 20px;
-  background-color: var(--vidrio-claro);
+  background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -116,8 +149,8 @@ body, html {
 }
 
 .pill-links a:hover {
-  background-color: var(--vidrio-hover);
-  color: var(--verde-limon);
+  background-color: var(--verde-suave);
+  color: var(--verde-oscuro);
 }
 
 /* Botones */
@@ -129,41 +162,35 @@ body, html {
 }
 
 .btn-glass,
-.btn {
-  background-color: rgba(255, 255, 255, 0.3);
+.btn-efecto {
+  background-color: var(--verde-medio);
   color: white;
   font-weight: bold;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 10px 20px;
+  border: none;
+  padding: 12px 20px;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-glass:hover,
-.btn:hover {
-  background-color: var(--vidrio-hover);
-  color: var(--verde-limon);
+.btn-efecto:hover {
+  background-color: var(--verde-limon);
+  color: var(--verde-oscuro);
   transform: scale(1.05);
 }
 
 /* Hero principal */
 .hero-section {
-  height: 100vh;
-  background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-medio));
+  background: none;
   color: white;
   text-shadow: 1px 1px 2px #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
 /* Caja de bienvenida */
 .glass-box {
-  background-color: var(--vidrio-claro);
+  background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -187,6 +214,8 @@ body, html {
   color: white;
   text-shadow: 1px 1px 2px #000;
   padding: 60px 20px;
+  border-radius: 16px;
+  margin-bottom: 40px;
 }
 
 #quienes {
@@ -238,14 +267,6 @@ body, html {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-
-  .carousel-item img {
-    max-height: 250px;
-  }
-
   .logo-hero {
     width: 90px;
   }
@@ -309,8 +330,8 @@ body, html {
   }
 
   .pill-links a:hover {
-    background-color: var(--vidrio-hover);
-    color: var(--verde-limon);
+    background-color: var(--verde-suave);
+    color: var(--verde-oscuro);
   }
 
   .pill-buttons {
