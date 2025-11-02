@@ -33,7 +33,7 @@ body, html {
 
 /* Logo */
 .logo-link .logo-nav {
-  width: 40px;
+  width: 60px;
   height: auto;
   border-radius: 8px;
 }
@@ -69,10 +69,10 @@ body, html {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Menú expandible */
+/* Menú expandible móvil */
 .pill-menu {
   position: absolute;
-  top: 60px;
+  top: 70px;
   right: 20px;
   background-color: var(--vidrio-claro);
   backdrop-filter: blur(12px);
@@ -85,6 +85,7 @@ body, html {
   flex-direction: column;
   align-items: flex-start;
   min-width: 220px;
+  transition: transform 0.3s ease;
 }
 
 .pill-menu.active {
@@ -279,24 +280,37 @@ body, html {
     display: flex !important;
     flex-direction: row;
     align-items: center;
-    background: none;
-    backdrop-filter: none;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    gap: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    gap: 30px;
+    transition: transform 0.3s ease;
   }
 
   .pill-links {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 30px;
     margin: 0;
   }
 
   .pill-links a {
-    background: none;
-    padding: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pill-links a:hover {
+    background-color: var(--vidrio-hover);
+    color: var(--verde-limon);
   }
 
   .pill-buttons {
@@ -306,5 +320,9 @@ body, html {
 
   .menu-toggle {
     display: none;
+  }
+
+  .logo-link .logo-nav {
+    width: 80px;
   }
 }
