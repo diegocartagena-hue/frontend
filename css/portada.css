@@ -97,12 +97,6 @@ body, html {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo en hero */
-.logo-hero {
-  width: 120px;
-  height: auto;
-}
-
 /* Secciones con fondo fijo */
 .parallax-section {
   background-attachment: fixed;
@@ -115,15 +109,15 @@ body, html {
 }
 
 #quienes {
-  background-image: url('assets/quienes.png');
+  background-image: url('../assets/quienes.png');
 }
 
 #vision {
-  background-image: url('assets/vision.jpg');
+  background-image: url('../assets/vision.jpg');
 }
 
 #galeria {
-  background-image: url('assets/galeria.jpg');
+  background-image: url('../assets/galeria.jpg');
 }
 
 /* Secciones con vidrio */
