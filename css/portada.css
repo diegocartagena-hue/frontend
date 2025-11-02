@@ -6,24 +6,18 @@
   --verde-mostaza: #B3A93A;
 }
 
-/* Fondo general como login */
+/* Fondo general blanco */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', 'Poppins', sans-serif;
-  background: linear-gradient(
-    135deg,
-    var(--verde-oscuro) 0%,
-    var(--verde-medio) 25%,
-    var(--verde-suave) 50%,
-    var(--verde-limon) 75%,
-    var(--verde-mostaza) 100%
-  );
+  background-color: white;
   background-attachment: fixed;
   background-size: cover;
   overflow-x: hidden;
 }
+
 
 /* Fondo contenedor principal */
 .background {
