@@ -228,8 +228,12 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes fadeInUp {
@@ -314,8 +318,12 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
 }
 
 /* ========== SECCIONES MODERNAS ========== */
@@ -655,5 +663,13 @@ body {
   .btn-hero-primary,
   .btn-hero-secondary {
     width: 100%;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .value-card {
+    padding: 1.25rem;
   }
 }
