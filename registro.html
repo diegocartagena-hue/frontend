@@ -48,8 +48,83 @@
     <div class="registro-background"></div>
     <div class="container">
       <div class="row align-items-center justify-content-center min-vh-100">
-        <!-- Columna izquierda: formulario -->
-        <div class="col-lg-6 col-md-8">
+        <!-- Columna izquierda: Contenido informativo -->
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 d-none d-lg-block">
+          <div class="info-sidebar">
+            <div class="info-content">
+              <!-- Logo grande -->
+              <div class="info-logo-wrapper mb-4">
+                <img src="assets/logosinfondo.png" alt="ClasiYA" class="info-logo" />
+              </div>
+
+              <!-- Título principal -->
+              <h2 class="info-title mb-4">Únete a ClasiYA</h2>
+              <p class="info-subtitle mb-5">Comienza tu viaje educativo hoy</p>
+
+              <!-- Beneficios de registrarse -->
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Acceso inmediato</h4>
+                    <p class="feature-text">Comienza a aprender desde el primer día con acceso a todos los recursos.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Cientos de cursos</h4>
+                    <p class="feature-text">Explora una amplia variedad de cursos en diferentes áreas de conocimiento.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-certificate"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Certificados de finalización</h4>
+                    <p class="feature-text">Obtén certificados reconocidos al completar tus cursos.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Soporte 24/7</h4>
+                    <p class="feature-text">Nuestro equipo está disponible para ayudarte cuando lo necesites.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonios o estadísticas -->
+              <div class="stats-container mt-5">
+                <div class="stat-item">
+                  <div class="stat-number">98%</div>
+                  <div class="stat-label">Satisfacción</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">4.9/5</div>
+                  <div class="stat-label">Calificación</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">24/7</div>
+                  <div class="stat-label">Soporte</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: Formulario -->
+        <div class="col-lg-5 col-md-8">
           <div class="registro-box">
             <div class="text-center mb-4">
               <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-registro mb-3" />
@@ -58,7 +133,7 @@
             </div>
 
             <form id="registroForm" class="registro-form">
-              <!-- Nombre completo -->
+              <!-- Resto del formulario igual que antes -->
               <div class="form-group-modern mb-4">
                 <label for="nombre" class="form-label-modern">
                   <i class="fas fa-user me-2"></i>Nombre completo
@@ -72,7 +147,6 @@
                 />
               </div>
 
-              <!-- Correo electrónico -->
               <div class="form-group-modern mb-4">
                 <label for="correo" class="form-label-modern">
                   <i class="fas fa-envelope me-2"></i>Correo electrónico
@@ -86,7 +160,6 @@
                 />
               </div>
 
-              <!-- Contraseña -->
               <div class="form-group-modern mb-4">
                 <label for="contraseña" class="form-label-modern">
                   <i class="fas fa-lock me-2"></i>Contraseña
@@ -105,7 +178,6 @@
                 </div>
               </div>
 
-              <!-- Confirmar contraseña -->
               <div class="form-group-modern mb-4">
                 <label for="confirmar" class="form-label-modern">
                   <i class="fas fa-lock me-2"></i>Confirmar contraseña
@@ -125,7 +197,6 @@
                 <div class="password-match" id="passwordMatch"></div>
               </div>
 
-              <!-- Tipo de cuenta -->
               <div class="form-group-modern mb-4">
                 <label class="form-label-modern mb-3">
                   <i class="fas fa-user-tag me-2"></i>Tipo de cuenta
@@ -163,7 +234,6 @@
                 </div>
               </div>
 
-              <!-- Campo condicional para comprobante de maestro -->
               <div class="form-group-modern mb-4 d-none" id="comprobante-box">
                 <label for="comprobante" class="form-label-modern">
                   <i class="fas fa-file-upload me-2"></i>Comprobante de carnet de profesor
@@ -184,12 +254,10 @@
                 </div>
               </div>
 
-              <!-- Botón de registro -->
               <button type="submit" class="btn-registro-modern w-100 mt-4">
                 <i class="fas fa-user-plus me-2"></i>Crear cuenta
               </button>
 
-              <!-- Enlace a login -->
               <div class="text-center mt-4">
                 <p class="login-link-text">
                   ¿Ya tienes cuenta? 
@@ -197,17 +265,6 @@
                 </p>
               </div>
             </form>
-          </div>
-        </div>
-
-        <!-- Columna derecha: imagen (solo desktop) -->
-        <div class="col-lg-6 d-none d-lg-block">
-          <div class="imagen-box">
-            <img src="assets/registro-ilustracion.png" alt="Educación ClasiYA" class="img-fluid rounded" />
-            <div class="imagen-overlay">
-              <h3>Únete a ClasiYA</h3>
-              <p>Comienza tu viaje educativo hoy</p>
-            </div>
           </div>
         </div>
       </div>
