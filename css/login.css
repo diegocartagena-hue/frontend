@@ -230,9 +230,10 @@ html, body {
   border-radius: 10px;
   cursor: pointer;
   padding: 10px;
-  z-index: 1001;
+  z-index: 1002;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .menu-toggle:hover {
@@ -547,7 +548,7 @@ html, body {
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 120px 20px 50px;
+  padding: 80px 20px 50px;
 }
 
 /* Contenedor con efecto vidrio mejorado */
@@ -1237,15 +1238,17 @@ html, body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 120px 2.5rem 2.5rem;
+    padding: 100px 2.5rem 2.5rem;
     gap: 2.5rem;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
   }
 
   .nav-menu.active {
     right: 0;
   }
+
 
   .nav-links {
     flex-direction: column;
@@ -1274,7 +1277,7 @@ html, body {
   }
 
   .background {
-    padding: 120px 20px 40px;
+    padding: 80px 20px 40px;
   }
 
   .login-form-container {
@@ -1294,9 +1297,8 @@ html, body {
   }
 
   .background {
-    padding: 110px 15px 30px;
+    padding: 80px 15px 30px;
     align-items: flex-start;
-    padding-top: 120px;
   }
 
   .login-form-container {
@@ -1378,8 +1380,7 @@ html, body {
   }
 
   .background {
-    padding: 100px 12px 25px;
-    padding-top: 110px;
+    padding: 80px 12px 25px;
   }
 
   .login-form-container {
