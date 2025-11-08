@@ -3,81 +3,113 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ClasiYA - Panel de Maestro</title>
+    <title>ClasiYA - Sesión en Vivo: [Nombre del Curso]</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
-    <link rel="stylesheet" href="css/maestro.css" />
+    <link rel="stylesheet" href="css/sesiones.css" />
     
     <link rel="icon" href="assets/logoicono.ico" type="image/x-icon" />
 </head>
 <body>
 
-    <div class="dashboard-wrapper">
+    <div class="session-wrapper">
         
-        <aside class="sidebar bg-light shadow-sm">
-            <div class="sidebar-header d-flex justify-content-between align-items-center p-3 border-bottom">
-                <a href="index.html" class="logo-link d-flex align-items-center">
-                    <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-sidebar me-2" />
-                    <span class="logo-text fw-bold">ClasiYA</span>
-                </a>
+        <aside class="sidebar-session bg-white shadow-lg">
+            
+            <div class="sidebar-header border-bottom p-3 d-flex justify-content-between align-items-center">
+                <h5 class="course-title-sidebar mb-0 text-truncate" title="Introducción a la Programación Web">
+                    <i class="fas fa-book me-2"></i> Curso: Programación Web
+                </h5>
+                <button class="btn btn-sm btn-outline-secondary d-lg-none" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-            <div class="profile-section text-center p-4">
-                <div class="profile-avatar mb-2 mx-auto">
-                    <i class="fas fa-user-circle fa-4x text-muted"></i>
+            
+            <div class="nav-pills-container p-3">
+                <ul class="nav nav-pills nav-fill" id="sessionTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="content-tab" data-bs-toggle="tab" data-bs-target="#content-pane" type="button" role="tab" aria-controls="content-pane" aria-selected="true">
+                            <i class="fas fa-list-ul d-block d-sm-inline me-1"></i> Contenido
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="chat-tab" data-bs-toggle="tab" data-bs-target="#chat-pane" type="button" role="tab" aria-controls="chat-pane" aria-selected="false">
+                            <i class="fas fa-comments d-block d-sm-inline me-1"></i> Chat
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content sidebar-body flex-grow-1" id="sessionTabsContent">
+                
+                <div class="tab-pane fade show active" id="content-pane" role="tabpanel" aria-labelledby="content-tab" tabindex="0">
+                    <div class="p-3">
+                        <h6 class="text-uppercase fw-bold mb-3">Módulos del Curso</h6>
+                        <ul class="list-group list-group-flush modules-list">
+                            <li class="list-group-item module-item active">
+                                <i class="fas fa-video me-2"></i> Sesión 1: HTML y Estructura
+                            </li>
+                            <li class="list-group-item module-item">
+                                <i class="fas fa-file-pdf me-2"></i> Recurso: Guía de CSS
+                            </li>
+                            <li class="list-group-item module-item">
+                                <i class="fas fa-chalkboard-teacher me-2"></i> Sesión 2: Flexbox y Grid
+                            </li>
+                            </ul>
+                    </div>
                 </div>
-                <h5 class="profile-name mb-0">Herberth Contreras</h5>
+
+                <div class="tab-pane fade" id="chat-pane" role="tabpanel" aria-labelledby="chat-tab" tabindex="0">
+                    <div class="chat-box d-flex flex-column h-100">
+                        <div class="chat-messages flex-grow-1 p-3">
+                            <div class="message incoming mb-2">
+                                <span class="badge text-bg-secondary">Estudiante A:</span> Hola a todos!
+                            </div>
+                            <div class="message outgoing text-end mb-2">
+                                <span class="badge text-bg-primary">Yo:</span> Empecemos en un minuto.
+                            </div>
+                        </div>
+                        <div class="chat-input p-3 border-top">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Escribe un mensaje..." aria-label="Escribe un mensaje">
+                                <button class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="sidebar-menu p-3">
-                <button class="btn btn-warning w-100 py-2 create-course-btn">CREAR NUEVO CURSO</button>
-            </div>
+            
         </aside>
 
-        
-        <main class="main-content">
+        <main class="video-main-content">
             
-            <nav class="navbar-top p-3 d-flex align-items-center justify-content-between shadow-sm bg-white">
-                <div class="d-flex">
-                    <a href="#" class="btn btn-outline-secondary me-2"><i class="fas fa-arrow-left"></i></a>
-                    <a href="#" class="btn btn-outline-secondary"><i class="fas fa-arrow-right"></i></a>
+            <div class="session-header p-3 bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="session-title mb-0">Sesión en Vivo: Estructura HTML</h2>
+                    <a href="maestro.html" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-times me-1"></i> Terminar Sesión
+                    </a>
                 </div>
-                <div>
-                    <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-topbar" /> 
-                </div>
-            </nav>
+            </div>
 
-            <div class="content-area p-4">
-                <h1 class="mb-4 dashboard-title">CURSOS</h1>
-
-                <div class="course-list">
-                    
-                    <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
-                        <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 1</h4>
-                        </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
-                    </div>
-
-                    <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
-                        <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 2</h4>
-                        </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
-                    </div>
-
-                    <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
-                        <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 3</h4>
-                        </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
+            <div class="jitsi-container flex-grow-1 d-flex">
+                <div id="jitsi-meet-iframe" class="w-100 h-100">
+                    <div class="jitsi-placeholder text-center p-5">
+                        <i class="fas fa-video fa-4x mb-3 text-muted"></i>
+                        <p class="lead text-muted">Cargando la sala de videollamada de Jitsi...</p>
+                        <button id="startJitsiBtn" class="btn btn-success btn-lg mt-3">Iniciar Videollamada</button>
                     </div>
                 </div>
             </div>
+
         </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/maestro.js"></script> 
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script src="js/sesiones.js"></script>
 </body>
 </html>

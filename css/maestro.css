@@ -1,203 +1,202 @@
-/* Variables CSS (Mantenemos la consistencia) */
+@import url('variables.css');
+
+/* Mapeo de Colores */
 :root {
-    --primary-color: #0d6efd; /* Azul de Bootstrap */
-    --secondary-color: #6c757d; 
-    --warning-color: #ffc107; /* Amarillo de Bootstrap */
+    --primary-color: var(--verde-medio); /* Color principal: para botones y acentos */
+    --accent-color: var(--verde-limon); /* Color de acento para hover */
+    --dark-bg-color: var(--verde-oscuro); /* Color oscuro para algunos textos */
     --light-bg-color: #f8f9fa; 
-    --dark-text-color: #212529; 
-    --border-color: #dee2e6; 
+    --sidebar-width: 380px;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: var(--light-bg-color);
     margin: 0;
-    overflow-x: hidden; 
+    overflow: hidden; /* Evita el scroll global */
 }
 
-/* --- Layout Principal del Dashboard --- */
-.dashboard-wrapper {
+/* --- Layout Principal --- */
+.session-wrapper {
     display: flex;
-    min-height: 100vh; 
+    height: 100vh;
+    width: 100vw;
 }
 
-/* --- Sidebar (Panel Izquierdo) --- */
-.sidebar {
-    width: 280px; 
-    background-color: #fff;
-    border-right: 1px solid var(--border-color);
+/* --- Sidebar del Curso (Izquierda) --- */
+.sidebar-session {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
     display: flex;
     flex-direction: column;
-    position: sticky; 
-    top: 0;
-    left: 0;
-    height: 100vh; 
-    z-index: 1000; 
+    z-index: 10;
+    transition: transform 0.3s ease;
 }
 
-.sidebar-header .logo-sidebar {
-    height: 35px; 
-    width: auto;
+.sidebar-header {
+    background-color: #fff;
 }
 
-.sidebar-header .logo-text {
-    font-size: 1.3rem;
-    color: var(--dark-text-color);
+.course-title-sidebar {
+    color: var(--dark-bg-color);
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
-.profile-section {
-    background-color: #fff; /* Fondo blanco */
-    border-bottom: 1px solid var(--border-color);
+.nav-pills-container {
+    background-color: var(--light-bg-color);
 }
 
-.profile-avatar {
-    width: 90px;
-    height: 90px;
-    background-color: #e9ecef; 
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--primary-color); 
-    overflow: hidden; 
+/* Pestañas de Navegación */
+.nav-pills .nav-link {
+    color: var(--dark-bg-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
 }
 
-.profile-name {
-    color: var(--dark-text-color);
-    font-size: 1.15rem;
+.nav-pills .nav-link.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(74, 128, 0, 0.3);
+}
+.nav-pills .nav-link:hover:not(.active) {
+    background-color: var(--verde-suave);
+}
+
+.sidebar-body {
+    overflow-y: auto; /* Permite scroll en el contenido */
+}
+
+/* Lista de Módulos */
+.modules-list .module-item {
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    color: var(--dark-bg-color);
+}
+.modules-list .module-item:hover {
+    background-color: var(--light-bg-color);
+    border-left-color: var(--accent-color);
+}
+.modules-list .module-item.active {
+    background-color: var(--verde-suave);
+    border-left-color: var(--primary-color);
     font-weight: 600;
 }
 
-.create-course-btn {
-    background-color: var(--warning-color);
-    border-color: var(--warning-color);
-    color: var(--dark-text-color); /* Texto oscuro para el botón amarillo */
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+/* Chat Box */
+.chat-box {
+    height: 100%;
 }
-
-.create-course-btn:hover {
-    background-color: #e0a800; /* Un poco más oscuro */
-    border-color: #e0a800;
+.chat-messages {
+    overflow-y: auto;
 }
-
-/* --- Main Content Area --- */
-.main-content {
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-    background-color: #f0f2f5; 
-}
-
-/* Top Bar (Arriba del contenido principal) */
-.navbar-top {
-    background-color: #fff;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.navbar-top .btn {
-    border-radius: 50%; 
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.navbar-top .logo-topbar {
-    height: 30px; 
-    width: auto;
-}
-
-.content-area {
-    padding: 2.5rem; 
-}
-
-.dashboard-title {
-    color: var(--dark-text-color);
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
-    display: inline-block; 
-}
-
-/* Course Cards */
-.course-card {
-    background-color: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.course-card:hover {
-    transform: translateY(-3px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.course-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--dark-text-color);
-}
-
-.view-course-btn {
+.chat-input .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
+}
+.chat-input .btn-primary:hover {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-bg-color);
 }
 
-.view-course-btn:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+
+/* --- Main Video Area (Derecha) --- */
+.video-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* --- Responsive Adjustments (para tablets y móviles) --- */
-@media (max-width: 768px) {
-    .dashboard-wrapper {
-        flex-direction: column; /* Apila el sidebar y el contenido */
+.session-header {
+    min-height: 60px;
+}
+
+.session-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-bg-color);
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Contenedor de Jitsi */
+.jitsi-container {
+    background-color: var(--dark-bg-color); /* Fondo oscuro para el video */
+    overflow: hidden;
+}
+
+#jitsi-meet-iframe {
+    background-color: #222;
+    border: none;
+}
+
+/* Placeholder (antes de cargar el IFrame) */
+.jitsi-placeholder {
+    color: #fff;
+    background-color: #222;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.jitsi-placeholder .btn-success {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--dark-bg-color);
+    font-weight: 700;
+    transition: all 0.3s;
+}
+.jitsi-placeholder .btn-success:hover {
+    background-color: var(--verde-medio);
+    border-color: var(--verde-medio);
+    transform: translateY(-2px);
+}
+
+
+/* --- Responsive Mobile --- */
+@media (max-width: 992px) {
+    .sidebar-session {
+        position: fixed;
+        height: 100%;
+        left: 0;
+        transform: translateX(-100%);
+        width: 100vw;
+        max-width: 320px;
     }
-    .sidebar {
-        width: 100%; 
-        height: auto; 
-        position: relative; 
+    .sidebar-session.open {
+        transform: translateX(0);
     }
+    
+    .session-header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+    }
+    
+    .jitsi-placeholder, #jitsi-meet-iframe {
+        min-height: calc(100vh - 60px); /* Ajusta la altura en móvil */
+    }
+    
     .sidebar-header {
-        justify-content: center; 
+        border-bottom: none !important;
     }
-    .profile-section {
-        padding-bottom: 1rem;
+    
+    .course-title-sidebar {
+        font-size: 1.3rem;
     }
-    .sidebar-menu {
-        padding-top: 0; 
-        padding-bottom: 1.5rem;
-    }
-    .navbar-top {
-        display: none !important; /* Ocultar la barra superior en móvil para un diseño más limpio */
-    }
-    .content-area {
-        padding: 1rem;
-    }
-    .dashboard-title {
-        font-size: 1.5rem;
-        text-align: center;
-        width: 100%;
-        border-bottom: none; 
-        margin-bottom: 1.5rem;
-    }
-    .course-card {
-        flex-direction: column; 
-        text-align: center;
-    }
-    .course-info {
-        margin-bottom: 1rem; 
+    
+    .nav-pills .nav-link {
+        font-size: 0.85rem;
     }
 }
