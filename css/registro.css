@@ -7,13 +7,6 @@
   --vidrio-hover: rgba(255, 255, 255, 0.4);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
-=======
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
 /* Animación del fondo */
 @keyframes gradientAnimation {
   0% {
@@ -28,11 +21,6 @@
 }
 
 body, html {
-<<<<<<< HEAD
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-=======
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -53,47 +41,12 @@ body, html {
   min-height: 100vh;
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  padding-top: 100px;
-  padding-bottom: 40px;
-}
-
-.registro-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
->>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
-  background: linear-gradient(
-    135deg,
-    var(--verde-oscuro) 0%,
-    var(--verde-medio) 25%,
-    var(--verde-suave) 50%,
-    var(--verde-medio) 75%,
-    var(--verde-oscuro) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientAnimation 15s ease infinite;
-}
-
-/* Sección principal */
-.registro-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-=======
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   padding: 40px 20px;
 }
 
 /* Caja del formulario */
 .registro-box {
-<<<<<<< HEAD
-  background-color: var(--vidrio-claro);
-=======
   background-color: rgba(255, 255, 255, 0.2);
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -172,209 +125,15 @@ body, html {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
-=======
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
 .btn-glass:hover {
   background-color: rgba(255, 255, 255, 0.4);
   color: var(--verde-suave);
   transform: scale(1.05);
-<<<<<<< HEAD
 }
 
 /* Enlace inferior */
 a {
   color: var(--verde-suave);
-=======
-}
-
-/* Enlace inferior */
-a {
-  color: var(--verde-suave);
-<<<<<<< HEAD
-=======
-.password-toggle:hover {
-  color: var(--verde-oscuro);
-}
-
-.password-match {
-  margin-top: 8px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  min-height: 20px;
-}
-
-.password-match.match {
-  color: #28a745;
-}
-
-.password-match.no-match {
-  color: #dc3545;
-}
-
-/* Selector de tipo de cuenta */
-.account-type-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.account-type-option {
-  position: relative;
-}
-
-.form-check-input-modern {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.account-type-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  border: 2px solid rgba(74, 128, 0, 0.2);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.account-type-label i {
-  font-size: 2rem;
-  color: var(--verde-medio);
-  margin-bottom: 0.5rem;
-}
-
-.account-type-label span {
-  font-weight: 600;
-  color: var(--verde-oscuro);
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.account-type-label small {
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.form-check-input-modern:checked + .account-type-label {
-  border-color: var(--verde-medio);
-  background: rgba(74, 128, 0, 0.1);
-  box-shadow: 0 4px 12px rgba(74, 128, 0, 0.2);
-}
-
-.form-check-input-modern:checked + .account-type-label i {
-  color: var(--verde-medio);
-  transform: scale(1.1);
-}
-
-.account-type-label:hover {
-  border-color: var(--verde-medio);
-  background: rgba(74, 128, 0, 0.05);
-}
-
-/* File upload */
-.file-upload-wrapper {
-  position: relative;
-}
-
-.file-input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.file-upload-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  border: 2px dashed rgba(74, 128, 0, 0.3);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.file-upload-label:hover {
-  border-color: var(--verde-medio);
-  background: rgba(74, 128, 0, 0.05);
-}
-
-.file-upload-label i {
-  font-size: 2.5rem;
-  color: var(--verde-medio);
-  margin-bottom: 0.5rem;
-}
-
-.file-text {
-  font-weight: 600;
-  color: var(--verde-oscuro);
-  margin-bottom: 0.5rem;
-}
-
-.file-name {
-  font-size: 0.875rem;
-  color: #666;
-  font-weight: 500;
-}
-
-.file-hint {
-  display: block;
-  margin-top: 0.5rem;
-  color: #999;
-  font-size: 0.875rem;
-}
-
-/* Botón de registro */
-.btn-registro-modern {
-  padding: 16px;
-  background: linear-gradient(135deg, var(--verde-medio), var(--verde-limon));
-  color: var(--verde-oscuro);
-  font-weight: 700;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(74, 128, 0, 0.3);
-}
-
-.btn-registro-modern:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(74, 128, 0, 0.4);
-}
-
-.btn-registro-modern:active {
-  transform: translateY(-1px);
-}
-
-/* Enlace a login */
-.login-link-text {
-  color: #666;
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.login-link {
-  color: var(--verde-medio);
-  font-weight: 600;
->>>>>>> 3df3eba96e264c31954b46e65f176b645fc292b3
->>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
-=======
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   text-decoration: none;
 }
 
@@ -399,8 +158,4 @@ a:hover {
   .imagen-box {
     display: none;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
