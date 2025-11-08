@@ -7,11 +7,33 @@
   --vidrio-hover: rgba(255, 255, 255, 0.4);
 }
 
+/* Animación del fondo */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, var(--verde-medio), var(--verde-oscuro));
+  background: linear-gradient(
+    135deg,
+    var(--verde-oscuro) 0%,
+    var(--verde-medio) 25%,
+    var(--verde-suave) 50%,
+    var(--verde-medio) 75%,
+    var(--verde-oscuro) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientAnimation 15s ease infinite;
 }
 
 /* Sección principal */
@@ -52,6 +74,7 @@ body, html {
   width: 100px;
   display: block;
   margin: 0 auto;
+  /* Sin animaciones */
 }
 
 /* Etiquetas */
@@ -104,13 +127,13 @@ body, html {
 
 .btn-glass:hover {
   background-color: var(--vidrio-hover);
-  color: var(--verde-limon);
+  color: var(--verde-suave);
   transform: scale(1.05);
 }
 
 /* Enlace inferior */
 a {
-  color: var(--verde-limon);
+  color: var(--verde-suave);
   text-decoration: none;
 }
 

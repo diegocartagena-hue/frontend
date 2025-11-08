@@ -6,6 +6,19 @@
   --verde-mostaza: #B3A93A;
 }
 
+/* Animación del fondo */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Reset y fuente base */
 html, body {
   height: 100%;
@@ -17,11 +30,12 @@ html, body {
     var(--verde-oscuro) 0%,
     var(--verde-medio) 25%,
     var(--verde-suave) 50%,
-    var(--verde-limon) 75%,
-    var(--verde-mostaza) 100%
+    var(--verde-medio) 75%,
+    var(--verde-oscuro) 100%
   );
+  background-size: 200% 200%;
   background-attachment: fixed;
-  background-size: cover;
+  animation: gradientAnimation 15s ease infinite;
   overflow: hidden;
 }
 
@@ -75,7 +89,7 @@ html, body {
 }
 
 .btn-efecto:hover {
-  background-color: var(--verde-limon);
+  background-color: var(--verde-suave);
   color: var(--verde-oscuro);
   transform: scale(1.03);
 }
@@ -98,4 +112,5 @@ html, body {
   height: auto;
   margin: 0 auto;
   display: block;
+  /* Sin animaciones */
 }
