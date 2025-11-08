@@ -8,9 +8,12 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
+=======
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
 /* Animación del fondo */
 @keyframes gradientAnimation {
   0% {
@@ -43,193 +46,14 @@ body, html {
   );
   background-size: 200% 200%;
   animation: gradientAnimation 15s ease infinite;
-=======
-/* Reset y base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
->>>>>>> 3df3eba96e264c31954b46e65f176b645fc292b3
 }
 
-body {
-  font-family: 'Segoe UI', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
-  background: #f8f9fa;
-}
-
-/* ========== NAVEGACIÓN (Compartida) ========== */
-.navbar-glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 1rem 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.navbar-glass.scrolled {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.nav-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.logo-link:hover {
-  transform: scale(1.05);
-}
-
-.logo-nav {
-  width: 50px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--verde-oscuro);
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
-}
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
-}
-
-.menu-toggle .bar {
-  width: 28px;
-  height: 3px;
-  background: var(--verde-oscuro);
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-.menu-toggle.open .bar:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
-}
-
-.menu-toggle.open .bar:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.open .bar:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
-}
-
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  color: var(--verde-oscuro);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: var(--verde-limon);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 80%;
-}
-
-.nav-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--verde-medio);
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 1rem;
-}
-
-.btn-nav-primary,
-.btn-nav-secondary {
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-nav-primary {
-  background: var(--verde-medio);
-  color: white;
-}
-
-.btn-nav-primary:hover {
-  background: var(--verde-limon);
-  color: var(--verde-oscuro);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(74, 128, 0, 0.3);
-}
-
-.btn-nav-secondary {
-  background: rgba(255, 255, 255, 0.3);
-  color: var(--verde-oscuro);
-  border: 2px solid var(--verde-medio);
-}
-
-.btn-nav-secondary:hover,
-.btn-nav-secondary.active {
-  background: var(--verde-medio);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* ========== SECCIÓN DE REGISTRO ========== */
+/* Sección principal */
 .registro-section {
-  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   padding-top: 100px;
   padding-bottom: 40px;
 }
@@ -258,12 +82,18 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
+=======
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   padding: 40px 20px;
 }
 
 /* Caja del formulario */
 .registro-box {
+<<<<<<< HEAD
   background-color: var(--vidrio-claro);
+=======
+  background-color: rgba(255, 255, 255, 0.2);
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -343,11 +173,14 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
+=======
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
 .btn-glass:hover {
-  background-color: var(--vidrio-hover);
+  background-color: rgba(255, 255, 255, 0.4);
   color: var(--verde-suave);
   transform: scale(1.05);
 <<<<<<< HEAD
@@ -362,6 +195,7 @@ a {
 /* Enlace inferior */
 a {
   color: var(--verde-suave);
+<<<<<<< HEAD
 =======
 .password-toggle:hover {
   color: var(--verde-oscuro);
@@ -539,6 +373,8 @@ a {
   font-weight: 600;
 >>>>>>> 3df3eba96e264c31954b46e65f176b645fc292b3
 >>>>>>> 84449946dc1a51628b65fa3c4e8e141ed84eace5
+=======
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
   text-decoration: none;
 }
 
@@ -563,4 +399,8 @@ a:hover {
   .imagen-box {
     display: none;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f9e23b226f55d3bf22058c141e6b47edbfd6f30d
