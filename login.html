@@ -5,33 +5,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClasiYA - Iniciar Sesión</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/login.css" />
-  <link rel="icon" href="assets/logo.ico" type="image/x-icon" />
+  <link rel="icon" href="assets/logoicono.ico" type="image/x-icon" />
 </head>
 <body>
+  <!-- Menú transparente fijo -->
+  <nav class="navbar-glass fixed-top" id="navbar">
+    <div class="container-fluid">
+      <div class="nav-wrapper">
+        <a href="index.html" class="logo-link">
+          <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-nav" />
+          <span class="logo-text">ClasiYA</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+          <ul class="nav-links">
+            <li><a href="index.html#inicio" class="nav-link">Inicio</a></li>
+            <li><a href="index.html#quienes" class="nav-link">Quiénes somos</a></li>
+            <li><a href="index.html#mision" class="nav-link">Misión</a></li>
+            <li><a href="index.html#vision" class="nav-link">Visión</a></li>
+            <li><a href="index.html#valores" class="nav-link">Valores</a></li>
+            <li><a href="index.html#galeria" class="nav-link">Galería</a></li>
+          </ul>
+          <div class="nav-buttons">
+            <a href="login.html" class="btn btn-nav-primary active">Iniciar sesión</a>
+            <a href="registro.html" class="btn btn-nav-secondary">Registrarse</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Fondo animado -->
+  <div class="animated-background">
+    <div class="gradient-animated"></div>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="decorative-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+    </div>
+  </div>
+
+  <!-- Contenedor principal -->
   <div class="background">
     <div class="container">
-      <div class="row justify-content-center align-items-center min-vh-100">
-        <div class="col-md-6 col-lg-4">
+      <div class="row align-items-center justify-content-center">
+        <!-- Columna izquierda: Contenido informativo -->
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 d-none d-lg-block">
+          <div class="info-sidebar">
+            <div class="info-content">
+              <!-- Logo grande -->
+              <div class="info-logo-wrapper mb-4">
+                <img src="assets/logosinfondo.png" alt="ClasiYA" class="info-logo" />
+              </div>
+
+              <!-- Título principal -->
+              <h2 class="info-title mb-4">Bienvenido a ClasiYA</h2>
+              <p class="info-subtitle mb-5">Tu plataforma educativa de confianza</p>
+
+              <!-- Características destacadas -->
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Aprende a tu ritmo</h4>
+                    <p class="feature-text">Accede a cursos y materiales cuando quieras, desde cualquier lugar.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Comunidad activa</h4>
+                    <p class="feature-text">Conecta con estudiantes y maestros de todo el mundo.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">100% Seguro</h4>
+                    <p class="feature-text">Tu información está protegida con los más altos estándares de seguridad.</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4 class="feature-title">Seguimiento de progreso</h4>
+                    <p class="feature-text">Monitorea tu avance y logros en tiempo real.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estadísticas -->
+              <div class="stats-container mt-5">
+                <div class="stat-item">
+                  <div class="stat-number">10K+</div>
+                  <div class="stat-label">Estudiantes</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">500+</div>
+                  <div class="stat-label">Cursos</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">200+</div>
+                  <div class="stat-label">Maestros</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: Formulario -->
+        <div class="col-lg-5 col-md-8 col-sm-10">
           <div class="login-form-container text-center">
-            <!-- Logo -->
-            <img src="assets/logosinfondo.png" alt="Logo ClasiYA" class="logo-clasiya mb-4" />
+            <!-- Logo animado -->
+            <div class="logo-wrapper">
+              <img src="assets/logosinfondo.png" alt="Logo ClasiYA" class="logo-clasiya" />
+              <div class="logo-glow"></div>
+            </div>
 
-            <form class="login-form text-start">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.com" required />
-                <label for="correo">Correo electrónico</label>
+            <h2 class="login-title">Bienvenido de nuevo</h2>
+            <p class="login-subtitle">Inicia sesión para continuar</p>
+
+            <form class="login-form text-start" id="loginForm">
+              <div class="form-group-modern">
+                <label for="correo" class="form-label-modern">
+                  <i class="fas fa-envelope me-2"></i>Correo electrónico
+                </label>
+                <input 
+                  type="email" 
+                  class="form-control-modern" 
+                  id="correo" 
+                  placeholder="ejemplo@correo.com" 
+                  required 
+                />
               </div>
 
-              <div class="form-floating mb-4">
-                <input type="password" class="form-control" id="contraseña" placeholder="••••••••" required />
-                <label for="contraseña">Contraseña</label>
+              <div class="form-group-modern">
+                <label for="contraseña" class="form-label-modern">
+                  <i class="fas fa-lock me-2"></i>Contraseña
+                </label>
+                <div class="password-input-wrapper">
+                  <input 
+                    type="password" 
+                    class="form-control-modern" 
+                    id="contraseña" 
+                    placeholder="••••••••" 
+                    required 
+                  />
+                  <button type="button" class="password-toggle" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
               </div>
 
-              <button type="submit" class="btn btn-efecto w-100">Iniciar sesión</button>
+              <div class="form-options">
+                <div class="form-check-modern">
+                  <input type="checkbox" class="form-check-input-modern" id="rememberMe" />
+                  <label class="form-check-label-modern" for="rememberMe">
+                    Recordarme
+                  </label>
+                </div>
+                <a href="#" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
+              </div>
 
-              <div class="text-center mt-3">
-                <a href="registro.html" class="link-registro">¿No tienes cuenta? Regístrate</a>
+              <button type="submit" class="btn-login-modern">
+                <i class="fas fa-sign-in-alt me-2"></i>Iniciar sesión
+              </button>
+
+              <div class="divider">
+                <span>o</span>
+              </div>
+
+              <div class="text-center">
+                <p class="register-link-text">
+                  ¿No tienes cuenta? 
+                  <a href="registro.html" class="register-link">Regístrate aquí</a>
+                </p>
               </div>
             </form>
           </div>
@@ -39,5 +215,9 @@
       </div>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
