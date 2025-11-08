@@ -514,11 +514,11 @@ html, body {
 .background {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 80px 20px 50px;
+  padding: 70px 20px 50px;
   margin-top: 0;
 }
 
@@ -1180,7 +1180,8 @@ html, body {
   }
 
   .background {
-    padding: 80px 20px 40px;
+    padding: 70px 20px 40px;
+    align-items: flex-start;
   }
 
   .login-form-container {
@@ -1196,8 +1197,8 @@ html, body {
 
 @media (max-width: 768px) {
   .background {
-    padding: 80px 15px 30px;
-    align-items: center;
+    padding: 70px 15px 30px;
+    align-items: flex-start;
   }
 
   .login-form-container {
@@ -1270,7 +1271,7 @@ html, body {
   }
 
   .background {
-    padding: 80px 12px 25px;
+    padding: 70px 12px 25px;
   }
 
   .login-form-container {
