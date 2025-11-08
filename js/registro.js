@@ -3,6 +3,41 @@ if (typeof initNavbar === 'function') {
   initNavbar();
 }
 
+// Crear partículas animadas
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  if (!particlesContainer) return;
+
+  const particleCount = 50;
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Tamaño aleatorio
+    const size = Math.random() * 4 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    // Posición inicial aleatoria
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    
+    // Opacidad aleatoria
+    particle.style.opacity = Math.random() * 0.5 + 0.3;
+    
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Inicializar partículas cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', createParticles);
+} else {
+  createParticles();
+}
+
 // Toggle de visibilidad de contraseña
 const togglePassword = document.getElementById('togglePassword');
 const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
