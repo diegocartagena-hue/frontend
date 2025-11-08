@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClasiYA - Selección de Curso</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/curso.css" />
+  <link rel="icon" href="assets/logoicono.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- Menú transparente fijo -->
+  <nav class="navbar-glass fixed-top" id="navbar">
+    <!-- ... mismo menú que ya tienes ... -->
+  </nav>
+
+  <!-- Fondo animado -->
+  <div class="animated-background">
+    <!-- ... mismo fondo que ya tienes ... -->
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container py-5 mt-5">
+    <h2 class="text-center mb-4">Selección de un curso alumno</h2>
+
+    <div class="card curso-card mx-auto p-4 shadow-lg" style="max-width: 800px;">
+      <div class="row g-3 align-items-center">
+        <!-- Imagen y perfil -->
+        <div class="col-md-4 text-center">
+          <img src="assets/profile-placeholder.png" alt="Foto de perfil" class="img-fluid rounded-circle mb-2" style="width: 120px;" />
+          <h5 class="mb-0">Juan Pérez</h5>
+          <span class="text-muted">CURSO - XXXX</span>
+        </div>
+
+        <!-- Introducción y enlaces -->
+        <div class="col-md-8">
+          <h6 class="text-uppercase fw-bold mb-2">Introducción</h6>
+          <p class="text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <div class="d-flex flex-column gap-2">
+            <a href="#" class="btn btn-outline-primary w-100">
+              <i class="fas fa-link me-2"></i>Link de las clases
+            </a>
+            <a href="#" class="btn btn-outline-secondary w-100">
+              <i class="fas fa-book me-2"></i>Material de apoyo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subir archivo/enlace -->
+      <div class="mt-4 text-end">
+        <label for="archivoEnlace" class="form-label fw-bold">Subir archivo/enlace:</label>
+        <input type="file" id="archivoEnlace" class="form-control" />
+      </div>
+    </div>
+
+    <!-- Barra inferior interactiva -->
+    <div class="toolbar mt-5 text-center">
+      <button class="btn btn-success me-2"><i class="fas fa-user-plus me-1"></i>Registrarse</button>
+      <button class="btn btn-primary me-2"><i class="fas fa-arrow-right me-1"></i>Continuar</button>
+      <button class="btn btn-outline-dark"><i class="fas fa-pencil-alt"></i></button>
+      <button class="btn btn-outline-dark"><i class="fas fa-comment-dots"></i></button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
