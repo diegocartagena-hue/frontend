@@ -548,7 +548,7 @@ html, body {
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 80px 20px 50px;
+  padding: 20px 20px 50px;
 }
 
 /* Contenedor con efecto vidrio mejorado */
@@ -1249,6 +1249,7 @@ html, body {
     right: 0;
   }
 
+
   .nav-links {
     flex-direction: column;
     width: 100%;
@@ -1276,7 +1277,7 @@ html, body {
   }
 
   .background {
-    padding: 80px 20px 40px;
+    padding: 20px 20px 40px;
   }
 
   .login-form-container {
@@ -1296,8 +1297,8 @@ html, body {
   }
 
   .background {
-    padding: 80px 15px 30px;
-    align-items: flex-start;
+    padding: 20px 15px 30px;
+    align-items: center;
   }
 
   .login-form-container {
@@ -1379,7 +1380,7 @@ html, body {
   }
 
   .background {
-    padding: 80px 12px 25px;
+    padding: 20px 12px 25px;
   }
 
   .login-form-container {
