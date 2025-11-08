@@ -512,14 +512,23 @@ html, body {
 
 /* ========== CONTENEDOR PRINCIPAL ========== */
 .background {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 70px 20px 50px;
+  padding: 50px 20px 50px;
   margin-top: 0;
+}
+
+.background .container {
+  width: 100%;
+}
+
+.background .row {
+  align-items: flex-start !important;
+  margin: 0;
 }
 
 /* Contenedor con efecto vidrio mejorado */
@@ -1180,7 +1189,7 @@ html, body {
   }
 
   .background {
-    padding: 70px 20px 40px;
+    padding: 50px 20px 40px;
     align-items: flex-start;
   }
 
@@ -1197,7 +1206,7 @@ html, body {
 
 @media (max-width: 768px) {
   .background {
-    padding: 70px 15px 30px;
+    padding: 50px 15px 30px;
     align-items: flex-start;
   }
 
@@ -1271,7 +1280,7 @@ html, body {
   }
 
   .background {
-    padding: 70px 12px 25px;
+    padding: 50px 12px 25px;
   }
 
   .login-form-container {
