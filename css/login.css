@@ -177,7 +177,6 @@ html, body {
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
@@ -187,16 +186,9 @@ html, body {
 }
 
 .logo-nav {
-  width: 50px;
+  width: 60px;
   height: auto;
   border-radius: 8px;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--verde-oscuro);
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .menu-toggle {
@@ -1272,10 +1264,6 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  .logo-text {
-    font-size: 1.2rem;
-  }
-
   .background {
     padding: 40px 15px 30px;
     align-items: flex-start;
@@ -1352,11 +1340,7 @@ html, body {
   }
 
   .logo-nav {
-    width: 40px;
-  }
-
-  .logo-text {
-    font-size: 1rem;
+    width: 50px;
   }
 
   .background {
