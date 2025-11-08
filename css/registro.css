@@ -504,8 +504,9 @@ body, html {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 80px;
-  padding-bottom: 40px;
+  justify-content: center;
+  padding: 20px 20px 50px;
+  z-index: 1;
 }
 
 /* Caja del formulario mejorada */
@@ -1127,6 +1128,10 @@ body, html {
     text-align: center;
   }
 
+  .registro-section {
+    padding: 20px 20px 40px;
+  }
+
   .registro-box {
     padding: 2rem;
   }
@@ -1143,6 +1148,11 @@ body, html {
 @media (max-width: 768px) {
   .logo-text {
     font-size: 1.2rem;
+  }
+
+  .registro-section {
+    padding: 20px 15px 30px;
+    align-items: center;
   }
 
   .registro-box {
@@ -1181,6 +1191,10 @@ body, html {
 
   .logo-text {
     font-size: 1rem;
+  }
+
+  .registro-section {
+    padding: 20px 12px 25px;
   }
 
   .registro-box {
