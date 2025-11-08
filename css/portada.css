@@ -530,6 +530,7 @@ body {
     height: 100vh;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
@@ -537,6 +538,9 @@ body {
     gap: 2rem;
     transition: right 0.3s ease;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    visibility: visible;
+    opacity: 1;
   }
 
   .nav-menu.active {
