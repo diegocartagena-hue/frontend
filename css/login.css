@@ -142,8 +142,12 @@ html, body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   padding: 1.2rem 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-  position: relative;
+  z-index: 1050;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }
 
 .navbar-glass::after {
@@ -544,11 +548,12 @@ html, body {
 .background {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 80px 20px 50px;
+  padding: 60px 20px 50px;
+  margin-top: 0;
 }
 
 /* Contenedor con efecto vidrio mejorado */
@@ -1249,6 +1254,7 @@ html, body {
     right: 0;
   }
 
+
   .nav-links {
     flex-direction: column;
     width: 100%;
@@ -1276,7 +1282,8 @@ html, body {
   }
 
   .background {
-    padding: 80px 20px 40px;
+    padding: 60px 20px 40px;
+    align-items: flex-start;
   }
 
   .login-form-container {
@@ -1296,7 +1303,7 @@ html, body {
   }
 
   .background {
-    padding: 80px 15px 30px;
+    padding: 60px 15px 30px;
     align-items: flex-start;
   }
 
@@ -1379,7 +1386,7 @@ html, body {
   }
 
   .background {
-    padding: 80px 12px 25px;
+    padding: 60px 12px 25px;
   }
 
   .login-form-container {
