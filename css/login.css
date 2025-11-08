@@ -518,7 +518,7 @@ html, body {
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 100px 20px 50px;
+  padding: 80px 20px 50px;
   margin-top: 0;
 }
 
@@ -1180,7 +1180,7 @@ html, body {
   }
 
   .background {
-    padding: 100px 20px 40px;
+    padding: 80px 20px 40px;
   }
 
   .login-form-container {
@@ -1196,7 +1196,7 @@ html, body {
 
 @media (max-width: 768px) {
   .background {
-    padding: 100px 15px 30px;
+    padding: 80px 15px 30px;
     align-items: center;
   }
 
@@ -1270,7 +1270,7 @@ html, body {
   }
 
   .background {
-    padding: 100px 12px 25px;
+    padding: 80px 12px 25px;
   }
 
   .login-form-container {
