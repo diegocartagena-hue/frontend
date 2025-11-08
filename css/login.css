@@ -552,7 +552,7 @@ html, body {
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 60px 20px 50px;
+  padding: 40px 20px 50px;
   margin-top: 0;
 }
 
@@ -1282,7 +1282,7 @@ html, body {
   }
 
   .background {
-    padding: 60px 20px 40px;
+    padding: 40px 20px 40px;
     align-items: flex-start;
   }
 
@@ -1303,7 +1303,7 @@ html, body {
   }
 
   .background {
-    padding: 60px 15px 30px;
+    padding: 40px 15px 30px;
     align-items: flex-start;
   }
 
@@ -1386,7 +1386,7 @@ html, body {
   }
 
   .background {
-    padding: 60px 12px 25px;
+    padding: 40px 12px 25px;
   }
 
   .login-form-container {
