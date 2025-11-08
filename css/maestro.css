@@ -1,12 +1,18 @@
 @import url('variables.css');
 
-/* Mapeo de Colores a tu paleta verde */
+/* Asume que variables.css tiene: --verde-oscuro, --verde-medio, --verde-limon, --verde-mostaza, --verde-suave */
+
+/* Mapeo de Colores */
 :root {
-    --primary-color: var(--verde-medio); /* Color principal: para acentos y VER CURSO */
-    --warning-color: var(--verde-limon); /* Color de acción: para CREAR NUEVO CURSO */
+    --primary-color: var(--verde-medio); /* Color principal: para acentos y línea de título */
+    --warning-color: var(--verde-limon); /* Color de acción: CREAR NUEVO CURSO */
     --dark-text-color: var(--verde-oscuro); /* Color principal de texto */
-    --light-bg-color: #f8f9fa; /* Fondo claro del área de contenido */
+    --light-bg-color: #f8f9fa; 
     --border-color: #dee2e6; /* Borde suave */
+
+    /* Colores del prototipo específico: Botón VER CURSO (azul claro) */
+    --btn-view-bg: #92b0e0; 
+    --btn-view-hover: #799ad0;
 }
 
 body {
@@ -36,18 +42,9 @@ body {
     z-index: 1000; 
 }
 
-.sidebar-top-nav {
-    /* Estilos para los botones de flecha y logo superior */
-    background-color: #fff;
-}
-
 .sidebar-top-nav .btn {
     border-color: var(--border-color);
     color: var(--verde-medio);
-}
-.sidebar-top-nav .btn:hover {
-    background-color: var(--verde-suave);
-    color: var(--dark-text-color);
 }
 
 .sidebar-top-nav .logo-sidebar {
@@ -68,7 +65,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid var(--primary-color); 
+    border: 1px solid var(--border-color); /* Borde sutil, como en el prototipo */
     overflow: hidden; 
     margin-bottom: 10px !important;
 }
@@ -80,21 +77,19 @@ body {
 }
 
 .create-course-btn {
-    /* Botón CREAR NUEVO CURSO: Verde Limón/Amarillo */
+    /* Botón CREAR NUEVO CURSO: Amarillo claro del prototipo */
     background-color: var(--warning-color); 
     border-color: var(--warning-color);
     color: var(--dark-text-color); 
     font-weight: 700;
-    letter-spacing: 0.5px;
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(214, 232, 0, 0.4);
 }
 
 .create-course-btn:hover {
-    background-color: var(--verde-mostaza, #B3A93A); /* Usamos el mostaza para un hover sutil */
+    background-color: var(--verde-mostaza, #B3A93A);
     border-color: var(--verde-mostaza, #B3A93A);
-    color: var(--dark-text-color);
     transform: translateY(-2px);
 }
 
@@ -138,7 +133,7 @@ body {
 }
 
 .course-placeholder {
-    /* Estilo para las líneas punteadas de los nombres de curso en el prototipo */
+    /* Estilo para las líneas punteadas del prototipo */
     color: var(--border-color); 
     font-size: 1.4rem;
     letter-spacing: 1px;
@@ -146,19 +141,19 @@ body {
 }
 
 .view-course-btn {
-    /* Botón VER CURSO: Azul/Verde Medio del prototipo */
-    background-color: #92b0e0; /* Tono similar al azul/verde claro del prototipo */
-    border-color: #92b0e0;
+    /* Botón VER CURSO: Azul claro del prototipo */
+    background-color: var(--btn-view-bg); 
+    border-color: var(--btn-view-bg);
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: all 0.3s ease;
-    color: var(--dark-text-color);
+    color: #fff; /* Texto blanco en botón azul claro */
 }
 
 .view-course-btn:hover {
-    background-color: #799ad0; 
-    border-color: #799ad0;
+    background-color: var(--btn-view-hover); 
+    border-color: var(--btn-view-hover);
     transform: scale(1.05);
 }
 
