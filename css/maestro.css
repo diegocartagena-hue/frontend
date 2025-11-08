@@ -1,11 +1,12 @@
-/* Variables CSS (Mantenemos la consistencia) */
+@import url('variables.css');
+
+/* Mapeo de Colores a tu paleta verde */
 :root {
-    --primary-color: #0d6efd; /* Azul de Bootstrap */
-    --secondary-color: #6c757d; 
-    --warning-color: #ffc107; /* Amarillo de Bootstrap */
-    --light-bg-color: #f8f9fa; 
-    --dark-text-color: #212529; 
-    --border-color: #dee2e6; 
+    --primary-color: var(--verde-medio); /* Color principal: para acentos y VER CURSO */
+    --warning-color: var(--verde-limon); /* Color de acción: para CREAR NUEVO CURSO */
+    --dark-text-color: var(--verde-oscuro); /* Color principal de texto */
+    --light-bg-color: #f8f9fa; /* Fondo claro del área de contenido */
+    --border-color: #dee2e6; /* Borde suave */
 }
 
 body {
@@ -15,13 +16,13 @@ body {
     overflow-x: hidden; 
 }
 
-/* --- Layout Principal del Dashboard --- */
+/* 🚀 --- Layout Principal del Dashboard --- */
 .dashboard-wrapper {
     display: flex;
     min-height: 100vh; 
 }
 
-/* --- Sidebar (Panel Izquierdo) --- */
+/* 🧭 --- Sidebar (Panel Izquierdo) --- */
 .sidebar {
     width: 280px; 
     background-color: #fff;
@@ -35,18 +36,27 @@ body {
     z-index: 1000; 
 }
 
-.sidebar-header .logo-sidebar {
-    height: 35px; 
-    width: auto;
+.sidebar-top-nav {
+    /* Estilos para los botones de flecha y logo superior */
+    background-color: #fff;
 }
 
-.sidebar-header .logo-text {
-    font-size: 1.3rem;
+.sidebar-top-nav .btn {
+    border-color: var(--border-color);
+    color: var(--verde-medio);
+}
+.sidebar-top-nav .btn:hover {
+    background-color: var(--verde-suave);
     color: var(--dark-text-color);
 }
 
+.sidebar-top-nav .logo-sidebar {
+    height: 30px; 
+    width: auto;
+}
+
 .profile-section {
-    background-color: #fff; /* Fondo blanco */
+    background-color: #fff;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -58,58 +68,42 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--primary-color); 
+    border: 3px solid var(--primary-color); 
     overflow: hidden; 
+    margin-bottom: 10px !important;
 }
 
 .profile-name {
     color: var(--dark-text-color);
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .create-course-btn {
-    background-color: var(--warning-color);
+    /* Botón CREAR NUEVO CURSO: Verde Limón/Amarillo */
+    background-color: var(--warning-color); 
     border-color: var(--warning-color);
-    color: var(--dark-text-color); /* Texto oscuro para el botón amarillo */
-    font-weight: bold;
+    color: var(--dark-text-color); 
+    font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(214, 232, 0, 0.4);
 }
 
 .create-course-btn:hover {
-    background-color: #e0a800; /* Un poco más oscuro */
-    border-color: #e0a800;
+    background-color: var(--verde-mostaza, #B3A93A); /* Usamos el mostaza para un hover sutil */
+    border-color: var(--verde-mostaza, #B3A93A);
+    color: var(--dark-text-color);
+    transform: translateY(-2px);
 }
 
-/* --- Main Content Area --- */
+/* 💻 --- Main Content Area --- */
 .main-content {
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
-    background-color: #f0f2f5; 
-}
-
-/* Top Bar (Arriba del contenido principal) */
-.navbar-top {
-    background-color: #fff;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.navbar-top .btn {
-    border-radius: 50%; 
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.navbar-top .logo-topbar {
-    height: 30px; 
-    width: auto;
+    background-color: var(--light-bg-color); 
 }
 
 .content-area {
@@ -119,75 +113,69 @@ body {
 .dashboard-title {
     color: var(--dark-text-color);
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 800;
     margin-bottom: 2rem;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 4px solid var(--primary-color); 
     padding-bottom: 10px;
     display: inline-block; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Course Cards */
 .course-card {
     background-color: #fff;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .course-card:hover {
-    transform: translateY(-3px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.course-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--dark-text-color);
+.course-placeholder {
+    /* Estilo para las líneas punteadas de los nombres de curso en el prototipo */
+    color: var(--border-color); 
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .view-course-btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    /* Botón VER CURSO: Azul/Verde Medio del prototipo */
+    background-color: #92b0e0; /* Tono similar al azul/verde claro del prototipo */
+    border-color: #92b0e0;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: var(--dark-text-color);
 }
 
 .view-course-btn:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #799ad0; 
+    border-color: #799ad0;
+    transform: scale(1.05);
 }
 
-/* --- Responsive Adjustments (para tablets y móviles) --- */
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     .dashboard-wrapper {
-        flex-direction: column; /* Apila el sidebar y el contenido */
+        flex-direction: column; 
     }
     .sidebar {
         width: 100%; 
         height: auto; 
         position: relative; 
     }
-    .sidebar-header {
-        justify-content: center; 
-    }
-    .profile-section {
-        padding-bottom: 1rem;
-    }
-    .sidebar-menu {
-        padding-top: 0; 
-        padding-bottom: 1.5rem;
-    }
-    .navbar-top {
-        display: none !important; /* Ocultar la barra superior en móvil para un diseño más limpio */
-    }
     .content-area {
         padding: 1rem;
     }
     .dashboard-title {
-        font-size: 1.5rem;
         text-align: center;
         width: 100%;
         border-bottom: none; 
@@ -196,8 +184,12 @@ body {
     .course-card {
         flex-direction: column; 
         text-align: center;
+        padding: 1rem;
     }
     .course-info {
         margin-bottom: 1rem; 
+    }
+    .view-course-btn {
+        width: 100%;
     }
 }

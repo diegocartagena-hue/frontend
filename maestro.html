@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ClasiYA - Panel de Maestro</title>
+    <title>ClasiYA - Dashboard de Maestros</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <link rel="stylesheet" href="css/maestro.css" />
-    
     <link rel="icon" href="assets/logoicono.ico" type="image/x-icon" />
 </head>
 <body>
@@ -17,36 +16,30 @@
     <div class="dashboard-wrapper">
         
         <aside class="sidebar bg-light shadow-sm">
-            <div class="sidebar-header d-flex justify-content-between align-items-center p-3 border-bottom">
-                <a href="index.html" class="logo-link d-flex align-items-center">
-                    <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-sidebar me-2" />
-                    <span class="logo-text fw-bold">ClasiYA</span>
+            
+            <div class="sidebar-top-nav p-3 border-bottom d-flex align-items-center">
+                <a href="#" class="btn btn-sm btn-outline-secondary me-2"><i class="fas fa-arrow-left"></i></a>
+                <a href="#" class="btn btn-sm btn-outline-secondary me-auto"><i class="fas fa-arrow-right"></i></a>
+                <a href="index.html" class="logo-link">
+                    <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-sidebar" />
                 </a>
             </div>
+            
             <div class="profile-section text-center p-4">
                 <div class="profile-avatar mb-2 mx-auto">
                     <i class="fas fa-user-circle fa-4x text-muted"></i>
                 </div>
-                <h5 class="profile-name mb-0">Herberth Contreras</h5>
+                <h5 class="profile-name mb-0">Profesor</h5>
             </div>
+            
             <div class="sidebar-menu p-3">
                 <button class="btn btn-warning w-100 py-2 create-course-btn">CREAR NUEVO CURSO</button>
             </div>
+            
         </aside>
 
-        
         <main class="main-content">
             
-            <nav class="navbar-top p-3 d-flex align-items-center justify-content-between shadow-sm bg-white">
-                <div class="d-flex">
-                    <a href="#" class="btn btn-outline-secondary me-2"><i class="fas fa-arrow-left"></i></a>
-                    <a href="#" class="btn btn-outline-secondary"><i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div>
-                    <img src="assets/logosinfondo.png" alt="ClasiYA" class="logo-topbar" /> 
-                </div>
-            </nav>
-
             <div class="content-area p-4">
                 <h1 class="mb-4 dashboard-title">CURSOS</h1>
 
@@ -54,23 +47,16 @@
                     
                     <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
                         <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 1</h4>
+                            <h4 class="course-name mb-0 course-placeholder">-----------------</h4>
                         </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
+                        <button class="btn btn-primary view-course-btn" data-id="1">VER CURSO</button>
                     </div>
 
                     <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
                         <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 2</h4>
+                             <h4 class="course-name mb-0 course-placeholder">-----------------</h4>
                         </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
-                    </div>
-
-                    <div class="course-card d-flex justify-content-between align-items-center p-3 mb-3 bg-white border rounded shadow-sm">
-                        <div class="course-info">
-                            <h4 class="course-name mb-0">Nombre del Curso 3</h4>
-                        </div>
-                        <a href="#" class="btn btn-primary view-course-btn">VER CURSO</a>
+                        <button class="btn btn-primary view-course-btn" data-id="2">VER CURSO</button>
                     </div>
                 </div>
             </div>
