@@ -1,202 +1,195 @@
 @import url('variables.css');
 
-/* Mapeo de Colores */
+/* Mapeo de Colores a tu paleta verde */
 :root {
-    --primary-color: var(--verde-medio); /* Color principal: para botones y acentos */
-    --accent-color: var(--verde-limon); /* Color de acento para hover */
-    --dark-bg-color: var(--verde-oscuro); /* Color oscuro para algunos textos */
-    --light-bg-color: #f8f9fa; 
-    --sidebar-width: 380px;
+    --primary-color: var(--verde-medio); /* Color principal: para acentos y VER CURSO */
+    --warning-color: var(--verde-limon); /* Color de acción: para CREAR NUEVO CURSO */
+    --dark-text-color: var(--verde-oscuro); /* Color principal de texto */
+    --light-bg-color: #f8f9fa; /* Fondo claro del área de contenido */
+    --border-color: #dee2e6; /* Borde suave */
 }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: var(--light-bg-color);
     margin: 0;
-    overflow: hidden; /* Evita el scroll global */
+    overflow-x: hidden; 
 }
 
-/* --- Layout Principal --- */
-.session-wrapper {
+/* 🚀 --- Layout Principal del Dashboard --- */
+.dashboard-wrapper {
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh; 
 }
 
-/* --- Sidebar del Curso (Izquierda) --- */
-.sidebar-session {
-    width: var(--sidebar-width);
-    min-width: var(--sidebar-width);
+/* 🧭 --- Sidebar (Panel Izquierdo) --- */
+.sidebar {
+    width: 280px; 
+    background-color: #fff;
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    z-index: 10;
-    transition: transform 0.3s ease;
+    position: sticky; 
+    top: 0;
+    left: 0;
+    height: 100vh; 
+    z-index: 1000; 
 }
 
-.sidebar-header {
+.sidebar-top-nav {
+    /* Estilos para los botones de flecha y logo superior */
     background-color: #fff;
 }
 
-.course-title-sidebar {
-    color: var(--dark-bg-color);
-    font-weight: 700;
-    font-size: 1.1rem;
+.sidebar-top-nav .btn {
+    border-color: var(--border-color);
+    color: var(--verde-medio);
 }
-
-.nav-pills-container {
-    background-color: var(--light-bg-color);
-}
-
-/* Pestañas de Navegación */
-.nav-pills .nav-link {
-    color: var(--dark-bg-color);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-}
-
-.nav-pills .nav-link.active {
-    background-color: var(--primary-color);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(74, 128, 0, 0.3);
-}
-.nav-pills .nav-link:hover:not(.active) {
+.sidebar-top-nav .btn:hover {
     background-color: var(--verde-suave);
+    color: var(--dark-text-color);
 }
 
-.sidebar-body {
-    overflow-y: auto; /* Permite scroll en el contenido */
+.sidebar-top-nav .logo-sidebar {
+    height: 30px; 
+    width: auto;
 }
 
-/* Lista de Módulos */
-.modules-list .module-item {
-    border-left: 4px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.95rem;
-    color: var(--dark-bg-color);
-}
-.modules-list .module-item:hover {
-    background-color: var(--light-bg-color);
-    border-left-color: var(--accent-color);
-}
-.modules-list .module-item.active {
-    background-color: var(--verde-suave);
-    border-left-color: var(--primary-color);
-    font-weight: 600;
+.profile-section {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* Chat Box */
-.chat-box {
-    height: 100%;
-}
-.chat-messages {
-    overflow-y: auto;
-}
-.chat-input .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-.chat-input .btn-primary:hover {
-    background-color: var(--dark-bg-color);
-    border-color: var(--dark-bg-color);
-}
-
-
-/* --- Main Video Area (Derecha) --- */
-.video-main-content {
-    flex-grow: 1;
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    background-color: #e9ecef; 
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
-}
-
-.session-header {
-    min-height: 60px;
-}
-
-.session-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--dark-bg-color);
-}
-
-.btn-outline-danger {
-    color: #dc3545;
-    border-color: #dc3545;
-}
-.btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-/* Contenedor de Jitsi */
-.jitsi-container {
-    background-color: var(--dark-bg-color); /* Fondo oscuro para el video */
-    overflow: hidden;
-}
-
-#jitsi-meet-iframe {
-    background-color: #222;
-    border: none;
-}
-
-/* Placeholder (antes de cargar el IFrame) */
-.jitsi-placeholder {
-    color: #fff;
-    background-color: #222;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 3px solid var(--primary-color); 
+    overflow: hidden; 
+    margin-bottom: 10px !important;
 }
-.jitsi-placeholder .btn-success {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    color: var(--dark-bg-color);
+
+.profile-name {
+    color: var(--dark-text-color);
+    font-size: 1.2rem;
     font-weight: 700;
-    transition: all 0.3s;
 }
-.jitsi-placeholder .btn-success:hover {
-    background-color: var(--verde-medio);
-    border-color: var(--verde-medio);
+
+.create-course-btn {
+    /* Botón CREAR NUEVO CURSO: Verde Limón/Amarillo */
+    background-color: var(--warning-color); 
+    border-color: var(--warning-color);
+    color: var(--dark-text-color); 
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(214, 232, 0, 0.4);
+}
+
+.create-course-btn:hover {
+    background-color: var(--verde-mostaza, #B3A93A); /* Usamos el mostaza para un hover sutil */
+    border-color: var(--verde-mostaza, #B3A93A);
+    color: var(--dark-text-color);
     transform: translateY(-2px);
 }
 
+/* 💻 --- Main Content Area --- */
+.main-content {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light-bg-color); 
+}
 
-/* --- Responsive Mobile --- */
-@media (max-width: 992px) {
-    .sidebar-session {
-        position: fixed;
-        height: 100%;
-        left: 0;
-        transform: translateX(-100%);
-        width: 100vw;
-        max-width: 320px;
+.content-area {
+    padding: 2.5rem; 
+}
+
+.dashboard-title {
+    color: var(--dark-text-color);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid var(--primary-color); 
+    padding-bottom: 10px;
+    display: inline-block; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Course Cards */
+.course-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.course-card:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-placeholder {
+    /* Estilo para las líneas punteadas de los nombres de curso en el prototipo */
+    color: var(--border-color); 
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.view-course-btn {
+    /* Botón VER CURSO: Azul/Verde Medio del prototipo */
+    background-color: #92b0e0; /* Tono similar al azul/verde claro del prototipo */
+    border-color: #92b0e0;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: var(--dark-text-color);
+}
+
+.view-course-btn:hover {
+    background-color: #799ad0; 
+    border-color: #799ad0;
+    transform: scale(1.05);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column; 
     }
-    .sidebar-session.open {
-        transform: translateX(0);
+    .sidebar {
+        width: 100%; 
+        height: auto; 
+        position: relative; 
     }
-    
-    .session-header {
-        position: sticky;
-        top: 0;
-        z-index: 5;
+    .content-area {
+        padding: 1rem;
     }
-    
-    .jitsi-placeholder, #jitsi-meet-iframe {
-        min-height: calc(100vh - 60px); /* Ajusta la altura en móvil */
+    .dashboard-title {
+        text-align: center;
+        width: 100%;
+        border-bottom: none; 
+        margin-bottom: 1.5rem;
     }
-    
-    .sidebar-header {
-        border-bottom: none !important;
+    .course-card {
+        flex-direction: column; 
+        text-align: center;
+        padding: 1rem;
     }
-    
-    .course-title-sidebar {
-        font-size: 1.3rem;
+    .course-info {
+        margin-bottom: 1rem; 
     }
-    
-    .nav-pills .nav-link {
-        font-size: 0.85rem;
+    .view-course-btn {
+        width: 100%;
     }
 }
