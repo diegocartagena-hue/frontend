@@ -1,42 +1,42 @@
-/* Variables CSS para consistencia (puedes moverlas a un archivo global si ya tienes uno) */
+/* Variables CSS (Mantenemos la consistencia) */
 :root {
-    --primary-color: #007bff; /* Azul de Bootstrap */
-    --secondary-color: #6c757d; /* Gris de Bootstrap */
+    --primary-color: #0d6efd; /* Azul de Bootstrap */
+    --secondary-color: #6c757d; 
     --warning-color: #ffc107; /* Amarillo de Bootstrap */
-    --light-bg-color: #f8f9fa; /* Fondo claro de Bootstrap */
-    --dark-text-color: #343a40; /* Texto oscuro de Bootstrap */
-    --border-color: #dee2e6; /* Borde de Bootstrap */
+    --light-bg-color: #f8f9fa; 
+    --dark-text-color: #212529; 
+    --border-color: #dee2e6; 
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: var(--light-bg-color);
     margin: 0;
-    overflow-x: hidden; /* Evitar scroll horizontal */
+    overflow-x: hidden; 
 }
 
 /* --- Layout Principal del Dashboard --- */
 .dashboard-wrapper {
     display: flex;
-    min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    min-height: 100vh; 
 }
 
 /* --- Sidebar (Panel Izquierdo) --- */
 .sidebar {
-    width: 280px; /* Ancho fijo para el sidebar */
+    width: 280px; 
     background-color: #fff;
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    position: sticky; /* Sticky para que se mantenga visible al hacer scroll */
+    position: sticky; 
     top: 0;
     left: 0;
-    height: 100vh; /* Ocupa toda la altura */
-    z-index: 1000; /* Asegurar que esté por encima de otros elementos si es necesario */
+    height: 100vh; 
+    z-index: 1000; 
 }
 
 .sidebar-header .logo-sidebar {
-    height: 35px; /* Ajusta el tamaño del logo en el sidebar */
+    height: 35px; 
     width: auto;
 }
 
@@ -46,20 +46,20 @@ body {
 }
 
 .profile-section {
-    background-color: var(--light-bg-color); /* Fondo ligeramente diferente para la sección de perfil */
+    background-color: #fff; /* Fondo blanco */
     border-bottom: 1px solid var(--border-color);
 }
 
 .profile-avatar {
     width: 90px;
     height: 90px;
-    background-color: #e9ecef; /* Fondo del círculo del avatar */
+    background-color: #e9ecef; 
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--primary-color); /* Borde primario */
-    overflow: hidden; /* Para que la imagen de perfil no se desborde */
+    border: 2px solid var(--primary-color); 
+    overflow: hidden; 
 }
 
 .profile-name {
@@ -71,33 +71,33 @@ body {
 .create-course-btn {
     background-color: var(--warning-color);
     border-color: var(--warning-color);
-    color: #fff;
+    color: var(--dark-text-color); /* Texto oscuro para el botón amarillo */
     font-weight: bold;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
 .create-course-btn:hover {
-    background-color: darken(var(--warning-color), 10%); /* Oscurecer un poco al pasar el ratón */
-    border-color: darken(var(--warning-color), 10%);
+    background-color: #e0a800; /* Un poco más oscuro */
+    border-color: #e0a800;
 }
 
 /* --- Main Content Area --- */
 .main-content {
-    flex-grow: 1; /* Ocupa todo el espacio restante */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
-    background-color: #f0f2f5; /* Un color de fondo suave para el área principal */
+    background-color: #f0f2f5; 
 }
 
-/* Top Bar */
+/* Top Bar (Arriba del contenido principal) */
 .navbar-top {
     background-color: #fff;
     border-bottom: 1px solid var(--border-color);
 }
 
 .navbar-top .btn {
-    border-radius: 50%; /* Botones redondos */
+    border-radius: 50%; 
     width: 40px;
     height: 40px;
     display: flex;
@@ -107,19 +107,13 @@ body {
     border-color: var(--secondary-color);
 }
 
-.navbar-top .btn:hover {
-    background-color: var(--light-bg-color);
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
 .navbar-top .logo-topbar {
-    height: 30px; /* Tamaño del logo en la barra superior */
+    height: 30px; 
     width: auto;
 }
 
 .content-area {
-    padding: 2.5rem; /* Espaciado interno para el contenido */
+    padding: 2.5rem; 
 }
 
 .dashboard-title {
@@ -129,7 +123,7 @@ body {
     margin-bottom: 2rem;
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 10px;
-    display: inline-block; /* Para que la línea se ajuste al texto */
+    display: inline-block; 
 }
 
 /* Course Cards */
@@ -138,12 +132,12 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1.25rem 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .course-card:hover {
-    transform: translateY(-3px); /* Pequeño efecto de elevación */
+    transform: translateY(-3px); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -162,60 +156,32 @@ body {
 }
 
 .view-course-btn:hover {
-    background-color: darken(var(--primary-color), 10%);
-    border-color: darken(var(--primary-color), 10%);
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 992px) {
-    .sidebar {
-        width: 250px;
-    }
-    .content-area {
-        padding: 1.5rem;
-    }
-    .dashboard-title {
-        font-size: 1.8rem;
-    }
-    .course-name {
-        font-size: 1.15rem;
-    }
-    .view-course-btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-}
-
+/* --- Responsive Adjustments (para tablets y móviles) --- */
 @media (max-width: 768px) {
     .dashboard-wrapper {
         flex-direction: column; /* Apila el sidebar y el contenido */
     }
     .sidebar {
-        width: 100%; /* Ocupa todo el ancho */
-        height: auto; /* Altura automática */
-        position: relative; /* Deja de ser sticky */
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
+        width: 100%; 
+        height: auto; 
+        position: relative; 
     }
     .sidebar-header {
-        justify-content: center; /* Centrar logo en móvil */
+        justify-content: center; 
     }
     .profile-section {
-        border-bottom: none; /* No necesita doble borde */
         padding-bottom: 1rem;
     }
     .sidebar-menu {
-        padding-top: 0; /* Ajustar padding */
+        padding-top: 0; 
         padding-bottom: 1.5rem;
     }
     .navbar-top {
-        justify-content: space-between; /* Ajustar espacio */
-        flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
-        padding: 1rem;
-    }
-    .navbar-top .logo-topbar {
-        margin-left: auto; /* Centrar o mover a la derecha si no hay espacio */
-        margin-right: auto;
+        display: none !important; /* Ocultar la barra superior en móvil para un diseño más limpio */
     }
     .content-area {
         padding: 1rem;
@@ -224,27 +190,14 @@ body {
         font-size: 1.5rem;
         text-align: center;
         width: 100%;
-        border-bottom: none; /* Quitar línea debajo del título en móvil */
+        border-bottom: none; 
         margin-bottom: 1.5rem;
     }
     .course-card {
-        flex-direction: column; /* Apila nombre y botón */
+        flex-direction: column; 
         text-align: center;
     }
     .course-info {
-        margin-bottom: 1rem; /* Espacio entre info y botón */
+        margin-bottom: 1rem; 
     }
-}
-
-/* Helper para oscurecer colores (para hover, si no usas SASS/LESS) */
-/* Función simplificada para darken, no es un oscurecimiento real en CSS puro, 
-   pero ayuda a simular un cambio de color. Ajusta los valores RGB manualmente. */
-/* Puedes eliminar esto y solo poner un color específico para el hover si lo prefieres */
-.btn-warning:hover {
-    background-color: #e0a800 !important;
-    border-color: #e0a800 !important;
-}
-.btn-primary:hover {
-    background-color: #0056b3 !important;
-    border-color: #0056b3 !important;
 }
