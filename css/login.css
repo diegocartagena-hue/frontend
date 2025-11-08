@@ -177,7 +177,6 @@ html, body {
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
@@ -187,16 +186,9 @@ html, body {
 }
 
 .logo-nav {
-  width: 50px;
+  width: 60px;
   height: auto;
   border-radius: 8px;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--verde-oscuro);
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .menu-toggle {
@@ -522,11 +514,11 @@ html, body {
 .background {
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   position: relative;
   z-index: 1;
-  padding: 40px 20px 50px;
+  padding: 100px 20px 50px;
   margin-top: 0;
 }
 
@@ -540,13 +532,14 @@ html, body {
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  padding: 3rem 2.5rem;
-  max-width: 480px;
+  padding: 3.5rem 3rem;
+  max-width: 600px;
   width: 100%;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .login-form-container::before {
@@ -590,58 +583,23 @@ html, body {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Logo wrapper mejorado */
-.logo-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  animation: fadeInUp 0.8s ease 0.2s both;
-}
-
+/* Logo */
 .logo-clasiya {
-  max-width: 150px;
+  width: 120px;
   height: auto;
-  margin: 0 auto;
   display: block;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.25));
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-wrapper:hover .logo-clasiya {
-  transform: scale(1.05) rotate(2deg);
-}
-
-.logo-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(
-    circle,
-    rgba(74, 128, 0, 0.35) 0%,
-    rgba(74, 128, 0, 0.15) 40%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  animation: pulseGlow 3s ease-in-out infinite;
-  z-index: 1;
-  filter: blur(10px);
+  margin: 0 auto;
 }
 
 /* Títulos mejorados */
 .login-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-medio));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   text-align: center;
   letter-spacing: -0.5px;
   animation: fadeInUp 0.8s ease 0.3s both;
@@ -651,10 +609,10 @@ html, body {
 .login-title::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 80px;
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--verde-medio), transparent);
   border-radius: 3px;
@@ -662,35 +620,16 @@ html, body {
 
 .login-subtitle {
   color: rgba(27, 51, 0, 0.75);
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
   text-align: center;
   font-weight: 500;
   animation: fadeInUp 0.8s ease 0.4s both;
 }
 
-/* Formulario moderno mejorado */
+/* Formulario moderno */
 .login-form {
   margin-top: 0;
-  animation: fadeInUp 0.8s ease 0.5s both;
-}
-
-.form-group-modern {
-  position: relative;
-  margin-bottom: 1.5rem;
-  animation: slideIn 0.6s ease both;
-}
-
-.form-group-modern:nth-child(1) {
-  animation-delay: 0.6s;
-}
-
-.form-group-modern:nth-child(2) {
-  animation-delay: 0.7s;
-}
-
-.form-group-modern:nth-child(3) {
-  animation-delay: 0.8s;
 }
 
 .form-label-modern {
@@ -724,7 +663,7 @@ html, body {
 
 .form-control-modern {
   width: 100%;
-  padding: 14px 18px;
+  padding: 15px 18px;
   border: 2px solid rgba(255, 255, 255, 0.35);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.45);
@@ -737,9 +676,7 @@ html, body {
 }
 
 .form-control-modern::placeholder {
-  color: rgba(27, 51, 0, 0.5);
-  font-size: 0.95rem;
-  font-weight: 400;
+  color: #999;
 }
 
 .form-control-modern:focus {
@@ -764,31 +701,18 @@ html, body {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.3);
+  background: none;
   border: none;
   color: var(--verde-medio);
   cursor: pointer;
   font-size: 1.1rem;
   padding: 8px;
-  border-radius: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s ease;
   z-index: 10;
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
 }
 
 .password-toggle:hover {
-  background: rgba(74, 128, 0, 0.15);
   color: var(--verde-oscuro);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.password-toggle:active {
-  transform: translateY(-50%) scale(0.95);
 }
 
 /* Checkbox y forgot password mejorados */
@@ -1256,8 +1180,7 @@ html, body {
   }
 
   .background {
-    padding: 40px 20px 40px;
-    align-items: flex-start;
+    padding: 100px 20px 40px;
   }
 
   .login-form-container {
@@ -1272,13 +1195,9 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  .logo-text {
-    font-size: 1.2rem;
-  }
-
   .background {
-    padding: 40px 15px 30px;
-    align-items: flex-start;
+    padding: 100px 15px 30px;
+    align-items: center;
   }
 
   .login-form-container {
@@ -1296,12 +1215,7 @@ html, body {
   }
 
   .logo-clasiya {
-    max-width: 130px;
-  }
-
-  .logo-glow {
-    width: 160px;
-    height: 160px;
+    width: 100px;
   }
 
   .form-group-modern {
@@ -1352,15 +1266,11 @@ html, body {
   }
 
   .logo-nav {
-    width: 40px;
-  }
-
-  .logo-text {
-    font-size: 1rem;
+    width: 50px;
   }
 
   .background {
-    padding: 40px 12px 25px;
+    padding: 100px 12px 25px;
   }
 
   .login-form-container {
@@ -1368,17 +1278,8 @@ html, body {
     border-radius: 20px;
   }
 
-  .logo-wrapper {
-    margin-bottom: 1.5rem;
-  }
-
   .logo-clasiya {
-    max-width: 110px;
-  }
-
-  .logo-glow {
-    width: 140px;
-    height: 140px;
+    width: 90px;
   }
 
   .login-title {
@@ -1426,7 +1327,7 @@ html, body {
   }
 
   .logo-clasiya {
-    max-width: 100px;
+    width: 80px;
   }
 
   .login-title {
