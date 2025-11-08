@@ -216,7 +216,7 @@ body, html {
   border-radius: 10px;
   cursor: pointer;
   padding: 10px;
-  z-index: 1002;
+  z-index: 1101;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   position: relative;
@@ -1100,6 +1100,29 @@ body, html {
   text-transform: uppercase;
 }
 
+/* Asegurar que el menú se muestre en pantallas grandes */
+@media (min-width: 993px) {
+  .nav-menu {
+    display: flex !important;
+    position: relative !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    z-index: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 992px) {
   .nav-wrapper {
@@ -1127,14 +1150,16 @@ body, html {
     gap: 2rem !important;
     transition: right 0.3s ease !important;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15) !important;
-    z-index: 1001 !important;
+    z-index: 1100 !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .nav-menu.active {
     right: 0 !important;
+    z-index: 1100 !important;
   }
 
 
