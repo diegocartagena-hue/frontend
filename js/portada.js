@@ -37,9 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const transitionDuration = prefersReducedMotion.matches ? '0s' : '0.3s';
   const mqDesktop = window.matchMedia('(min-width: 992px)');
+
   const navMenuComputed = window.getComputedStyle(navMenu);
-  const initialDisplay = navMenuComputed.display === 'none' ? 'flex' : navMenuComputed.display || 'flex';
-  const usesRightTransition = navMenuComputed.right !== 'auto' && navMenuComputed.position !== 'static';
+  const initialDisplay =
+    navMenuComputed.display === 'none' ? 'flex' : navMenuComputed.display || 'flex';
+  const usesRightTransition =
+    navMenuComputed.position !== 'static' &&
+    (navMenuComputed.right !== 'auto' || navMenu.classList.contains('nav-menu--right'));
 
   const applyMobileLayout = () => {
     navMenu.style.transition = usesRightTransition
@@ -48,23 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (navMenu.classList.contains('active')) {
       navMenu.style.display = initialDisplay;
-
       if (usesRightTransition) {
-        navMenu.style.right = '0';
+        navMenu.style.setProperty('right', '0', 'important');
       } else {
         navMenu.style.transform = 'translateX(0)';
       }
-
       navMenu.style.opacity = '1';
       navMenu.style.visibility = 'visible';
       navMenu.style.pointerEvents = 'auto';
     } else {
       if (usesRightTransition) {
-        navMenu.style.right = '-100%';
+        navMenu.style.setProperty('right', '-100%', 'important');
       } else {
         navMenu.style.transform = 'translateX(100%)';
       }
-
       navMenu.style.display = initialDisplay;
       navMenu.style.opacity = '0';
       navMenu.style.visibility = 'hidden';
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navMenu.style.transition = '';
     navMenu.style.transform = '';
-    navMenu.style.right = '';
+    navMenu.style.removeProperty('right');
     navMenu.style.opacity = '';
     navMenu.style.visibility = '';
     navMenu.style.pointerEvents = '';
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyMobileLayout();
 
       if (usesRightTransition) {
-        navMenu.style.right = '0';
+        navMenu.style.setProperty('right', '0', 'important');
       } else {
         navMenu.style.transform = 'translateX(0)';
       }
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyMobileLayout();
 
       if (usesRightTransition) {
-        navMenu.style.right = '-100%';
+        navMenu.style.setProperty('right', '-100%', 'important');
       } else {
         navMenu.style.transform = 'translateX(100%)';
       }
