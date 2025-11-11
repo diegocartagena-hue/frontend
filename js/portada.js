@@ -155,28 +155,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Toggle menú móvil
   menuToggle.addEventListener('click', (event) => {
     event.preventDefault();
     setMenuState();
   });
 
-  // Overlay
   overlay.addEventListener('click', () => setMenuState(false));
 
-  // Cerrar menú al seleccionar enlaces o botones
   [...navLinks, ...navButtons].forEach((element) => {
     element.addEventListener('click', () => setMenuState(false));
   });
 
-  // Atajo con tecla Escape
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && navMenu.classList.contains('active')) {
       setMenuState(false);
     }
   });
 
-  // Reset en escritorio
   const handleViewportChange = () => {
     if (mqDesktop.matches) {
       resetDesktopLayout();

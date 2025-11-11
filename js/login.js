@@ -1,101 +1,194 @@
 // Menú móvil - Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-  const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle =
+    document.querySelector('[data-menu-toggle]') ||
+    document.getElementById('menuToggle');
+  const navMenu =
+    document.querySelector('[data-nav-menu]') || document.getElementById('navMenu');
   const navLinks = document.querySelectorAll('.nav-link');
+  const navButtons = document.querySelectorAll('.btn-nav-primary, .btn-nav-secondary');
   const body = document.body;
 
   if (!menuToggle || !navMenu) {
-    console.warn('Elementos del menú no encontrados');
+    console.warn(
+      'Elementos del menú no encontrados. Asegúrate de que el botón tenga data-menu-toggle o id="menuToggle" y el menú data-nav-menu o id="navMenu".'
+    );
     return;
   }
 
-  // Crear overlay para cerrar el menú
-  const overlay = document.createElement('div');
-  overlay.className = 'menu-overlay';
-  overlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none;
-  `;
-  body.appendChild(overlay);
-
-  // Función para abrir el menú
-  function openMenu() {
-    console.log('Abriendo menú...');
-    menuToggle.classList.add('open');
-    navMenu.classList.add('active');
-    navMenu.style.right = '0';
-    navMenu.style.display = 'flex';
-    navMenu.style.visibility = 'visible';
-    navMenu.style.opacity = '1';
-    overlay.style.opacity = '1';
-    overlay.style.visibility = 'visible';
-    overlay.style.pointerEvents = 'auto';
-    body.style.overflow = 'hidden';
-    console.log('Menú abierto');
+  let overlay = document.querySelector('.menu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      pointer-events: none;
+    `;
+    body.appendChild(overlay);
   }
 
-  // Función para cerrar el menú
-  function closeMenu() {
-    console.log('Cerrando menú...');
-    menuToggle.classList.remove('open');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const transitionDuration = prefersReducedMotion.matches ? '0s' : '0.3s';
+  const mqDesktop = window.matchMedia('(min-width: 992px)');
+
+  const navMenuComputed = window.getComputedStyle(navMenu);
+  const initialDisplay =
+    navMenuComputed.display === 'none' ? 'flex' : navMenuComputed.display || 'flex';
+  const usesRightTransition =
+    navMenuComputed.position !== 'static' &&
+    (navMenuComputed.right !== 'auto' || navMenu.classList.contains('nav-menu--right'));
+
+  const applyMobileLayout = () => {
+    navMenu.style.transition = usesRightTransition
+      ? `right ${transitionDuration} ease`
+      : `transform ${transitionDuration} ease, opacity ${transitionDuration} ease`;
+
+    if (navMenu.classList.contains('active')) {
+      navMenu.style.display = initialDisplay;
+      if (usesRightTransition) {
+        navMenu.style.setProperty('right', '0', 'important');
+      } else {
+        navMenu.style.transform = 'translateX(0)';
+      }
+      navMenu.style.opacity = '1';
+      navMenu.style.visibility = 'visible';
+      navMenu.style.pointerEvents = 'auto';
+    } else {
+      if (usesRightTransition) {
+        navMenu.style.setProperty('right', '-100%', 'important');
+      } else {
+        navMenu.style.transform = 'translateX(100%)';
+      }
+      navMenu.style.display = initialDisplay;
+      navMenu.style.opacity = '0';
+      navMenu.style.visibility = 'hidden';
+      navMenu.style.pointerEvents = 'none';
+    }
+  };
+
+  const resetDesktopLayout = () => {
     navMenu.classList.remove('active');
-    navMenu.style.right = '-100%';
+    menuToggle.classList.remove('open');
+    body.classList.remove('menu-open');
+
+    navMenu.style.transition = '';
+    navMenu.style.transform = '';
+    navMenu.style.removeProperty('right');
+    navMenu.style.opacity = '';
+    navMenu.style.visibility = '';
+    navMenu.style.pointerEvents = '';
+    navMenu.style.display = '';
+
     overlay.style.opacity = '0';
     overlay.style.visibility = 'hidden';
     overlay.style.pointerEvents = 'none';
+
     body.style.overflow = '';
-    console.log('Menú cerrado');
-  }
+    menuToggle.setAttribute('aria-expanded', 'false');
+    navMenu.removeAttribute('aria-hidden');
+  };
 
-  // Toggle menú móvil
-  menuToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log('Menú toggle clickeado');
-    console.log('Estado actual:', navMenu.classList.contains('active'));
-    if (navMenu.classList.contains('active')) {
-      closeMenu();
+  const setMenuState = (shouldOpen) => {
+    if (mqDesktop.matches) {
+      return;
+    }
+
+    const isOpen =
+      typeof shouldOpen === 'boolean' ? shouldOpen : !navMenu.classList.contains('active');
+
+    navMenu.classList.toggle('active', isOpen);
+    menuToggle.classList.toggle('open', isOpen);
+    body.classList.toggle('menu-open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    navMenu.setAttribute('aria-hidden', String(!isOpen));
+
+    if (isOpen) {
+      applyMobileLayout();
+
+      if (usesRightTransition) {
+        navMenu.style.setProperty('right', '0', 'important');
+      } else {
+        navMenu.style.transform = 'translateX(0)';
+      }
+      navMenu.style.opacity = '1';
+      navMenu.style.visibility = 'visible';
+      navMenu.style.pointerEvents = 'auto';
+
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
+      overlay.style.pointerEvents = 'auto';
+
+      body.style.overflow = 'hidden';
+
+      const firstFocusable =
+        navMenu.querySelector(
+          'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ) || navMenu;
+      requestAnimationFrame(() => firstFocusable.focus({ preventScroll: true }));
     } else {
-      openMenu();
+      applyMobileLayout();
+
+      if (usesRightTransition) {
+        navMenu.style.setProperty('right', '-100%', 'important');
+      } else {
+        navMenu.style.transform = 'translateX(100%)';
+      }
+      navMenu.style.opacity = '0';
+      navMenu.style.visibility = 'hidden';
+      navMenu.style.pointerEvents = 'none';
+
+      overlay.style.opacity = '0';
+      overlay.style.visibility = 'hidden';
+      overlay.style.pointerEvents = 'none';
+
+      body.style.overflow = '';
+      menuToggle.focus({ preventScroll: true });
+    }
+  };
+
+  menuToggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    setMenuState();
+  });
+
+  overlay.addEventListener('click', () => setMenuState(false));
+
+  [...navLinks, ...navButtons].forEach((element) => {
+    element.addEventListener('click', () => setMenuState(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+      setMenuState(false);
     }
   });
 
-  // Cerrar menú al hacer clic en el overlay
-  overlay.addEventListener('click', () => {
-    closeMenu();
-  });
-
-  // Cerrar menú al hacer clic en un enlace
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
-
-  // Cerrar menú al hacer clic en los botones de navegación
-  const navButtons = document.querySelectorAll('.btn-nav-primary, .btn-nav-secondary');
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
-
-  // Cerrar menú cuando se redimensiona la ventana a pantalla grande
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 992 && navMenu.classList.contains('active')) {
-      closeMenu();
+  const handleViewportChange = () => {
+    if (mqDesktop.matches) {
+      resetDesktopLayout();
+    } else {
+      navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
+      applyMobileLayout();
     }
-  });
+  };
+
+  mqDesktop.addEventListener('change', handleViewportChange);
+  window.addEventListener('resize', handleViewportChange);
+
+  if (mqDesktop.matches) {
+    resetDesktopLayout();
+  } else {
+    navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
+    applyMobileLayout();
+  }
 });
 
 // Toggle de visibilidad de contraseña
@@ -122,25 +215,21 @@ function createParticles() {
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
-    
-    // Tamaño aleatorio
+
     const size = Math.random() * 4 + 2;
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
-    
-    // Posición inicial aleatoria
+
     particle.style.left = Math.random() * 100 + '%';
     particle.style.animationDelay = Math.random() * 15 + 's';
-    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    
-    // Opacidad aleatoria
+    particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+
     particle.style.opacity = Math.random() * 0.5 + 0.3;
-    
+
     particlesContainer.appendChild(particle);
   }
 }
 
-// Inicializar partículas cuando el DOM esté listo
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', createParticles);
 } else {
@@ -157,35 +246,27 @@ if (loginForm) {
     const correo = document.getElementById('correo').value;
     const contraseña = document.getElementById('contraseña').value;
 
-    // Validación básica
     if (!correo || !contraseña) {
       alert('Por favor, completa todos los campos');
       return;
     }
 
-    // Validación de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(correo)) {
       alert('Por favor, ingresa un correo electrónico válido');
       return;
     }
 
-    // Aquí puedes agregar la lógica para enviar el formulario
     console.log('Iniciando sesión...');
-    
-    // Ejemplo de datos a enviar
+
     const formData = {
       correo: correo,
       contraseña: contraseña,
-      rememberMe: document.getElementById('rememberMe').checked
+      rememberMe: document.getElementById('rememberMe').checked,
     };
 
     console.log('Datos del formulario:', formData);
-    
-    // Aquí harías la petición al servidor
-    // fetch('/api/login', { method: 'POST', body: JSON.stringify(formData) })
-    
-    // Simulación de login exitoso
+
     alert('¡Inicio de sesión exitoso! (Esta es una demostración)');
   });
 }
