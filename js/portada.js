@@ -1,214 +1,5 @@
-// Menú móvil - Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle =
-    document.querySelector('[data-menu-toggle]') ||
-    document.getElementById('menuToggle');
-  const navMenu =
-    document.querySelector('[data-nav-menu]') || document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const navButtons = document.querySelectorAll('.btn-nav-primary, .btn-nav-secondary');
-  const body = document.body;
-
-  if (!menuToggle || !navMenu) {
-    console.warn(
-      'Elementos del menú no encontrados. Asegúrate de que el botón tenga data-menu-toggle o id="menuToggle" y el menú data-nav-menu o id="navMenu".'
-    );
-    return;
-  }
-
-  // Overlay reutilizable
-  let overlay = document.querySelector('.menu-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'menu-overlay';
-    overlay.style.cssText = `
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      pointer-events: none;
-    `;
-    body.appendChild(overlay);
-  }
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const transitionDuration = prefersReducedMotion.matches ? '0s' : '0.3s';
-  const mqDesktop = window.matchMedia('(min-width: 992px)');
-
-  const navMenuComputed = window.getComputedStyle(navMenu);
-  const initialDisplay =
-    navMenuComputed.display === 'none' ? 'flex' : navMenuComputed.display || 'flex';
-  const usesRightTransition =
-    navMenuComputed.position !== 'static' &&
-    (navMenuComputed.right !== 'auto' || navMenu.classList.contains('nav-menu--right'));
-
-  const applyMobileLayout = () => {
-    navMenu.style.transition = usesRightTransition
-      ? `right ${transitionDuration} ease`
-      : `transform ${transitionDuration} ease, opacity ${transitionDuration} ease`;
-
-    if (navMenu.classList.contains('active')) {
-      navMenu.style.display = initialDisplay;
-      if (usesRightTransition) {
-        navMenu.style.setProperty('right', '0', 'important');
-      } else {
-        navMenu.style.transform = 'translateX(0)';
-      }
-      navMenu.style.opacity = '1';
-      navMenu.style.visibility = 'visible';
-      navMenu.style.pointerEvents = 'auto';
-    } else {
-      if (usesRightTransition) {
-        navMenu.style.setProperty('right', '-100%', 'important');
-      } else {
-        navMenu.style.transform = 'translateX(100%)';
-      }
-      navMenu.style.display = initialDisplay;
-      navMenu.style.opacity = '0';
-      navMenu.style.visibility = 'hidden';
-      navMenu.style.pointerEvents = 'none';
-    }
-  };
-
-  const resetDesktopLayout = () => {
-    navMenu.classList.remove('active');
-    menuToggle.classList.remove('open');
-    body.classList.remove('menu-open');
-
-    navMenu.style.transition = '';
-    navMenu.style.transform = '';
-    navMenu.style.removeProperty('right');
-    navMenu.style.opacity = '';
-    navMenu.style.visibility = '';
-    navMenu.style.pointerEvents = '';
-    navMenu.style.display = '';
-
-    overlay.style.opacity = '0';
-    overlay.style.visibility = 'hidden';
-    overlay.style.pointerEvents = 'none';
-
-    body.style.overflow = '';
-    menuToggle.setAttribute('aria-expanded', 'false');
-    navMenu.removeAttribute('aria-hidden');
-  };
-
-  const setMenuState = (shouldOpen) => {
-    if (mqDesktop.matches) {
-      return;
-    }
-
-    const isOpen =
-      typeof shouldOpen === 'boolean' ? shouldOpen : !navMenu.classList.contains('active');
-
-    navMenu.classList.toggle('active', isOpen);
-    menuToggle.classList.toggle('open', isOpen);
-    body.classList.toggle('menu-open', isOpen);
-    overlay.classList.toggle('visible', isOpen);
-
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    navMenu.setAttribute('aria-hidden', String(!isOpen));
-
-    if (isOpen) {
-      applyMobileLayout();
-
-      if (usesRightTransition) {
-        navMenu.style.setProperty('right', '0', 'important');
-      } else {
-        navMenu.style.transform = 'translateX(0)';
-      }
-      navMenu.style.opacity = '1';
-      navMenu.style.visibility = 'visible';
-      navMenu.style.pointerEvents = 'auto';
-
-      overlay.style.opacity = '1';
-      overlay.style.visibility = 'visible';
-      overlay.style.pointerEvents = 'auto';
-
-      body.style.overflow = 'hidden';
-
-      const firstFocusable =
-        navMenu.querySelector(
-          'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        ) || navMenu;
-      requestAnimationFrame(() => firstFocusable.focus({ preventScroll: true }));
-    } else {
-      applyMobileLayout();
-
-      if (usesRightTransition) {
-        navMenu.style.setProperty('right', '-100%', 'important');
-      } else {
-        navMenu.style.transform = 'translateX(100%)';
-      }
-      navMenu.style.opacity = '0';
-      navMenu.style.visibility = 'hidden';
-      navMenu.style.pointerEvents = 'none';
-
-      overlay.style.opacity = '0';
-      overlay.style.visibility = 'hidden';
-      overlay.style.pointerEvents = 'none';
-
-      body.style.overflow = '';
-      menuToggle.focus({ preventScroll: true });
-    }
-  };
-
-  menuToggle.addEventListener('click', (event) => {
-    event.preventDefault();
-    setMenuState();
-  });
-
-  overlay.addEventListener('click', () => setMenuState(false));
-
-  [...navLinks, ...navButtons].forEach((element) => {
-    element.addEventListener('click', () => setMenuState(false));
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && navMenu.classList.contains('active')) {
-      setMenuState(false);
-    }
-  });
-
-  const handleViewportChange = () => {
-    if (mqDesktop.matches) {
-      resetDesktopLayout();
-    } else {
-      navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
-      applyMobileLayout();
-    }
-  };
-  mqDesktop.addEventListener('change', handleViewportChange);
-  window.addEventListener('resize', handleViewportChange);
-
-  if (mqDesktop.matches) {
-    resetDesktopLayout();
-  } else {
-    navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
-    applyMobileLayout();
-  }
-});
-
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-
-  if (currentScroll > 100) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-
-  lastScroll = currentScroll;
-});
-
-// Smooth scroll para enlaces
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+// Smooth scroll para enlaces internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
@@ -216,7 +7,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       const offsetTop = target.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
-        behavior: 'smooth',
+        behavior: 'smooth'
       });
     }
   });
@@ -229,14 +20,14 @@ window.addEventListener('scroll', () => {
   const scrollY = window.pageYOffset;
   const navLinks = document.querySelectorAll('.nav-link');
 
-  sections.forEach((section) => {
+  sections.forEach(section => {
     const sectionHeight = section.offsetHeight;
     const sectionTop = section.offsetTop - 100;
     const sectionId = section.getAttribute('id');
     const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      navLinks.forEach((link) => link.classList.remove('active'));
+      navLinks.forEach(link => link.classList.remove('active'));
       if (navLink) navLink.classList.add('active');
     }
   });
@@ -245,7 +36,7 @@ window.addEventListener('scroll', () => {
 // Animación al hacer scroll
 const observerOptions = {
   threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px',
+  rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
