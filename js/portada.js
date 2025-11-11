@@ -36,14 +36,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const transitionDuration = prefersReducedMotion.matches ? '0s' : '0.3s';
+  const mqDesktop = window.matchMedia('(min-width: 992px)');
 
-  navMenu.style.transition = `transform ${transitionDuration} ease, opacity ${transitionDuration} ease`;
-  navMenu.style.transform = 'translateX(100%)';
-  navMenu.style.opacity = '0';
-  navMenu.style.visibility = 'hidden';
-  navMenu.style.pointerEvents = 'none';
+  const applyMobileLayout = () => {
+    navMenu.style.transition = `transform ${transitionDuration} ease, opacity ${transitionDuration} ease`;
+
+    if (navMenu.classList.contains('active')) {
+      navMenu.style.transform = 'translateX(0)';
+      navMenu.style.opacity = '1';
+      navMenu.style.visibility = 'visible';
+      navMenu.style.pointerEvents = 'auto';
+    } else {
+      navMenu.style.transform = 'translateX(100%)';
+      navMenu.style.opacity = '0';
+      navMenu.style.visibility = 'hidden';
+      navMenu.style.pointerEvents = 'none';
+    }
+  };
+
+  const resetDesktopLayout = () => {
+    navMenu.classList.remove('active');
+    menuToggle.classList.remove('open');
+    body.classList.remove('menu-open');
+
+    navMenu.style.transition = '';
+    navMenu.style.transform = '';
+    navMenu.style.opacity = '';
+    navMenu.style.visibility = '';
+    navMenu.style.pointerEvents = '';
+
+    overlay.style.opacity = '0';
+    overlay.style.visibility = 'hidden';
+    overlay.style.pointerEvents = 'none';
+
+    body.style.overflow = '';
+    menuToggle.setAttribute('aria-expanded', 'false');
+    navMenu.removeAttribute('aria-hidden');
+  };
 
   const setMenuState = (shouldOpen) => {
+    if (mqDesktop.matches) {
+      return;
+    }
+
     const isOpen =
       typeof shouldOpen === 'boolean' ? shouldOpen : !navMenu.classList.contains('active');
 
@@ -56,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
     navMenu.setAttribute('aria-hidden', String(!isOpen));
 
     if (isOpen) {
+      applyMobileLayout();
+
       navMenu.style.transform = 'translateX(0)';
       navMenu.style.opacity = '1';
       navMenu.style.visibility = 'visible';
@@ -73,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ) || navMenu;
       requestAnimationFrame(() => firstFocusable.focus({ preventScroll: true }));
     } else {
+      applyMobileLayout();
+
       navMenu.style.transform = 'translateX(100%)';
       navMenu.style.opacity = '0';
       navMenu.style.visibility = 'hidden';
@@ -109,14 +148,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Reset en escritorio
-  const mqDesktop = window.matchMedia('(min-width: 992px)');
   const handleViewportChange = () => {
     if (mqDesktop.matches) {
-      setMenuState(false);
+      resetDesktopLayout();
+    } else {
+      navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
+      applyMobileLayout();
     }
   };
   mqDesktop.addEventListener('change', handleViewportChange);
   window.addEventListener('resize', handleViewportChange);
+
+  if (mqDesktop.matches) {
+    resetDesktopLayout();
+  } else {
+    navMenu.setAttribute('aria-hidden', String(!navMenu.classList.contains('active')));
+    applyMobileLayout();
+  }
 });
 
 // Navbar scroll effect
