@@ -624,7 +624,6 @@ body, html {
 }
 
 .file-upload-label {
-  displayable block;
   display: flex;
   flex-direction: column;
   align-items: center;
