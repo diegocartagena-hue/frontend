@@ -37,16 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const transitionDuration = prefersReducedMotion.matches ? '0s' : '0.3s';
   const mqDesktop = window.matchMedia('(min-width: 992px)');
+  const computedDisplay = window.getComputedStyle(navMenu).display;
+  const initialDisplay =
+    computedDisplay === 'none' ? 'flex' : computedDisplay || 'flex';
 
   const applyMobileLayout = () => {
     navMenu.style.transition = `transform ${transitionDuration} ease, opacity ${transitionDuration} ease`;
 
     if (navMenu.classList.contains('active')) {
+      navMenu.style.display = initialDisplay;
       navMenu.style.transform = 'translateX(0)';
       navMenu.style.opacity = '1';
       navMenu.style.visibility = 'visible';
       navMenu.style.pointerEvents = 'auto';
     } else {
+      navMenu.style.display = 'none';
       navMenu.style.transform = 'translateX(100%)';
       navMenu.style.opacity = '0';
       navMenu.style.visibility = 'hidden';
@@ -64,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navMenu.style.opacity = '';
     navMenu.style.visibility = '';
     navMenu.style.pointerEvents = '';
+    navMenu.style.display = '';
 
     overlay.style.opacity = '0';
     overlay.style.visibility = 'hidden';
