@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClasiYA - Iniciar Sesión</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="css/navbar.css" />
   <link rel="stylesheet" href="css/login.css" />
   <link rel="icon" href="assets/logoicono.ico" type="image/x-icon" />
 </head>
-
 <body>
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <nav class="navbar-glass fixed-top" id="navbar">
     <div class="container-fluid">
       <div class="nav-wrapper">
@@ -45,7 +44,7 @@
     </div>
   </nav>
 
-  <!-- Fondo animado -->
+  <!-- FONDO ANIMADO -->
   <div class="animated-background">
     <div class="gradient-animated"></div>
 
@@ -66,86 +65,77 @@
     </div>
   </div>
 
-  <!-- Contenido principal -->
-  <main class="login-viewport">
+  <!-- CONTENIDO -->
+  <main class="viewport">
     <div class="container">
-      <div class="row align-items-center justify-content-center gy-4">
-        <!-- Panel informativo -->
-        <div class="col-xl-6 d-none d-xl-block">
+      <div class="row g-4 align-items-center justify-content-center">
+        <!-- PANEL IZQUIERDO -->
+        <div class="col-lg-6 d-none d-lg-block">
           <section class="info-panel">
-            <div class="info-logo-wrap">
+            <div class="info-logo-wrapper">
               <img src="assets/logosinfondo.png" alt="ClasiYA" class="info-logo" />
             </div>
             <h2 class="info-title">
-              Impulsa tu aprendizaje con <span>ClasiYA</span>
+              Aprende sin límites con <span>ClasiYA</span>
             </h2>
             <p class="info-subtitle">
-              Accede a recursos, maestros y una comunidad en constante crecimiento.
+              Accede a programas flexibles, acompáñate de mentores expertos y lleva un registro claro de tu progreso.
             </p>
-
             <ul class="info-features">
-              <li class="info-feature">
+              <li>
                 <span class="feature-icon"><i class="fas fa-user-graduate"></i></span>
                 <div>
-                  <h4 class="feature-title">Programas a tu ritmo</h4>
-                  <p class="feature-text">
-                    Diseñados para adaptarse a tus horarios y objetivos personales.
-                  </p>
+                  <h4>Programas flexibles</h4>
+                  <p>Diseñados para adaptarse a tu ritmo y objetivos académicos.</p>
                 </div>
               </li>
-              <li class="info-feature">
+              <li>
+                <span class="feature-icon"><i class="fas fa-people-group"></i></span>
+                <div>
+                  <h4>Comunidad activa</h4>
+                  <p>Estudiantes, docentes y mentores conectados las 24 horas.</p>
+                </div>
+              </li>
+              <li>
                 <span class="feature-icon"><i class="fas fa-shield-heart"></i></span>
                 <div>
-                  <h4 class="feature-title">Seguridad ante todo</h4>
-                  <p class="feature-text">
-                    Gestionamos tus datos con responsabilidad y cifrado moderno.
-                  </p>
-                </div>
-              </li>
-              <li class="info-feature">
-                <span class="feature-icon"><i class="fas fa-chart-line"></i></span>
-                <div>
-                  <h4 class="feature-title">Progreso medible</h4>
-                  <p class="feature-text">
-                    Visualiza estadísticas claras de asistencia, tareas y logros.
-                  </p>
+                  <h4>Seguridad y confianza</h4>
+                  <p>Tus datos están protegidos con cifrado y buenas prácticas.</p>
                 </div>
               </li>
             </ul>
 
-            <div class="info-stats">
-              <article class="stat">
-                <h3 class="stat-number">+10K</h3>
-                <p class="stat-label">Estudiantes activos</p>
+            <div class="stats">
+              <article>
+                <h3>10K+</h3>
+                <p>Estudiantes activos</p>
               </article>
-              <article class="stat">
-                <h3 class="stat-number">+500</h3>
-                <p class="stat-label">Cursos disponibles</p>
+              <article>
+                <h3>600+</h3>
+                <p>Cursos disponibles</p>
               </article>
-              <article class="stat">
-                <h3 class="stat-number">24/7</h3>
-                <p class="stat-label">Acceso digital</p>
+              <article>
+                <h3>98%</h3>
+                <p>Satisfacción</p>
               </article>
             </div>
           </section>
         </div>
 
-        <!-- Formulario -->
-        <div class="col-xl-5 col-lg-8 col-md-10">
+        <!-- FORMULARIO -->
+        <div class="col-lg-5 col-md-8 col-sm-10">
           <section class="login-card">
             <header class="login-header">
-              <div class="avatar-ring">
-                <i class="fas fa-unlock-alt"></i>
+              <div class="icon-ring">
+                <i class="fas fa-unlock-keyhole"></i>
               </div>
-              <h1 class="login-heading">¡Hola de nuevo!</h1>
-              <p class="login-text">
-                Inicia sesión para continuar explorando oportunidades educativas.
-              </p>
+              <h1>¡Bienvenido de nuevo!</h1>
+              <p>Ingresa tus credenciales para continuar aprendiendo.</p>
             </header>
 
             <form class="login-form" id="loginForm">
-              <div class="input-group-modern">
-                <label for="correo" class="input-label">
+              <div class="form-group">
+                <label for="correo" class="form-label">
                   <span class="label-icon"><i class="fas fa-envelope"></i></span>
                   <span>Correo electrónico</span>
                 </label>
@@ -153,15 +143,15 @@
                   <input
                     type="email"
                     id="correo"
-                    class="input-control"
+                    class="form-control glass-input"
                     placeholder="ejemplo@correo.com"
                     required
                   />
                 </div>
               </div>
 
-              <div class="input-group-modern">
-                <label for="contraseña" class="input-label">
+              <div class="form-group">
+                <label for="contraseña" class="form-label">
                   <span class="label-icon"><i class="fas fa-lock"></i></span>
                   <span>Contraseña</span>
                 </label>
@@ -169,11 +159,11 @@
                   <input
                     type="password"
                     id="contraseña"
-                    class="input-control"
+                    class="form-control glass-input"
                     placeholder="••••••••"
                     required
                   />
-                  <button class="input-toggle" type="button" id="togglePassword" aria-label="Mostrar contraseña">
+                  <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar contraseña">
                     <i class="fas fa-eye"></i>
                   </button>
                 </div>
@@ -189,31 +179,29 @@
               </div>
 
               <button type="submit" class="btn-login">
-                <span><i class="fas fa-sign-in-alt"></i> Iniciar sesión</span>
+                <i class="fas fa-sign-in-alt"></i>
+                Iniciar sesión
               </button>
 
               <div class="divider">
                 <span>o continúa con</span>
               </div>
 
-              <div class="social-login">
+              <div class="social-buttons">
                 <button type="button" class="btn-social google">
-                  <i class="fab fa-google"></i>
-                  Google
+                  <i class="fab fa-google"></i> Google
                 </button>
                 <button type="button" class="btn-social facebook">
-                  <i class="fab fa-facebook-f"></i>
-                  Facebook
+                  <i class="fab fa-facebook-f"></i> Facebook
                 </button>
                 <button type="button" class="btn-social github">
-                  <i class="fab fa-github"></i>
-                  GitHub
+                  <i class="fab fa-github"></i> GitHub
                 </button>
               </div>
 
               <p class="register-note">
                 ¿Aún no tienes cuenta?
-                <a href="registro.html" class="register-link">Regístrate ahora</a>
+                <a href="registro.html" class="register-link">Crea una ahora</a>
               </p>
             </form>
           </section>
