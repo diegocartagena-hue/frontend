@@ -1,59 +1,648 @@
-/**
- * js/maestro.js
- * Lógica de frontend para el Dashboard de Maestro (maestro.html)
- * Maneja la interacción de botones del prototipo.
- */
+// Panel de Maestro - ClasiYA
+(function () {
+  'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // =========================================================
-    // Manejo del botón "CREAR NUEVO CURSO"
-    // =========================================================
-    const createCourseBtn = document.querySelector('.create-course-btn');
-    if (createCourseBtn) {
-        createCourseBtn.addEventListener('click', () => {
-            console.log('Maestro: Botón CREAR NUEVO CURSO presionado.');
-            alert('Abriendo formulario para crear un nuevo curso...');
-            // window.location.href = 'crear-curso.html'; // Descomentar para redirección real
-        });
+  // Estado global
+  const state = {
+    maestro: null,
+    cursos: [],
+    sesiones: [],
+    codigosAcceso: {}
+  };
+
+  // ========== INICIALIZACIÓN ==========
+  document.addEventListener('DOMContentLoaded', function () {
+    initParticles();
+    loadMaestroProfile();
+    loadCursos();
+    loadSesiones();
+    setupEventListeners();
+  });
+
+  // ========== PARTÍCULAS ANIMADAS ==========
+  function initParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+
+    const particleCount = 30;
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 18 + 's';
+      particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // ========== CARGA DE DATOS ==========
+  async function loadMaestroProfile() {
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/perfil');
+      // const data = await response.json();
+      
+      // Datos de ejemplo
+      const maestroData = {
+        id: 1,
+        nombre: 'Prof. Juan Pérez',
+        email: 'juan.perez@clasiya.com',
+        avatar: 'assets/logosinfondo.png',
+        totalCursos: 0,
+        totalEstudiantes: 0,
+        totalSesiones: 0
+      };
+
+      state.maestro = maestroData;
+      renderProfile(maestroData);
+    } catch (error) {
+      console.error('Error al cargar perfil del maestro:', error);
+      showNotification('Error al cargar el perfil', 'error');
+    }
+  }
+
+  async function loadCursos() {
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/cursos');
+      // const data = await response.json();
+      
+      // Datos de ejemplo
+      const cursosData = [];
+
+      state.cursos = cursosData;
+      renderCursos(cursosData);
+      updateStats();
+    } catch (error) {
+      console.error('Error al cargar cursos:', error);
+      showNotification('Error al cargar los cursos', 'error');
+    }
+  }
+
+  async function loadSesiones() {
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/sesiones');
+      // const data = await response.json();
+      
+      // Datos de ejemplo
+      const sesionesData = [];
+
+      state.sesiones = sesionesData;
+      renderSesiones(sesionesData);
+      updateStats();
+    } catch (error) {
+      console.error('Error al cargar sesiones:', error);
+      showNotification('Error al cargar las sesiones', 'error');
+    }
+  }
+
+  // ========== RENDERIZADO ==========
+  function renderProfile(maestro) {
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+    const profileAvatar = document.getElementById('profileAvatar');
+
+    if (profileName) profileName.textContent = maestro.nombre;
+    if (profileEmail) profileEmail.textContent = maestro.email;
+    if (profileAvatar) profileAvatar.src = maestro.avatar;
+  }
+
+  function renderCursos(cursos) {
+    const container = document.getElementById('coursesContainer');
+    const template = document.getElementById('courseTemplate');
+    const emptyState = document.getElementById('emptyState');
+
+    if (!container || !template) return;
+
+    // Limpiar cursos existentes (excepto template y empty state)
+    const existingCourses = container.querySelectorAll('.course-card:not(#courseTemplate)');
+    existingCourses.forEach(card => card.remove());
+
+    if (cursos.length === 0) {
+      if (emptyState) emptyState.style.display = 'block';
+      return;
     }
 
-    // =========================================================
-    // Manejo de botones "VER CURSO"
-    // =========================================================
-    const courseList = document.querySelector('.course-list');
-    if (courseList) {
-        courseList.addEventListener('click', (event) => {
-            const viewButton = event.target.closest('.view-course-btn');
-            
-            if (viewButton) {
-                const courseId = viewButton.dataset.id || 'N/A';
-                
-                console.log(`Maestro: Redirigiendo a la sesión/detalles del Curso ID: ${courseId}`);
-                
-                alert(`Abriendo página de sesiones para el curso ${courseId}`);
-                // window.location.href = `sesiones.html?id=${courseId}`; // Redirección a la página de Jitsi
-            }
-        });
+    if (emptyState) emptyState.style.display = 'none';
+
+    cursos.forEach(curso => {
+      const card = template.cloneNode(true);
+      card.id = `course-${curso.id}`;
+      card.style.display = 'block';
+
+      // Llenar datos
+      const title = card.querySelector('.course-title');
+      const description = card.querySelector('.course-description');
+      const studentCount = card.querySelector('.student-count');
+      const sessionCount = card.querySelector('.session-count');
+      const viewBtn = card.querySelector('.btn-view');
+      const sessionsBtn = card.querySelector('.btn-sessions');
+      const codesBtn = card.querySelector('.btn-codes');
+
+      if (title) title.textContent = curso.nombre;
+      if (description) description.textContent = curso.descripcion;
+      if (studentCount) studentCount.textContent = curso.totalEstudiantes || 0;
+      if (sessionCount) sessionCount.textContent = curso.totalSesiones || 0;
+      if (viewBtn) viewBtn.setAttribute('data-course-id', curso.id);
+      if (sessionsBtn) sessionsBtn.setAttribute('data-course-id', curso.id);
+      if (codesBtn) codesBtn.setAttribute('data-course-id', curso.id);
+
+      container.appendChild(card);
+    });
+  }
+
+  function renderSesiones(sesiones) {
+    const container = document.getElementById('sessionsList');
+    const template = document.getElementById('sessionTemplate');
+    const emptyState = document.getElementById('emptySessionsState');
+
+    if (!container || !template) return;
+
+    // Limpiar sesiones existentes (excepto template y empty state)
+    const existingSessions = container.querySelectorAll('.session-item:not(#sessionTemplate)');
+    existingSessions.forEach(item => item.remove());
+
+    if (sesiones.length === 0) {
+      if (emptyState) emptyState.style.display = 'block';
+      return;
     }
 
-    // =========================================================
-    // Manejo de botones de navegación superior (Flechas)
-    // =========================================================
-    document.querySelectorAll('.sidebar-top-nav .btn-outline-secondary').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const icon = button.querySelector('i');
+    if (emptyState) emptyState.style.display = 'none';
 
-            if (icon.classList.contains('fa-arrow-left')) {
-                console.log('Navegación: Botón Atrás.');
-                // history.back(); 
-            } else if (icon.classList.contains('fa-arrow-right')) {
-                console.log('Navegación: Botón Adelante.');
-                // history.forward();
-            }
-        });
+    sesiones.forEach(sesion => {
+      const item = template.cloneNode(true);
+      item.id = `session-${sesion.id}`;
+      item.style.display = 'flex';
+
+      // Formatear fecha y hora
+      const fecha = new Date(sesion.fecha);
+      const dia = fecha.getDate();
+      const mes = fecha.toLocaleDateString('es-ES', { month: 'short' });
+      const hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+
+      // Llenar datos
+      const day = item.querySelector('.session-day');
+      const time = item.querySelector('.session-time');
+      const title = item.querySelector('.session-title');
+      const course = item.querySelector('.session-course');
+      const codeValue = item.querySelector('.code-value');
+      const joinBtn = item.querySelector('.btn-session-join');
+      const editBtn = item.querySelector('.btn-session-edit');
+
+      if (day) day.textContent = dia;
+      if (time) time.textContent = `${mes} ${hora}`;
+      if (title) title.textContent = sesion.titulo;
+      if (course) course.textContent = sesion.cursoNombre;
+      if (codeValue) codeValue.textContent = sesion.codigoAcceso;
+      if (joinBtn) joinBtn.setAttribute('data-session-id', sesion.id);
+      if (editBtn) editBtn.setAttribute('data-session-id', sesion.id);
+
+      container.appendChild(item);
+    });
+  }
+
+  function updateStats() {
+    const totalCursos = document.getElementById('totalCursos');
+    const totalEstudiantes = document.getElementById('totalEstudiantes');
+    const totalSesiones = document.getElementById('totalSesiones');
+
+    if (totalCursos) totalCursos.textContent = state.cursos.length;
+    if (totalSesiones) totalSesiones.textContent = state.sesiones.length;
+
+    // Calcular total de estudiantes
+    const estudiantes = state.cursos.reduce((sum, curso) => sum + (curso.totalEstudiantes || 0), 0);
+    if (totalEstudiantes) totalEstudiantes.textContent = estudiantes;
+  }
+
+  // ========== EVENT LISTENERS ==========
+  function setupEventListeners() {
+    // Botón crear curso
+    const btnCrearCurso = document.getElementById('btnCrearCurso');
+    const btnCrearCursoEmpty = document.getElementById('btnCrearCursoEmpty');
+    if (btnCrearCurso) {
+      btnCrearCurso.addEventListener('click', () => {
+        const modal = new bootstrap.Modal(document.getElementById('modalCrearCurso'));
+        modal.show();
+      });
+    }
+    if (btnCrearCursoEmpty) {
+      btnCrearCursoEmpty.addEventListener('click', () => {
+        const modal = new bootstrap.Modal(document.getElementById('modalCrearCurso'));
+        modal.show();
+      });
+    }
+
+    // Botón guardar curso
+    const btnGuardarCurso = document.getElementById('btnGuardarCurso');
+    if (btnGuardarCurso) {
+      btnGuardarCurso.addEventListener('click', handleCrearCurso);
+    }
+
+    // Botón nueva sesión
+    const btnNuevaSesion = document.getElementById('btnNuevaSesion');
+    if (btnNuevaSesion) {
+      btnNuevaSesion.addEventListener('click', () => {
+        loadCursosForSesion();
+        const modal = new bootstrap.Modal(document.getElementById('modalCrearSesion'));
+        modal.show();
+      });
+    }
+
+    // Botón guardar sesión
+    const btnGuardarSesion = document.getElementById('btnGuardarSesion');
+    if (btnGuardarSesion) {
+      btnGuardarSesion.addEventListener('click', handleCrearSesion);
+    }
+
+    // Botones de acciones de curso
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.btn-codes')) {
+        const cursoId = e.target.closest('.btn-codes').getAttribute('data-course-id');
+        handleVerCodigos(cursoId);
+      }
+      if (e.target.closest('.btn-sessions')) {
+        const cursoId = e.target.closest('.btn-sessions').getAttribute('data-course-id');
+        handleVerSesionesCurso(cursoId);
+      }
+      if (e.target.closest('.btn-session-join')) {
+        const sesionId = e.target.closest('.btn-session-join').getAttribute('data-session-id');
+        handleIniciarSesion(sesionId);
+      }
+      if (e.target.closest('.btn-copy-code')) {
+        const codigo = e.target.closest('.btn-copy-code').getAttribute('data-code');
+        handleCopiarCodigo(codigo);
+      }
+      if (e.target.closest('.btn-delete-code')) {
+        const codeId = e.target.closest('.btn-delete-code').getAttribute('data-code-id');
+        handleEliminarCodigo(codeId);
+      }
     });
 
-    console.log('Dashboard de Maestro cargado. Interactividad lista.');
-});
+    // Botón generar código
+    const btnGenerarCodigo = document.getElementById('btnGenerarCodigo');
+    if (btnGenerarCodigo) {
+      btnGenerarCodigo.addEventListener('click', handleGenerarCodigo);
+    }
+
+    // Botón cerrar sesión
+    const btnCerrarSesion = document.getElementById('btnCerrarSesion');
+    if (btnCerrarSesion) {
+      btnCerrarSesion.addEventListener('click', handleCerrarSesion);
+    }
+
+    // Botón editar perfil
+    const btnEditarPerfil = document.getElementById('btnEditarPerfil');
+    if (btnEditarPerfil) {
+      btnEditarPerfil.addEventListener('click', handleEditarPerfil);
+    }
+  }
+
+  // ========== MANEJO DE FORMULARIOS ==========
+  async function handleCrearCurso() {
+    const form = document.getElementById('formCrearCurso');
+    if (!form || !form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const cursoData = {
+      nombre: document.getElementById('cursoNombre').value,
+      descripcion: document.getElementById('cursoDescripcion').value,
+      categoria: document.getElementById('cursoCategoria').value
+    };
+
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/cursos', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(cursoData)
+      // });
+      // const nuevoCurso = await response.json();
+
+      // Simulación
+      const nuevoCurso = {
+        id: Date.now(),
+        ...cursoData,
+        totalEstudiantes: 0,
+        totalSesiones: 0
+      };
+
+      state.cursos.push(nuevoCurso);
+      renderCursos(state.cursos);
+      updateStats();
+
+      // Cerrar modal y limpiar formulario
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalCrearCurso'));
+      if (modal) modal.hide();
+      form.reset();
+
+      showNotification('Curso creado exitosamente', 'success');
+    } catch (error) {
+      console.error('Error al crear curso:', error);
+      showNotification('Error al crear el curso', 'error');
+    }
+  }
+
+  async function handleCrearSesion() {
+    const form = document.getElementById('formCrearSesion');
+    if (!form || !form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const cursoId = document.getElementById('sesionCurso').value;
+    const fecha = document.getElementById('sesionFecha').value;
+    const hora = document.getElementById('sesionHora').value;
+    const fechaHora = new Date(`${fecha}T${hora}`);
+
+    const sesionData = {
+      cursoId: parseInt(cursoId),
+      titulo: document.getElementById('sesionTitulo').value,
+      fecha: fechaHora.toISOString(),
+      duracion: parseInt(document.getElementById('sesionDuracion').value),
+      codigoAcceso: generarCodigoAcceso()
+    };
+
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/sesiones', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(sesionData)
+      // });
+      // const nuevaSesion = await response.json();
+
+      // Simulación
+      const curso = state.cursos.find(c => c.id === parseInt(cursoId));
+      const nuevaSesion = {
+        id: Date.now(),
+        ...sesionData,
+        cursoNombre: curso ? curso.nombre : 'Curso sin nombre'
+      };
+
+      state.sesiones.push(nuevaSesion);
+      renderSesiones(state.sesiones);
+      updateStats();
+
+      // Cerrar modal y limpiar formulario
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalCrearSesion'));
+      if (modal) modal.hide();
+      form.reset();
+
+      showNotification('Sesión creada exitosamente', 'success');
+    } catch (error) {
+      console.error('Error al crear sesión:', error);
+      showNotification('Error al crear la sesión', 'error');
+    }
+  }
+
+  function loadCursosForSesion() {
+    const select = document.getElementById('sesionCurso');
+    if (!select) return;
+
+    select.innerHTML = '<option value="">Selecciona un curso</option>';
+    state.cursos.forEach(curso => {
+      const option = document.createElement('option');
+      option.value = curso.id;
+      option.textContent = curso.nombre;
+      select.appendChild(option);
+    });
+  }
+
+  // ========== CÓDIGOS DE ACCESO ==========
+  function handleVerCodigos(cursoId) {
+    const curso = state.cursos.find(c => c.id === parseInt(cursoId));
+    if (!curso) return;
+
+    // Cargar códigos del curso
+    loadCodigosCurso(cursoId);
+
+    // Mostrar modal
+    const modalNombre = document.getElementById('modalCursoNombre');
+    if (modalNombre) modalNombre.textContent = curso.nombre;
+
+    const modal = new bootstrap.Modal(document.getElementById('modalCodigosAcceso'));
+    modal.show();
+
+    // Guardar curso actual
+    document.getElementById('modalCodigosAcceso').setAttribute('data-curso-id', cursoId);
+  }
+
+  async function loadCodigosCurso(cursoId) {
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch(`/api/maestro/cursos/${cursoId}/codigos`);
+      // const codigos = await response.json();
+
+      // Simulación
+      const codigos = state.codigosAcceso[cursoId] || [];
+
+      renderCodigos(codigos);
+    } catch (error) {
+      console.error('Error al cargar códigos:', error);
+      showNotification('Error al cargar los códigos', 'error');
+    }
+  }
+
+  function renderCodigos(codigos) {
+    const container = document.getElementById('codesList');
+    const template = document.getElementById('codeTemplate');
+    const emptyState = document.getElementById('emptyCodesState');
+
+    if (!container || !template) return;
+
+    // Limpiar códigos existentes
+    const existingCodes = container.querySelectorAll('.code-item:not(#codeTemplate)');
+    existingCodes.forEach(item => item.remove());
+
+    if (codigos.length === 0) {
+      if (emptyState) emptyState.style.display = 'block';
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = 'none';
+
+    codigos.forEach(codigo => {
+      const item = template.cloneNode(true);
+      item.id = `code-${codigo.id}`;
+      item.style.display = 'flex';
+
+      const codeValue = item.querySelector('.code-value-display');
+      const codeStudent = item.querySelector('.code-student');
+      const codeStatus = item.querySelector('.code-status');
+      const copyBtn = item.querySelector('.btn-copy-code');
+      const deleteBtn = item.querySelector('.btn-delete-code');
+
+      if (codeValue) codeValue.textContent = codigo.codigo;
+      if (codeStudent) codeStudent.textContent = codigo.estudianteNombre || 'Sin asignar';
+      if (codeStatus) {
+        codeStatus.textContent = codigo.activo ? 'Activo' : 'Inactivo';
+        codeStatus.className = `code-status ${codigo.activo ? 'active' : 'inactive'}`;
+      }
+      if (copyBtn) copyBtn.setAttribute('data-code', codigo.codigo);
+      if (deleteBtn) deleteBtn.setAttribute('data-code-id', codigo.id);
+
+      container.appendChild(item);
+    });
+  }
+
+  async function handleGenerarCodigo() {
+    const modal = document.getElementById('modalCodigosAcceso');
+    const cursoId = modal.getAttribute('data-curso-id');
+    if (!cursoId) return;
+
+    const nuevoCodigo = {
+      id: Date.now(),
+      codigo: generarCodigoAcceso(),
+      cursoId: parseInt(cursoId),
+      estudianteNombre: null,
+      activo: true
+    };
+
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch(`/api/maestro/cursos/${cursoId}/codigos`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ codigo: nuevoCodigo.codigo })
+      // });
+      // const codigoCreado = await response.json();
+
+      // Simulación
+      if (!state.codigosAcceso[cursoId]) {
+        state.codigosAcceso[cursoId] = [];
+      }
+      state.codigosAcceso[cursoId].push(nuevoCodigo);
+
+      loadCodigosCurso(cursoId);
+      showNotification('Código generado exitosamente', 'success');
+    } catch (error) {
+      console.error('Error al generar código:', error);
+      showNotification('Error al generar el código', 'error');
+    }
+  }
+
+  function generarCodigoAcceso() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let codigo = '';
+    for (let i = 0; i < 8; i++) {
+      codigo += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return codigo;
+  }
+
+  function handleCopiarCodigo(codigo) {
+    navigator.clipboard.writeText(codigo).then(() => {
+      showNotification('Código copiado al portapapeles', 'success');
+    }).catch(err => {
+      console.error('Error al copiar código:', err);
+      showNotification('Error al copiar el código', 'error');
+    });
+  }
+
+  async function handleEliminarCodigo(codeId) {
+    if (!confirm('¿Estás seguro de eliminar este código?')) return;
+
+    try {
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch(`/api/maestro/codigos/${codeId}`, {
+      //   method: 'DELETE'
+      // });
+
+      // Simulación
+      const modal = document.getElementById('modalCodigosAcceso');
+      const cursoId = modal.getAttribute('data-curso-id');
+      if (cursoId && state.codigosAcceso[cursoId]) {
+        state.codigosAcceso[cursoId] = state.codigosAcceso[cursoId].filter(c => c.id !== parseInt(codeId));
+        loadCodigosCurso(cursoId);
+        showNotification('Código eliminado exitosamente', 'success');
+      }
+    } catch (error) {
+      console.error('Error al eliminar código:', error);
+      showNotification('Error al eliminar el código', 'error');
+    }
+  }
+
+  // ========== OTRAS FUNCIONES ==========
+  function handleIniciarSesion(sesionId) {
+    const sesion = state.sesiones.find(s => s.id === parseInt(sesionId));
+    if (!sesion) return;
+
+    // TODO: Integrar con Jitsi Meet
+    // Por ahora, redirigir a una página de sesión
+    window.location.href = `sesiones.html?id=${sesionId}`;
+  }
+
+  function handleVerSesionesCurso(cursoId) {
+    // Filtrar sesiones por curso y mostrarlas
+    const sesionesCurso = state.sesiones.filter(s => s.cursoId === parseInt(cursoId));
+    // TODO: Implementar vista de sesiones por curso
+    console.log('Sesiones del curso:', sesionesCurso);
+  }
+
+  function handleCerrarSesion() {
+    if (confirm('¿Estás seguro de cerrar sesión?')) {
+      // TODO: Limpiar sesión y redirigir a login
+      window.location.href = 'login.html';
+    }
+  }
+
+  function handleEditarPerfil() {
+    // TODO: Implementar edición de perfil
+    showNotification('Funcionalidad en desarrollo', 'info');
+  }
+
+  // ========== UTILIDADES ==========
+  function showNotification(message, type = 'info') {
+    // Crear notificación simple
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'}`;
+    notification.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      z-index: 9999;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
+
+  // Agregar animación de fadeOut
+  if (!document.querySelector('#notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'notification-styles';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
