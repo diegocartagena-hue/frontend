@@ -160,7 +160,8 @@ body, html {
   background: transparent !important;
 }
 
-
+/* ========== NAVEGACIÓN ========== */
+/* Estilos del menú compartidos en `css/navbar.css` */
 /* ========== FONDO ANIMADO ========== */
 .animated-background {
   position: fixed;
@@ -355,7 +356,7 @@ body, html {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  margin-top: -60px;
+  margin-top: 0px;
 }
 
 .registro-box::before {
@@ -995,7 +996,7 @@ body, html {
 
   .registro-box {
     padding: 2rem;
-    margin-top: -50px;
+    margin-top: 10px;
   }
 
   .registro-title {
@@ -1015,7 +1016,7 @@ body, html {
 
   .registro-box {
     padding: 1.5rem;
-    margin-top: -40px;
+    margin-top: 20px;
   }
 
   .registro-title {
@@ -1054,14 +1055,10 @@ body, html {
 
   .registro-box {
     padding: 1.25rem;
-    margin-top: -30px;
+    margin-top: 30px;
   }
 
   .form-control-modern {
     padding: 12px 14px;
   }
 }
-
-
-/* ========== NAVEGACIÓN ========== */
-/* Estilos del menú compartidos en `css/navbar.css` */
