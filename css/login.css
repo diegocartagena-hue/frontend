@@ -510,15 +510,11 @@ body, html {
 }
 
 .input-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--verde-medio);
-  font-size: 1.1rem;
-  pointer-events: none;
-  z-index: 2;
-  transition: color 0.3s ease, transform 0.3s ease;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .form-group-modern:focus-within .input-icon {
