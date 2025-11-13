@@ -333,10 +333,11 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px 50px;
+  padding: 80px 20px 50px;
   z-index: 1;
   margin-top: 0;
 }
+
 /* Caja del formulario mejorada */
 .login-box {
   background: rgba(255, 255, 255, 0.28);
@@ -1038,8 +1039,8 @@ body, html {
     text-align: center;
   }
 
-  .login-section {
-    padding: 100px 20px 40px;
+    .login-section {
+    padding: 80px 20px 40px;
   }
 
   .login-box {
@@ -1055,9 +1056,8 @@ body, html {
   }
 }
 
-@media (max-width: 768px) {
   .login-section {
-    padding: 100px 15px 30px;
+    padding: 80px 15px 30px;
     align-items: center;
   }
 
@@ -1097,8 +1097,8 @@ body, html {
     width: 50px;
   }
 
-  .login-section {
-    padding: 100px 12px 25px;
+   .login-section {
+    padding: 80px 12px 25px;
   }
 
   .login-box {
