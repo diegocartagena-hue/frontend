@@ -780,42 +780,18 @@ body, html {
 
 /* ========== SIDEBAR INFORMATIVO ========== */
 .info-sidebar {
-  padding: 2rem;
+  padding: 0;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 12px 35px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
   position: relative;
-  overflow: hidden;
-}
-
-.info-sidebar::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(74, 128, 0, 0.08) 0%,
-    rgba(74, 128, 0, 0.04) 30%,
-    transparent 70%
-  );
-  animation: rotate 30s linear infinite;
-  pointer-events: none;
-}
-
-.info-sidebar > * {
-  position: relative;
-  z-index: 1;
+  overflow: visible;
 }
 
 .info-content {
@@ -832,7 +808,6 @@ body, html {
   max-width: 200px;
   height: auto;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
-  animation: logoFloat 3s ease-in-out infinite;
 }
 
 .info-title {
