@@ -160,9 +160,6 @@ body, html {
   background: transparent !important;
 }
 
-/* ========== NAVEGACIÓN ========== */
-/* Estilos del menú compartidos en `css/navbar.css` */
-
 /* ========== FONDO ANIMADO - EXACTO DE REGISTRO ========== */
 .animated-background {
   position: fixed;
@@ -333,7 +330,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px 50px;
+  padding: 100px 20px 50px;
   z-index: 1;
   margin-top: 0;
 }
@@ -357,6 +354,7 @@ body, html {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
+  margin-top: -60px;
 }
 
 .login-box::before {
@@ -584,6 +582,8 @@ body, html {
 .password-toggle:hover {
   color: var(--verde-oscuro);
 }
+
+
 /* Opciones del formulario */
 .form-options {
   display: flex;
@@ -778,6 +778,7 @@ body, html {
   color: var(--verde-oscuro);
   text-decoration: underline;
 }
+
 
 /* ========== SIDEBAR INFORMATIVO ========== */
 .info-sidebar {
@@ -1039,12 +1040,13 @@ body, html {
     text-align: center;
   }
 
-    .login-section {
-    padding: 80px 20px 40px;
+  .login-section {
+    padding: 100px 20px 40px;
   }
 
   .login-box {
     padding: 2rem;
+    margin-top: -50px;
   }
 
   .login-title {
@@ -1056,13 +1058,15 @@ body, html {
   }
 }
 
+@media (max-width: 768px) {
   .login-section {
-    padding: 80px 15px 30px;
+    padding: 100px 15px 30px;
     align-items: center;
   }
 
   .login-box {
     padding: 1.5rem;
+    margin-top: -40px;
   }
 
   .login-title {
@@ -1097,16 +1101,18 @@ body, html {
     width: 50px;
   }
 
-   .login-section {
-    padding: 80px 12px 25px;
+  .login-section {
+    padding: 100px 12px 25px;
   }
 
   .login-box {
     padding: 1.25rem;
+    margin-top: -30px;
   }
 
   .form-control-modern {
     padding: 12px 14px;
   }
 }
-
+/* ========== NAVEGACIÓN ========== */
+/* Estilos del menú compartidos en `css/navbar.css` */
