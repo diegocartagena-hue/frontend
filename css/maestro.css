@@ -112,11 +112,11 @@ body, html {
   height: 100%;
   background: linear-gradient(
     135deg,
-    #1a1a1a 0%,
-    #3a3a3a 25%,
-    #e0e0e0 50%,
-    #3a3a3a 75%,
-    #1a1a1a 100%
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    rgba(255, 255, 255, 0.1) 100%
   );
   background-size: 300% 300%;
   background-attachment: fixed;
@@ -148,7 +148,7 @@ body, html {
   top: 8%;
   left: 8%;
   animation-delay: 0s;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .shape-2 {
@@ -157,7 +157,7 @@ body, html {
   top: 55%;
   left: 75%;
   animation-delay: -6s;
-  background: rgba(224, 224, 224, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .shape-3 {
@@ -166,7 +166,7 @@ body, html {
   top: 25%;
   right: 15%;
   animation-delay: -12s;
-  background: rgba(200, 200, 200, 0.12);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .shape-4 {
@@ -175,7 +175,7 @@ body, html {
   bottom: 12%;
   left: 3%;
   animation-delay: -18s;
-  background: rgba(180, 180, 180, 0.08);
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .shape-5 {
@@ -184,7 +184,7 @@ body, html {
   top: 65%;
   left: 45%;
   animation-delay: -9s;
-  background: rgba(220, 220, 220, 0.1);
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .shape-6 {
@@ -193,7 +193,7 @@ body, html {
   top: 15%;
   right: 8%;
   animation-delay: -15s;
-  background: rgba(240, 240, 240, 0.1);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .decorative-circles {
@@ -306,8 +306,8 @@ body, html {
   height: 200%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(200, 200, 200, 0.05) 30%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 30%,
     transparent 70%
   );
   animation: float 25s linear infinite;
