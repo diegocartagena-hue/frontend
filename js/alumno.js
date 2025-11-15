@@ -615,15 +615,15 @@
 
     // Guardar el curso seleccionado para mostrarlo en el modal
     const modalElement = document.getElementById('modalUnirseCurso');
-    if (modalElement) {
-      modalElement.setAttribute('data-curso-id', cursoId);
-      modalElement.setAttribute('data-curso-nombre', curso.nombre);
-      
-      // Mostrar información del curso en el modal (opcional)
-      const modalTitle = document.querySelector('#modalUnirseCursoLabel');
-      if (modalTitle) {
-        modalTitle.innerHTML = `<i class="fas fa-sign-in-alt me-2"></i>Unirse a: ${curso.nombre}`;
-      }
+    if (!modalElement) return;
+
+    modalElement.setAttribute('data-curso-id', cursoId);
+    modalElement.setAttribute('data-curso-nombre', curso.nombre);
+    
+    // Mostrar información del curso en el modal (opcional)
+    const modalTitle = document.querySelector('#modalUnirseCursoLabel');
+    if (modalTitle) {
+      modalTitle.innerHTML = `<i class="fas fa-sign-in-alt me-2"></i>Unirse a: ${curso.nombre}`;
     }
 
     // Limpiar el campo de código de acceso
@@ -633,23 +633,21 @@
     }
 
     // Abrir el modal para ingresar el código de acceso
-    const modal = new bootstrap.Modal(document.getElementById('modalUnirseCurso'));
+    const modal = new bootstrap.Modal(modalElement);
     modal.show();
     
     // Restaurar el título original cuando se cierre el modal
-    if (modalElement) {
-      modalElement.addEventListener('hidden.bs.modal', function restoreTitle() {
-        const modalTitle = document.querySelector('#modalUnirseCursoLabel');
-        if (modalTitle) {
-          modalTitle.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Unirse a un Curso';
-        }
-        // Limpiar atributos del curso seleccionado
-        modalElement.removeAttribute('data-curso-id');
-        modalElement.removeAttribute('data-curso-nombre');
-        // Remover el listener después de usarlo
-        modalElement.removeEventListener('hidden.bs.modal', restoreTitle);
-      }, { once: true });
-    }
+    modalElement.addEventListener('hidden.bs.modal', function restoreTitle() {
+      const modalTitle = document.querySelector('#modalUnirseCursoLabel');
+      if (modalTitle) {
+        modalTitle.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Unirse a un Curso';
+      }
+      // Limpiar atributos del curso seleccionado
+      modalElement.removeAttribute('data-curso-id');
+      modalElement.removeAttribute('data-curso-nombre');
+      // Remover el listener después de usarlo
+      modalElement.removeEventListener('hidden.bs.modal', restoreTitle);
+    }, { once: true });
   }
 
   function handleVerDetallesCurso(cursoId) {
