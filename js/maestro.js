@@ -89,6 +89,10 @@
   function saveCursosToStorage() {
     try {
       localStorage.setItem('clasiya_cursos', JSON.stringify(state.cursos));
+      // Actualizar timestamp para notificar cambios
+      localStorage.setItem('clasiya_cursos_updated', Date.now().toString());
+      // Disparar evento personalizado para notificar cambios en la misma pestaña
+      window.dispatchEvent(new CustomEvent('cursosUpdated'));
     } catch (error) {
       console.error('Error al guardar cursos:', error);
     }
@@ -117,6 +121,10 @@
   function saveSesionesToStorage() {
     try {
       localStorage.setItem('clasiya_sesiones', JSON.stringify(state.sesiones));
+      // Actualizar timestamp para notificar cambios
+      localStorage.setItem('clasiya_sesiones_updated', Date.now().toString());
+      // Disparar evento personalizado para notificar cambios en la misma pestaña
+      window.dispatchEvent(new CustomEvent('sesionesUpdated'));
     } catch (error) {
       console.error('Error al guardar sesiones:', error);
     }

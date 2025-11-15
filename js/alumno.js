@@ -18,7 +18,55 @@
     loadMisCursos();
     loadSesiones();
     setupEventListeners();
+    setupStorageListener();
   });
+
+  // ========== LISTENER PARA CAMBIOS EN LOCALSTORAGE ==========
+  function setupStorageListener() {
+    let lastCursosUpdate = localStorage.getItem('clasiya_cursos_updated') || '0';
+    let lastSesionesUpdate = localStorage.getItem('clasiya_sesiones_updated') || '0';
+
+    // Escuchar eventos personalizados (para cambios en la misma pestaña)
+    window.addEventListener('cursosUpdated', function() {
+      loadCursosDisponibles();
+    });
+
+    window.addEventListener('sesionesUpdated', function() {
+      loadSesiones();
+    });
+
+    // Escuchar cambios en localStorage (funciona entre pestañas/ventanas)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'clasiya_cursos' || e.key === 'clasiya_cursos_updated') {
+        loadCursosDisponibles();
+      }
+      if (e.key === 'clasiya_sesiones' || e.key === 'clasiya_sesiones_updated') {
+        loadSesiones();
+      }
+    });
+
+    // Recargar cursos cuando la ventana vuelve a tener foco
+    window.addEventListener('focus', function() {
+      loadCursosDisponibles();
+      loadSesiones();
+    });
+
+    // Verificar cambios periódicamente cada 2 segundos
+    setInterval(function() {
+      const currentCursosUpdate = localStorage.getItem('clasiya_cursos_updated') || '0';
+      const currentSesionesUpdate = localStorage.getItem('clasiya_sesiones_updated') || '0';
+      
+      if (currentCursosUpdate !== lastCursosUpdate) {
+        lastCursosUpdate = currentCursosUpdate;
+        loadCursosDisponibles();
+      }
+      
+      if (currentSesionesUpdate !== lastSesionesUpdate) {
+        lastSesionesUpdate = currentSesionesUpdate;
+        loadSesiones();
+      }
+    }, 2000);
+  }
 
   // ========== PARTÍCULAS ANIMADAS ==========
   function initParticles() {
