@@ -327,6 +327,22 @@
       });
     }
 
+    // Limpiar backdrop cuando se cierra el modal
+    const modalUnirseCurso = document.getElementById('modalUnirseCurso');
+    if (modalUnirseCurso) {
+      modalUnirseCurso.addEventListener('hidden.bs.modal', function() {
+        // Limpiar backdrop si existe
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.remove();
+        }
+        // Remover clases del body
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      });
+    }
+
     // Botones de acciones de curso
     document.addEventListener('click', function (e) {
       if (e.target.closest('.btn-join')) {
@@ -407,15 +423,36 @@
       renderMisCursos(state.misCursos);
       updateStats();
 
-      // Limpiar formulario
+      // Limpiar formulario primero
       form.reset();
 
       // Cerrar modal
       const modalElement = document.getElementById('modalUnirseCurso');
       const modal = bootstrap.Modal.getInstance(modalElement);
+      
       if (modal) {
+        // Cerrar el modal
         modal.hide();
-        setTimeout(() => {
+        
+        // Asegurarse de que el backdrop se elimine después de que el modal se cierre
+        const cleanupBackdrop = function() {
+          // Eliminar el backdrop manualmente si existe
+          const backdrop = document.querySelector('.modal-backdrop');
+          if (backdrop) {
+            backdrop.remove();
+          }
+          // Remover la clase modal-open del body
+          document.body.classList.remove('modal-open');
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+          // Remover el event listener después de usarlo
+          modalElement.removeEventListener('hidden.bs.modal', cleanupBackdrop);
+        };
+        
+        modalElement.addEventListener('hidden.bs.modal', cleanupBackdrop, { once: true });
+        
+        // También limpiar inmediatamente si el backdrop ya existe (fallback)
+        setTimeout(function() {
           const backdrop = document.querySelector('.modal-backdrop');
           if (backdrop) {
             backdrop.remove();
