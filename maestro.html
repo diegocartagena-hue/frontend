@@ -341,6 +341,100 @@
     </div>
   </div>
 
+  <!-- Modal Editar Perfil -->
+  <div class="modal fade" id="modalEditarPerfil" tabindex="-1" aria-labelledby="modalEditarPerfilLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content glass-modal">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarPerfilLabel">
+            <i class="fas fa-user-edit me-2"></i>Editar Perfil
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarPerfil">
+            <!-- Foto de perfil -->
+            <div class="form-group mb-4 text-center">
+              <label class="form-label d-block mb-3">
+                <i class="fas fa-camera me-2"></i>Foto de Perfil
+              </label>
+              <div class="profile-upload-wrapper">
+                <div class="profile-avatar-preview" id="profilePreview">
+                  <img src="assets/logosinfondo.png" alt="Preview" id="profilePreviewImg" />
+                  <div class="profile-upload-overlay">
+                    <i class="fas fa-camera"></i>
+                    <span>Cambiar foto</span>
+                  </div>
+                </div>
+                <input type="file" class="d-none" id="profilePhotoInput" accept="image/jpeg,image/jpg,image/png" />
+                <button type="button" class="btn btn-upload-photo mt-3" id="btnUploadPhoto">
+                  <i class="fas fa-upload me-2"></i>Subir Foto
+                </button>
+                <small class="d-block mt-2 text-muted">Formatos: JPG, PNG (Máx. 2MB)</small>
+              </div>
+            </div>
+
+            <!-- Nombre -->
+            <div class="form-group mb-3">
+              <label for="perfilNombre" class="form-label">
+                <i class="fas fa-user me-2"></i>Nombre Completo
+              </label>
+              <input type="text" class="form-control glass-input" id="perfilNombre" placeholder="Ej: Prof. Juan Pérez" required />
+            </div>
+
+            <!-- Email (solo lectura) -->
+            <div class="form-group mb-3">
+              <label for="perfilEmail" class="form-label">
+                <i class="fas fa-envelope me-2"></i>Correo Electrónico
+              </label>
+              <input type="email" class="form-control glass-input" id="perfilEmail" readonly />
+              <small class="text-muted">El correo no se puede modificar</small>
+            </div>
+
+            <!-- Edad -->
+            <div class="form-group mb-3">
+              <label for="perfilEdad" class="form-label">
+                <i class="fas fa-birthday-cake me-2"></i>Edad
+              </label>
+              <input type="number" class="form-control glass-input" id="perfilEdad" placeholder="Ej: 35" min="18" max="100" />
+            </div>
+
+            <!-- Biografía -->
+            <div class="form-group mb-3">
+              <label for="perfilBiografia" class="form-label">
+                <i class="fas fa-align-left me-2"></i>Biografía
+              </label>
+              <textarea class="form-control glass-input" id="perfilBiografia" rows="4" placeholder="Cuéntanos sobre ti, tu formación y experiencia..."></textarea>
+            </div>
+
+            <!-- Experiencia -->
+            <div class="form-group mb-3">
+              <label for="perfilExperiencia" class="form-label">
+                <i class="fas fa-briefcase me-2"></i>Experiencia Profesional
+              </label>
+              <textarea class="form-control glass-input" id="perfilExperiencia" rows="3" placeholder="Años de experiencia, instituciones donde has trabajado..."></textarea>
+            </div>
+
+            <!-- Especialidades -->
+            <div class="form-group mb-3">
+              <label for="perfilEspecialidades" class="form-label">
+                <i class="fas fa-graduation-cap me-2"></i>Especialidades / Cursos que Impartes
+              </label>
+              <textarea class="form-control glass-input" id="perfilEspecialidades" rows="3" placeholder="Ej: Matemáticas, Física, Álgebra, Cálculo..."></textarea>
+              <small class="text-muted">Separa las especialidades con comas</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-create" id="btnGuardarPerfil">
+            <i class="fas fa-save me-2"></i>Guardar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Códigos de Acceso -->
   <div class="modal fade" id="modalCodigosAcceso" tabindex="-1" aria-labelledby="modalCodigosAccesoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
