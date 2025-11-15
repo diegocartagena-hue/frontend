@@ -217,6 +217,15 @@
 
   // ========== EVENT LISTENERS ==========
   function setupEventListeners() {
+    // Configurar limpieza del backdrop para el modal de crear curso
+    const modalCrearCurso = document.getElementById('modalCrearCurso');
+    if (modalCrearCurso) {
+      modalCrearCurso.addEventListener('hidden.bs.modal', function() {
+        // Limpiar backdrop cuando el modal se cierre completamente
+        cleanupModalBackdrop();
+      });
+    }
+
     // Botón crear curso
     const btnCrearCurso = document.getElementById('btnCrearCurso');
     const btnCrearCursoEmpty = document.getElementById('btnCrearCursoEmpty');
@@ -358,32 +367,10 @@
         // Cerrar el modal
         modal.hide();
         
-        // Asegurarse de que el backdrop se elimine después de que el modal se cierre
-        const cleanupBackdrop = function() {
-          // Eliminar el backdrop manualmente si existe
-          const backdrop = document.querySelector('.modal-backdrop');
-          if (backdrop) {
-            backdrop.remove();
-          }
-          // Remover la clase modal-open del body
-          document.body.classList.remove('modal-open');
-          document.body.style.overflow = '';
-          document.body.style.paddingRight = '';
-          // Remover el event listener después de usarlo
-          modalElement.removeEventListener('hidden.bs.modal', cleanupBackdrop);
-        };
-        
-        modalElement.addEventListener('hidden.bs.modal', cleanupBackdrop, { once: true });
-        
-        // También limpiar inmediatamente si el backdrop ya existe (fallback)
+        // La limpieza del backdrop se manejará automáticamente por el event listener
+        // Agregar un timeout adicional como fallback
         setTimeout(function() {
-          const backdrop = document.querySelector('.modal-backdrop');
-          if (backdrop) {
-            backdrop.remove();
-            document.body.classList.remove('modal-open');
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-          }
+          cleanupModalBackdrop();
         }, 300);
       }
 
@@ -644,6 +631,25 @@
   }
 
   // ========== UTILIDADES ==========
+  function cleanupModalBackdrop() {
+    // Eliminar todos los backdrops que puedan existir
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+    
+    // Remover clases y estilos del body
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    
+    // Asegurarse de que no haya modales abiertos
+    const openModals = document.querySelectorAll('.modal.show');
+    if (openModals.length === 0) {
+      // Si no hay modales abiertos, forzar limpieza
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  }
+
   function showNotification(message, type = 'info') {
     // Crear notificación simple
     const notification = document.createElement('div');
