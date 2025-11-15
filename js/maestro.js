@@ -236,7 +236,21 @@
     // Botón guardar curso
     const btnGuardarCurso = document.getElementById('btnGuardarCurso');
     if (btnGuardarCurso) {
-      btnGuardarCurso.addEventListener('click', handleCrearCurso);
+      btnGuardarCurso.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        handleCrearCurso();
+      });
+    }
+
+    // Prevenir envío del formulario al presionar Enter
+    const formCrearCurso = document.getElementById('formCrearCurso');
+    if (formCrearCurso) {
+      formCrearCurso.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        handleCrearCurso();
+      });
     }
 
     // Botón nueva sesión
@@ -333,10 +347,45 @@
       renderCursos(state.cursos);
       updateStats();
 
-      // Cerrar modal y limpiar formulario
-      const modal = bootstrap.Modal.getInstance(document.getElementById('modalCrearCurso'));
-      if (modal) modal.hide();
+      // Limpiar formulario primero
       form.reset();
+
+      // Cerrar modal
+      const modalElement = document.getElementById('modalCrearCurso');
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      
+      if (modal) {
+        // Cerrar el modal
+        modal.hide();
+        
+        // Asegurarse de que el backdrop se elimine después de que el modal se cierre
+        const cleanupBackdrop = function() {
+          // Eliminar el backdrop manualmente si existe
+          const backdrop = document.querySelector('.modal-backdrop');
+          if (backdrop) {
+            backdrop.remove();
+          }
+          // Remover la clase modal-open del body
+          document.body.classList.remove('modal-open');
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+          // Remover el event listener después de usarlo
+          modalElement.removeEventListener('hidden.bs.modal', cleanupBackdrop);
+        };
+        
+        modalElement.addEventListener('hidden.bs.modal', cleanupBackdrop, { once: true });
+        
+        // También limpiar inmediatamente si el backdrop ya existe (fallback)
+        setTimeout(function() {
+          const backdrop = document.querySelector('.modal-backdrop');
+          if (backdrop) {
+            backdrop.remove();
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+          }
+        }, 300);
+      }
 
       showNotification('Curso creado exitosamente', 'success');
     } catch (error) {
