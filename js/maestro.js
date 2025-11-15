@@ -7,7 +7,8 @@
     maestro: null,
     cursos: [],
     sesiones: [],
-    codigosAcceso: {}
+    codigosAcceso: {},
+    profilePhotoFile: null // Para almacenar la foto seleccionada
   };
 
   // ========== INICIALIZACIÓN ==========
@@ -48,6 +49,10 @@
         nombre: 'Prof. Juan Pérez',
         email: 'juan.perez@clasiya.com',
         avatar: 'assets/logosinfondo.png',
+        edad: null,
+        biografia: '',
+        experiencia: '',
+        especialidades: '',
         totalCursos: 0,
         totalEstudiantes: 0,
         totalSesiones: 0
@@ -217,11 +222,17 @@
 
   // ========== EVENT LISTENERS ==========
   function setupEventListeners() {
-    // Configurar limpieza del backdrop para el modal de crear curso
+    // Configurar limpieza del backdrop para los modales
     const modalCrearCurso = document.getElementById('modalCrearCurso');
     if (modalCrearCurso) {
       modalCrearCurso.addEventListener('hidden.bs.modal', function() {
-        // Limpiar backdrop cuando el modal se cierre completamente
+        cleanupModalBackdrop();
+      });
+    }
+
+    const modalEditarPerfil = document.getElementById('modalEditarPerfil');
+    if (modalEditarPerfil) {
+      modalEditarPerfil.addEventListener('hidden.bs.modal', function() {
         cleanupModalBackdrop();
       });
     }
@@ -318,6 +329,64 @@
     const btnEditarPerfil = document.getElementById('btnEditarPerfil');
     if (btnEditarPerfil) {
       btnEditarPerfil.addEventListener('click', handleEditarPerfil);
+    }
+
+    // Botón guardar perfil
+    const btnGuardarPerfil = document.getElementById('btnGuardarPerfil');
+    if (btnGuardarPerfil) {
+      btnGuardarPerfil.addEventListener('click', handleGuardarPerfil);
+    }
+
+    // Botón subir foto y preview de foto
+    const btnUploadPhoto = document.getElementById('btnUploadPhoto');
+    const profilePhotoInput = document.getElementById('profilePhotoInput');
+    const profilePreview = document.getElementById('profilePreview');
+    const profilePreviewImg = document.getElementById('profilePreviewImg');
+
+    if (btnUploadPhoto && profilePhotoInput) {
+      btnUploadPhoto.addEventListener('click', () => {
+        profilePhotoInput.click();
+      });
+    }
+
+    if (profilePreview && profilePhotoInput) {
+      profilePreview.addEventListener('click', () => {
+        profilePhotoInput.click();
+      });
+    }
+
+    if (profilePhotoInput && profilePreviewImg) {
+      profilePhotoInput.addEventListener('change', function(e) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // Validar tamaño (máx 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+          showNotification('El archivo es demasiado grande. El tamaño máximo es 2MB.', 'error');
+          profilePhotoInput.value = '';
+          return;
+        }
+
+        // Validar tipo
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+        if (!validTypes.includes(file.type)) {
+          showNotification('Formato no válido. Solo se aceptan JPG o PNG.', 'error');
+          profilePhotoInput.value = '';
+          return;
+        }
+
+        // Guardar archivo en el estado
+        state.profilePhotoFile = file;
+
+        // Mostrar preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profilePreviewImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+
+        showNotification('Foto seleccionada correctamente', 'success');
+      });
     }
   }
 
@@ -626,8 +695,117 @@
   }
 
   function handleEditarPerfil() {
-    // TODO: Implementar edición de perfil
-    showNotification('Funcionalidad en desarrollo', 'info');
+    if (!state.maestro) return;
+
+    // Cargar datos actuales en el formulario
+    const perfilNombre = document.getElementById('perfilNombre');
+    const perfilEmail = document.getElementById('perfilEmail');
+    const perfilEdad = document.getElementById('perfilEdad');
+    const perfilBiografia = document.getElementById('perfilBiografia');
+    const perfilExperiencia = document.getElementById('perfilExperiencia');
+    const perfilEspecialidades = document.getElementById('perfilEspecialidades');
+    const profilePreviewImg = document.getElementById('profilePreviewImg');
+
+    if (perfilNombre) perfilNombre.value = state.maestro.nombre || '';
+    if (perfilEmail) perfilEmail.value = state.maestro.email || '';
+    if (perfilEdad) perfilEdad.value = state.maestro.edad || '';
+    if (perfilBiografia) perfilBiografia.value = state.maestro.biografia || '';
+    if (perfilExperiencia) perfilExperiencia.value = state.maestro.experiencia || '';
+    if (perfilEspecialidades) perfilEspecialidades.value = state.maestro.especialidades || '';
+    if (profilePreviewImg) profilePreviewImg.src = state.maestro.avatar || 'assets/logosinfondo.png';
+
+    // Limpiar archivo seleccionado
+    state.profilePhotoFile = null;
+    const profilePhotoInput = document.getElementById('profilePhotoInput');
+    if (profilePhotoInput) profilePhotoInput.value = '';
+
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('modalEditarPerfil'));
+    modal.show();
+  }
+
+  async function handleGuardarPerfil() {
+    const form = document.getElementById('formEditarPerfil');
+    if (!form) return;
+
+    const perfilNombre = document.getElementById('perfilNombre');
+    const perfilEdad = document.getElementById('perfilEdad');
+    const perfilBiografia = document.getElementById('perfilBiografia');
+    const perfilExperiencia = document.getElementById('perfilExperiencia');
+    const perfilEspecialidades = document.getElementById('perfilEspecialidades');
+
+    if (!perfilNombre || !perfilNombre.value.trim()) {
+      showNotification('El nombre es obligatorio', 'error');
+      perfilNombre.focus();
+      return;
+    }
+
+    try {
+      // Preparar datos para enviar
+      const formData = new FormData();
+      formData.append('nombre', perfilNombre.value.trim());
+      if (perfilEdad && perfilEdad.value) {
+        formData.append('edad', parseInt(perfilEdad.value));
+      }
+      if (perfilBiografia) {
+        formData.append('biografia', perfilBiografia.value.trim());
+      }
+      if (perfilExperiencia) {
+        formData.append('experiencia', perfilExperiencia.value.trim());
+      }
+      if (perfilEspecialidades) {
+        formData.append('especialidades', perfilEspecialidades.value.trim());
+      }
+      if (state.profilePhotoFile) {
+        formData.append('foto', state.profilePhotoFile);
+      }
+
+      // TODO: Reemplazar con llamada a API real
+      // const response = await fetch('/api/maestro/perfil', {
+      //   method: 'PUT',
+      //   body: formData
+      // });
+      // const updatedProfile = await response.json();
+
+      // Simulación - Actualizar estado local
+      const updatedMaestro = {
+        ...state.maestro,
+        nombre: perfilNombre.value.trim(),
+        edad: perfilEdad && perfilEdad.value ? parseInt(perfilEdad.value) : null,
+        biografia: perfilBiografia ? perfilBiografia.value.trim() : '',
+        experiencia: perfilExperiencia ? perfilExperiencia.value.trim() : '',
+        especialidades: perfilEspecialidades ? perfilEspecialidades.value.trim() : ''
+      };
+
+      // Si hay una nueva foto, actualizar el avatar (en producción sería la URL de la imagen subida)
+      if (state.profilePhotoFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          updatedMaestro.avatar = e.target.result;
+          state.maestro = updatedMaestro;
+          renderProfile(updatedMaestro);
+        };
+        reader.readAsDataURL(state.profilePhotoFile);
+      } else {
+        state.maestro = updatedMaestro;
+        renderProfile(updatedMaestro);
+      }
+
+      // Cerrar modal
+      const modalElement = document.getElementById('modalEditarPerfil');
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+        setTimeout(function() {
+          cleanupModalBackdrop();
+        }, 300);
+      }
+
+      showNotification('Perfil actualizado exitosamente', 'success');
+    } catch (error) {
+      console.error('Error al actualizar perfil:', error);
+      showNotification('Error al actualizar el perfil', 'error');
+    }
   }
 
   // ========== UTILIDADES ==========
