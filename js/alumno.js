@@ -457,6 +457,9 @@
       return;
     }
 
+    // Obtener el elemento del modal una sola vez
+    const modalElement = document.getElementById('modalUnirseCurso');
+
     try {
       // TODO: Reemplazar con llamada a API real
       // const response = await fetch('/api/alumno/unirse-curso', {
@@ -471,7 +474,6 @@
       const cursosData = todosLosCursos ? JSON.parse(todosLosCursos) : [];
       
       // Verificar si hay un curso seleccionado (cuando se abre desde el botón directo)
-      const modalElement = document.getElementById('modalUnirseCurso');
       const cursoSeleccionadoId = modalElement ? modalElement.getAttribute('data-curso-id') : null;
       
       let cursoEncontrado = null;
@@ -512,9 +514,10 @@
       if (yaInscrito) {
         showNotification('Ya estás inscrito en este curso', 'info');
         form.reset();
-        const modalElement = document.getElementById('modalUnirseCurso');
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
+        if (modalElement) {
+          const modal = bootstrap.Modal.getInstance(modalElement);
+          if (modal) modal.hide();
+        }
         return;
       }
 
@@ -542,7 +545,6 @@
       form.reset();
       
       // Limpiar atributos del curso seleccionado
-      const modalElement = document.getElementById('modalUnirseCurso');
       if (modalElement) {
         modalElement.removeAttribute('data-curso-id');
         modalElement.removeAttribute('data-curso-nombre');
@@ -555,7 +557,7 @@
       }
 
       // Cerrar modal
-      const modal = bootstrap.Modal.getInstance(modalElement);
+      const modal = modalElement ? bootstrap.Modal.getInstance(modalElement) : null;
       
       if (modal) {
         // Cerrar el modal
