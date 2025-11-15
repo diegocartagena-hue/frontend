@@ -68,36 +68,26 @@
       // const response = await fetch('/api/alumno/cursos-disponibles');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const cursosData = [
-        {
-          id: 1,
-          nombre: 'Matemáticas Avanzadas',
-          descripcion: 'Curso completo de matemáticas avanzadas para estudiantes de nivel superior',
-          profesor: 'Prof. Juan Pérez',
-          totalEstudiantes: 25,
-          disponible: true
-        },
-        {
-          id: 2,
-          nombre: 'Programación Web',
-          descripcion: 'Aprende a crear aplicaciones web modernas con las últimas tecnologías',
-          profesor: 'Prof. María García',
-          totalEstudiantes: 30,
-          disponible: true
-        },
-        {
-          id: 3,
-          nombre: 'Historia del Arte',
-          descripcion: 'Explora las diferentes épocas y movimientos artísticos a lo largo de la historia',
-          profesor: 'Prof. Carlos López',
-          totalEstudiantes: 18,
-          disponible: true
-        }
-      ];
+      // Cargar cursos desde localStorage (cursos creados por maestros)
+      const cursosGuardados = localStorage.getItem('clasiya_cursos');
+      const cursosData = cursosGuardados ? JSON.parse(cursosGuardados) : [];
 
-      state.cursosDisponibles = cursosData;
-      renderCursosDisponibles(cursosData);
+      // Cargar mis cursos para filtrar los que ya están inscritos
+      const misCursosGuardados = localStorage.getItem('clasiya_mis_cursos');
+      const misCursosIds = misCursosGuardados ? JSON.parse(misCursosGuardados).map(c => c.id) : [];
+
+      // Agregar información adicional si falta y filtrar cursos ya inscritos
+      const cursosConInfo = cursosData
+        .filter(curso => !misCursosIds.includes(curso.id)) // Filtrar cursos ya inscritos
+        .map(curso => ({
+          ...curso,
+          profesor: curso.profesor || 'Profesor',
+          totalEstudiantes: curso.totalEstudiantes || 0,
+          disponible: curso.disponible !== undefined ? curso.disponible : true
+        }));
+
+      state.cursosDisponibles = cursosConInfo;
+      renderCursosDisponibles(cursosConInfo);
     } catch (error) {
       console.error('Error al cargar cursos disponibles:', error);
       showNotification('Error al cargar los cursos disponibles', 'error');
@@ -110,8 +100,9 @@
       // const response = await fetch('/api/alumno/mis-cursos');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const misCursosData = [];
+      // Cargar mis cursos desde localStorage
+      const misCursosGuardados = localStorage.getItem('clasiya_mis_cursos');
+      const misCursosData = misCursosGuardados ? JSON.parse(misCursosGuardados) : [];
 
       state.misCursos = misCursosData;
       renderMisCursos(misCursosData);
@@ -122,14 +113,41 @@
     }
   }
 
+  // Guardar mis cursos en localStorage
+  function saveMisCursosToStorage() {
+    try {
+      localStorage.setItem('clasiya_mis_cursos', JSON.stringify(state.misCursos));
+    } catch (error) {
+      console.error('Error al guardar mis cursos:', error);
+    }
+  }
+
+  // Actualizar contador de estudiantes en un curso
+  function updateCursoEstudiantes(cursoId, incremento) {
+    try {
+      const cursosGuardados = localStorage.getItem('clasiya_cursos');
+      if (cursosGuardados) {
+        const cursos = JSON.parse(cursosGuardados);
+        const cursoIndex = cursos.findIndex(c => c.id === parseInt(cursoId));
+        if (cursoIndex !== -1) {
+          cursos[cursoIndex].totalEstudiantes = (cursos[cursoIndex].totalEstudiantes || 0) + incremento;
+          localStorage.setItem('clasiya_cursos', JSON.stringify(cursos));
+        }
+      }
+    } catch (error) {
+      console.error('Error al actualizar contador de estudiantes:', error);
+    }
+  }
+
   async function loadSesiones() {
     try {
       // TODO: Reemplazar con llamada a API real
       // const response = await fetch('/api/alumno/sesiones');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const sesionesData = [];
+      // Cargar sesiones desde localStorage (sesiones creadas por maestros)
+      const sesionesGuardadas = localStorage.getItem('clasiya_sesiones');
+      const sesionesData = sesionesGuardadas ? JSON.parse(sesionesGuardadas) : [];
 
       state.sesiones = sesionesData;
       renderSesiones(sesionesData);
@@ -400,26 +418,52 @@
       // });
       // const resultado = await response.json();
 
-      // Simulación - buscar curso por código
-      const cursoEncontrado = state.cursosDisponibles.find(c => {
-        // En un caso real, esto vendría del backend
-        return true; // Simulación
+      // Buscar curso por código de acceso en todos los cursos
+      const todosLosCursos = localStorage.getItem('clasiya_cursos');
+      const cursosData = todosLosCursos ? JSON.parse(todosLosCursos) : [];
+      
+      // Buscar el curso (en un caso real, esto vendría del backend con el código)
+      // Por ahora, simulamos que el código es válido y tomamos el primer curso disponible
+      // o puedes buscar por algún campo específico
+      const cursoEncontrado = cursosData.find(c => {
+        // En un caso real, aquí se validaría el código de acceso
+        // Por ahora, tomamos cualquier curso disponible
+        return c.disponible !== false;
       });
 
       if (!cursoEncontrado) {
-        showNotification('Código de acceso inválido', 'error');
+        showNotification('Código de acceso inválido o curso no disponible', 'error');
+        return;
+      }
+
+      // Verificar si ya está inscrito
+      const yaInscrito = state.misCursos.find(c => c.id === cursoEncontrado.id);
+      if (yaInscrito) {
+        showNotification('Ya estás inscrito en este curso', 'info');
+        form.reset();
+        const modalElement = document.getElementById('modalUnirseCurso');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) modal.hide();
         return;
       }
 
       // Agregar curso a mis cursos
       const nuevoCurso = {
-        id: Date.now(),
+        id: cursoEncontrado.id,
         nombre: cursoEncontrado.nombre || 'Curso Nuevo',
         profesor: cursoEncontrado.profesor || 'Profesor',
         progreso: 0
       };
 
       state.misCursos.push(nuevoCurso);
+      saveMisCursosToStorage(); // Guardar en localStorage
+      
+      // Actualizar contador de estudiantes en el curso
+      updateCursoEstudiantes(cursoEncontrado.id || nuevoCurso.id, 1);
+      
+      // Recargar cursos disponibles para actualizar la lista
+      loadCursosDisponibles();
+      
       renderMisCursos(state.misCursos);
       updateStats();
 
@@ -501,6 +545,14 @@
       };
 
       state.misCursos.push(nuevoCurso);
+      saveMisCursosToStorage(); // Guardar en localStorage
+      
+      // Actualizar contador de estudiantes en el curso
+      updateCursoEstudiantes(curso.id, 1);
+      
+      // Recargar cursos disponibles para actualizar la lista
+      loadCursosDisponibles();
+      
       renderMisCursos(state.misCursos);
       updateStats();
 
