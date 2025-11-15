@@ -1,8 +1,3 @@
-// Inicializar navbar
-if (typeof initNavbar === 'function') {
-  initNavbar();
-}
-
 // Toggle de visibilidad de contraseña
 const togglePassword = document.getElementById('togglePassword');
 const passwordInput = document.getElementById('contraseña');
@@ -27,25 +22,21 @@ function createParticles() {
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
-    
-    // Tamaño aleatorio
+
     const size = Math.random() * 4 + 2;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    
-    // Posición inicial aleatoria
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 15 + 's';
-    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    
-    // Opacidad aleatoria
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 15}s`;
+    particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+
     particle.style.opacity = Math.random() * 0.5 + 0.3;
-    
+
     particlesContainer.appendChild(particle);
   }
 }
 
-// Inicializar partículas cuando el DOM esté listo
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', createParticles);
 } else {
@@ -56,41 +47,32 @@ if (document.readyState === 'loading') {
 const loginForm = document.getElementById('loginForm');
 
 if (loginForm) {
-  loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  loginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-    const correo = document.getElementById('correo').value;
-    const contraseña = document.getElementById('contraseña').value;
+    const correo = document.getElementById('correo').value.trim();
+    const contraseña = document.getElementById('contraseña').value.trim();
 
-    // Validación básica
     if (!correo || !contraseña) {
       alert('Por favor, completa todos los campos');
       return;
     }
 
-    // Validación de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(correo)) {
       alert('Por favor, ingresa un correo electrónico válido');
       return;
     }
 
-    // Aquí puedes agregar la lógica para enviar el formulario
     console.log('Iniciando sesión...');
-    
-    // Ejemplo de datos a enviar
+
     const formData = {
-      correo: correo,
-      contraseña: contraseña,
-      rememberMe: document.getElementById('rememberMe').checked
+      correo,
+      contraseña,
+      rememberMe: document.getElementById('rememberMe')?.checked ?? false,
     };
 
     console.log('Datos del formulario:', formData);
-    
-    // Aquí harías la petición al servidor
-    // fetch('/api/login', { method: 'POST', body: JSON.stringify(formData) })
-    
-    // Simulación de login exitoso
     alert('¡Inicio de sesión exitoso! (Esta es una demostración)');
   });
 }
