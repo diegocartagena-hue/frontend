@@ -162,7 +162,10 @@ body, html {
 
 /* ========== NAVEGACIÓN ========== */
 /* Estilos del menú compartidos en `css/navbar.css` */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1d2d1da8b4d84a87666a8df16323111a2c1f5b11
 /* ========== FONDO ANIMADO ========== */
 .animated-background {
   position: fixed;
@@ -585,7 +588,6 @@ body, html {
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-
 .account-type-label i {
   font-size: 2rem;
   color: var(--verde-medio);
@@ -650,7 +652,6 @@ body, html {
   backdrop-filter: blur(15px);
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
 
 .file-upload-label:hover {
   border-color: var(--verde-medio);
@@ -969,7 +970,6 @@ body, html {
     right: 0 !important;
     z-index: 1100 !important;
   }
-
 
   .nav-links {
     flex-direction: column;

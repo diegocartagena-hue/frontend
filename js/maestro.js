@@ -72,8 +72,9 @@
       // const response = await fetch('/api/maestro/cursos');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const cursosData = [];
+      // Cargar cursos desde localStorage
+      const cursosGuardados = localStorage.getItem('clasiya_cursos');
+      const cursosData = cursosGuardados ? JSON.parse(cursosGuardados) : [];
 
       state.cursos = cursosData;
       renderCursos(cursosData);
@@ -84,14 +85,27 @@
     }
   }
 
+  // Guardar cursos en localStorage
+  function saveCursosToStorage() {
+    try {
+      localStorage.setItem('clasiya_cursos', JSON.stringify(state.cursos));
+      // Actualizar timestamp para notificar cambios
+      localStorage.setItem('clasiya_cursos_updated', Date.now().toString());
+      // Disparar evento personalizado para notificar cambios en la misma pestaña
+      window.dispatchEvent(new CustomEvent('cursosUpdated'));
+    } catch (error) {
+      console.error('Error al guardar cursos:', error);
+    }
+  }
   async function loadSesiones() {
     try {
       // TODO: Reemplazar con llamada a API real
       // const response = await fetch('/api/maestro/sesiones');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const sesionesData = [];
+      // Cargar sesiones desde localStorage
+      const sesionesGuardadas = localStorage.getItem('clasiya_sesiones');
+      const sesionesData = sesionesGuardadas ? JSON.parse(sesionesGuardadas) : [];
 
       state.sesiones = sesionesData;
       renderSesiones(sesionesData);
@@ -102,6 +116,18 @@
     }
   }
 
+  // Guardar sesiones en localStorage
+  function saveSesionesToStorage() {
+    try {
+      localStorage.setItem('clasiya_sesiones', JSON.stringify(state.sesiones));
+      // Actualizar timestamp para notificar cambios
+      localStorage.setItem('clasiya_sesiones_updated', Date.now().toString());
+      // Disparar evento personalizado para notificar cambios en la misma pestaña
+      window.dispatchEvent(new CustomEvent('sesionesUpdated'));
+    } catch (error) {
+      console.error('Error al guardar sesiones:', error);
+    }
+  }
   // ========== RENDERIZADO ==========
   function renderProfile(maestro) {
     const profileName = document.getElementById('profileName');
@@ -418,10 +444,13 @@
         id: Date.now(),
         ...cursoData,
         totalEstudiantes: 0,
-        totalSesiones: 0
+        totalSesiones: 0,
+        profesor: state.maestro ? state.maestro.nombre : 'Profesor',
+        disponible: true
       };
 
       state.cursos.push(nuevoCurso);
+      saveCursosToStorage(); // Guardar en localStorage
       renderCursos(state.cursos);
       updateStats();
 
@@ -488,6 +517,7 @@
       };
 
       state.sesiones.push(nuevaSesion);
+      saveSesionesToStorage(); // Guardar en localStorage
       renderSesiones(state.sesiones);
       updateStats();
 
@@ -879,7 +909,3 @@
     document.head.appendChild(style);
   }
 })();
-
-
-
-

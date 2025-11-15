@@ -790,9 +790,6 @@ body, html {
   font-size: 1rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(15px);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: 'Courier New', monospace;
 }
 
 .glass-input:focus {
@@ -804,8 +801,6 @@ body, html {
 
 .glass-input::placeholder {
   color: rgba(27, 51, 0, 0.5);
-  text-transform: none;
-  letter-spacing: normal;
 }
 
 .form-text {
@@ -849,6 +844,7 @@ body, html {
   color: white;
 }
 
+<<<<<<< HEAD
 /* ========== SESIONES EN MODAL ========== */
 .sessions-list-modal {
   display: flex;
@@ -1266,6 +1262,3 @@ body, html {
     width: 100%;
   }
 }
-
-
-

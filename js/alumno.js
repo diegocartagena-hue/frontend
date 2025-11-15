@@ -11,7 +11,7 @@
     sesiones: []
   };
 
-  // ========== INICIALIZACIÓN ==========
+  // === INICIALIZACIÓN ===
   document.addEventListener('DOMContentLoaded', function () {
     initParticles();
     loadAlumnoProfile();
@@ -21,8 +21,7 @@
     loadSesiones();
     setupEventListeners();
   });
-
-  // ========== PARTÍCULAS ANIMADAS ==========
+  // === PARTÍCULAS ANIMADAS ===
   function initParticles() {
     const particlesContainer = document.getElementById('particles');
     if (!particlesContainer) return;
@@ -38,7 +37,7 @@
     }
   }
 
-  // ========== CARGA DE DATOS ==========
+  // === CARGA DE DATOS ===
   async function loadAlumnoProfile() {
     try {
       // TODO: Reemplazar con llamada a API real
@@ -88,32 +87,29 @@
       // const response = await fetch('/api/cursos/disponibles');
       // const data = await response.json();
       
-      // Datos de ejemplo - cursos que los maestros han creado
-      const cursosDisponiblesData = [
-        {
-          id: 1,
-          nombre: 'Matemáticas Avanzadas',
-          descripcion: 'Curso de matemáticas para estudiantes avanzados',
-          maestroNombre: 'Prof. Juan Pérez',
-          maestroId: 1,
-          totalEstudiantes: 15,
-          totalSesiones: 5,
-          categoria: 'matematicas'
-        },
-        {
-          id: 2,
-          nombre: 'Programación Web',
-          descripcion: 'Aprende HTML, CSS y JavaScript desde cero',
-          maestroNombre: 'Prof. María García',
-          maestroId: 2,
-          totalEstudiantes: 20,
-          totalSesiones: 8,
-          categoria: 'tecnologia'
-        }
-      ];
+      // Cargar cursos desde localStorage (cursos creados por maestros)
+      const cursosGuardados = localStorage.getItem('clasiya_cursos');
+      const cursosData = cursosGuardados ? JSON.parse(cursosGuardados) : [];
 
-      state.cursosDisponibles = cursosDisponiblesData;
-      renderCursosDisponibles(cursosDisponiblesData);
+      // Cargar cursos inscritos y solicitudes para filtrar
+      const cursosInscritosIds = state.cursosInscritos.map(c => c.id);
+      const solicitudesPendientesIds = state.solicitudes
+        .filter(s => s.estado === 'pendiente')
+        .map(s => s.cursoId);
+
+      // Agregar información adicional si falta y filtrar cursos ya inscritos o con solicitud pendiente
+      const cursosConInfo = cursosData
+        .filter(curso => !cursosInscritosIds.includes(curso.id) && !solicitudesPendientesIds.includes(curso.id))
+        .map(curso => ({
+          ...curso,
+          maestroNombre: curso.profesor || curso.maestroNombre || 'Profesor',
+          totalEstudiantes: curso.totalEstudiantes || 0,
+          totalSesiones: curso.totalSesiones || 0,
+          disponible: curso.disponible !== undefined ? curso.disponible : true
+        }));
+
+      state.cursosDisponibles = cursosConInfo;
+      renderCursosDisponibles(cursosConInfo);
     } catch (error) {
       console.error('Error al cargar cursos disponibles:', error);
       showNotification('Error al cargar los cursos disponibles', 'error');
@@ -144,8 +140,9 @@
       // const response = await fetch('/api/alumno/sesiones');
       // const data = await response.json();
       
-      // Datos de ejemplo
-      const sesionesData = [];
+      // Cargar sesiones desde localStorage (sesiones creadas por maestros)
+      const sesionesGuardadas = localStorage.getItem('clasiya_sesiones');
+      const sesionesData = sesionesGuardadas ? JSON.parse(sesionesGuardadas) : [];
 
       state.sesiones = sesionesData;
       renderSesiones(sesionesData);
@@ -156,7 +153,7 @@
     }
   }
 
-  // ========== RENDERIZADO ==========
+  // === RENDERIZADO ===
   function renderProfile(alumno) {
     const profileName = document.getElementById('profileName');
     const profileEmail = document.getElementById('profileEmail');
@@ -357,7 +354,6 @@
     };
     return estados[estado] || estado;
   }
-
   function renderSesiones(sesiones) {
     const container = document.getElementById('sessionsList');
     const template = document.getElementById('sessionTemplate');
@@ -422,7 +418,7 @@
     if (totalSesiones) totalSesiones.textContent = state.sesiones.length;
   }
 
-  // ========== EVENT LISTENERS ==========
+  // === EVENT LISTENERS ===
   function setupEventListeners() {
     // Botones de acciones de curso
     document.addEventListener('click', function (e) {
@@ -453,7 +449,6 @@
     if (btnEnviarSolicitud) {
       btnEnviarSolicitud.addEventListener('click', handleConfirmarEnviarSolicitud);
     }
-
     // Botón cerrar sesión
     const btnCerrarSesion = document.getElementById('btnCerrarSesion');
     if (btnCerrarSesion) {
@@ -480,7 +475,7 @@
     });
   }
 
-  // ========== MANEJO DE SOLICITUDES ==========
+  // === MANEJO DE SOLICITUDES ===
   function handleEnviarSolicitud(cursoId) {
     const curso = state.cursosDisponibles.find(c => c.id === parseInt(cursoId));
     if (!curso) {
@@ -590,7 +585,7 @@
     }
   }
 
-  // ========== MANEJO DE CURSOS Y SESIONES ==========
+  // === MANEJO DE CURSOS Y SESIONES ===
   function handleVerDetallesCurso(cursoId) {
     let curso = state.cursosInscritos.find(c => c.id === parseInt(cursoId));
     if (!curso) {
@@ -698,6 +693,48 @@
     });
   }
 
+  // ========== MANEJO DE CURSOS Y SESIONES ==========
+  function handleVerDetallesCurso(cursoId) {
+    let curso = state.cursosInscritos.find(c => c.id === parseInt(cursoId));
+    if (!curso) {
+      curso = state.cursosDisponibles.find(c => c.id === parseInt(cursoId));
+    }
+    
+    if (!curso) {
+      showNotification('Curso no encontrado', 'error');
+      return;
+    }
+
+    const detallesContainer = document.getElementById('cursoDetalles');
+    const modalTitulo = document.getElementById('modalDetallesCursoLabel');
+    
+    if (detallesContainer) {
+      detallesContainer.innerHTML = `
+        <div class="curso-detalle-item mb-3">
+          <h5 class="mb-2"><i class="fas fa-book me-2"></i>${curso.nombre}</h5>
+          <p class="text-muted">${curso.descripcion || 'Sin descripción'}</p>
+        </div>
+        <div class="curso-detalle-item mb-3">
+          <h6><i class="fas fa-chalkboard-teacher me-2"></i>Maestro</h6>
+          <p>${curso.maestroNombre || 'Sin asignar'}</p>
+        </div>
+        <div class="curso-detalle-item mb-3">
+          <h6><i class="fas fa-calendar me-2"></i>Sesiones Programadas</h6>
+          <p>${curso.totalSesiones || 0} sesiones</p>
+        </div>
+        ${curso.totalEstudiantes !== undefined ? `
+        <div class="curso-detalle-item mb-3">
+          <h6><i class="fas fa-users me-2"></i>Estudiantes</h6>
+          <p>${curso.totalEstudiantes} estudiantes</p>
+        </div>
+        ` : ''}
+      `;
+    }
+
+    const modal = new bootstrap.Modal(document.getElementById('modalDetallesCurso'));
+    modal.show();
+  }
+
   function handleUnirseSesion(sesionId) {
     const sesion = state.sesiones.find(s => s.id === parseInt(sesionId));
     if (!sesion) {
@@ -729,7 +766,7 @@
     }, 1000);
   }
 
-  // ========== OTRAS FUNCIONES ==========
+  // === OTRAS FUNCIONES ===
   function handleCerrarSesion() {
     if (confirm('¿Estás seguro de cerrar sesión?')) {
       // TODO: Limpiar sesión y redirigir a login
@@ -742,7 +779,7 @@
     showNotification('Funcionalidad en desarrollo', 'info');
   }
 
-  // ========== UTILIDADES ==========
+  // === UTILIDADES ===
   function showNotification(message, type = 'info') {
     // Crear notificación simple
     const notification = document.createElement('div');
