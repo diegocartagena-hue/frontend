@@ -422,14 +422,37 @@
       const todosLosCursos = localStorage.getItem('clasiya_cursos');
       const cursosData = todosLosCursos ? JSON.parse(todosLosCursos) : [];
       
-      // Buscar el curso (en un caso real, esto vendría del backend con el código)
-      // Por ahora, simulamos que el código es válido y tomamos el primer curso disponible
-      // o puedes buscar por algún campo específico
-      const cursoEncontrado = cursosData.find(c => {
-        // En un caso real, aquí se validaría el código de acceso
-        // Por ahora, tomamos cualquier curso disponible
-        return c.disponible !== false;
-      });
+      // Verificar si hay un curso seleccionado (cuando se abre desde el botón directo)
+      const modalElement = document.getElementById('modalUnirseCurso');
+      const cursoSeleccionadoId = modalElement ? modalElement.getAttribute('data-curso-id') : null;
+      
+      let cursoEncontrado = null;
+      
+      if (cursoSeleccionadoId) {
+        // Si hay un curso seleccionado, buscar ese curso específico
+        cursoEncontrado = cursosData.find(c => c.id === parseInt(cursoSeleccionadoId));
+        
+        if (!cursoEncontrado) {
+          showNotification('Curso no encontrado', 'error');
+          return;
+        }
+        
+        // En un caso real, aquí se validaría que el código corresponda a este curso específico
+        // Por ahora, solo verificamos que el curso exista y esté disponible
+        if (!cursoEncontrado.disponible) {
+          showNotification('Este curso no está disponible', 'error');
+          return;
+        }
+      } else {
+        // Si no hay curso seleccionado, buscar cualquier curso con el código
+        // En un caso real, esto vendría del backend con el código
+        // Por ahora, simulamos que el código es válido y tomamos el primer curso disponible
+        cursoEncontrado = cursosData.find(c => {
+          // En un caso real, aquí se validaría el código de acceso
+          // Por ahora, tomamos cualquier curso disponible
+          return c.disponible !== false;
+        });
+      }
 
       if (!cursoEncontrado) {
         showNotification('Código de acceso inválido o curso no disponible', 'error');
@@ -469,9 +492,21 @@
 
       // Limpiar formulario primero
       form.reset();
+      
+      // Limpiar atributos del curso seleccionado
+      const modalElement = document.getElementById('modalUnirseCurso');
+      if (modalElement) {
+        modalElement.removeAttribute('data-curso-id');
+        modalElement.removeAttribute('data-curso-nombre');
+      }
+      
+      // Restaurar título del modal
+      const modalTitle = document.querySelector('#modalUnirseCursoLabel');
+      if (modalTitle) {
+        modalTitle.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Unirse a un Curso';
+      }
 
       // Cerrar modal
-      const modalElement = document.getElementById('modalUnirseCurso');
       const modal = bootstrap.Modal.getInstance(modalElement);
       
       if (modal) {
@@ -530,36 +565,42 @@
       return;
     }
 
-    try {
-      // TODO: Reemplazar con llamada a API real
-      // const response = await fetch(`/api/alumno/cursos/${cursoId}/unirse`, {
-      //   method: 'POST'
-      // });
-
-      // Simulación
-      const nuevoCurso = {
-        id: curso.id,
-        nombre: curso.nombre,
-        profesor: curso.profesor,
-        progreso: 0
-      };
-
-      state.misCursos.push(nuevoCurso);
-      saveMisCursosToStorage(); // Guardar en localStorage
+    // Guardar el curso seleccionado para mostrarlo en el modal
+    const modalElement = document.getElementById('modalUnirseCurso');
+    if (modalElement) {
+      modalElement.setAttribute('data-curso-id', cursoId);
+      modalElement.setAttribute('data-curso-nombre', curso.nombre);
       
-      // Actualizar contador de estudiantes en el curso
-      updateCursoEstudiantes(curso.id, 1);
-      
-      // Recargar cursos disponibles para actualizar la lista
-      loadCursosDisponibles();
-      
-      renderMisCursos(state.misCursos);
-      updateStats();
+      // Mostrar información del curso en el modal (opcional)
+      const modalTitle = document.querySelector('#modalUnirseCursoLabel');
+      if (modalTitle) {
+        modalTitle.innerHTML = `<i class="fas fa-sign-in-alt me-2"></i>Unirse a: ${curso.nombre}`;
+      }
+    }
 
-      showNotification('Te has unido al curso exitosamente', 'success');
-    } catch (error) {
-      console.error('Error al unirse al curso:', error);
-      showNotification('Error al unirse al curso', 'error');
+    // Limpiar el campo de código de acceso
+    const codigoAccesoInput = document.getElementById('codigoAcceso');
+    if (codigoAccesoInput) {
+      codigoAccesoInput.value = '';
+    }
+
+    // Abrir el modal para ingresar el código de acceso
+    const modal = new bootstrap.Modal(document.getElementById('modalUnirseCurso'));
+    modal.show();
+    
+    // Restaurar el título original cuando se cierre el modal
+    if (modalElement) {
+      modalElement.addEventListener('hidden.bs.modal', function restoreTitle() {
+        const modalTitle = document.querySelector('#modalUnirseCursoLabel');
+        if (modalTitle) {
+          modalTitle.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Unirse a un Curso';
+        }
+        // Limpiar atributos del curso seleccionado
+        modalElement.removeAttribute('data-curso-id');
+        modalElement.removeAttribute('data-curso-nombre');
+        // Remover el listener después de usarlo
+        modalElement.removeEventListener('hidden.bs.modal', restoreTitle);
+      }, { once: true });
     }
   }
 
