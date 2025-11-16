@@ -424,10 +424,21 @@
       return;
     }
 
+    const fechaInicio = document.getElementById('cursoFechaInicio').value;
+    const fechaFin = document.getElementById('cursoFechaFin').value;
+
+    // Validar que fechaFin sea posterior a fechaInicio
+    if (new Date(fechaFin) <= new Date(fechaInicio)) {
+      showNotification('La fecha de fin debe ser posterior a la fecha de inicio', 'error');
+      return;
+    }
+
     const cursoData = {
       nombre: document.getElementById('cursoNombre').value,
       descripcion: document.getElementById('cursoDescripcion').value,
-      categoria: document.getElementById('cursoCategoria').value
+      categoria: document.getElementById('cursoCategoria').value,
+      fechaInicio: fechaInicio,
+      fechaFin: fechaFin
     };
 
     try {
@@ -703,11 +714,22 @@
   // ========== OTRAS FUNCIONES ==========
   function handleIniciarSesion(sesionId) {
     const sesion = state.sesiones.find(s => s.id === parseInt(sesionId));
-    if (!sesion) return;
+    if (!sesion) {
+      showNotification('Sesión no encontrada', 'error');
+      return;
+    }
 
-    // TODO: Integrar con Jitsi Meet
-    // Por ahora, redirigir a una página de sesión
-    window.location.href = `sesiones.html?id=${sesionId}`;
+    // Verificar que la sesión no haya pasado
+    const ahora = new Date();
+    const fechaSesion = new Date(sesion.fecha);
+    
+    if (fechaSesion < ahora) {
+      showNotification('Esta sesión ya ha finalizado', 'info');
+      return;
+    }
+
+    // Redirigir a la página de sesión con Jitsi Meet
+    window.location.href = `sesiones.html?id=${sesionId}&tipo=maestro`;
   }
 
   function handleVerSesionesCurso(cursoId) {

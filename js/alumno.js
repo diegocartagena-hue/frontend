@@ -752,18 +752,14 @@
     }
 
     // Verificar si el alumno está inscrito en el curso
-    const cursoInscrito = state.cursosInscritos.find(c => c.id === sesion.cursoId);
+    const cursoInscrito = state.misCursos.find(c => c.id === sesion.cursoId);
     if (!cursoInscrito) {
       showNotification('Debes estar inscrito en el curso para unirte a la sesión', 'error');
       return;
     }
 
-    // TODO: Integrar con Jitsi Meet
-    // Por ahora, redirigir a una página de sesión
-    showNotification('Redirigiendo a la sesión...', 'info');
-    setTimeout(() => {
-      window.location.href = `sesiones.html?id=${sesionId}&tipo=alumno`;
-    }, 1000);
+    // Redirigir a la página de sesión con Jitsi Meet
+    window.location.href = `sesiones.html?id=${sesionId}&tipo=alumno`;
   }
 
   // === OTRAS FUNCIONES ===
