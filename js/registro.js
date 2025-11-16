@@ -140,10 +140,10 @@ if (registroForm) {
     const nombre = document.getElementById('nombre')?.value.trim();
     const apellido = document.getElementById('apellido')?.value.trim();
     const correo = document.getElementById('correo')?.value.trim();
-    const telefono = document.getElementById('telefono')?.value.trim();
+    const telefono = document.getElementById('telefono')?.value.trim() || '';
     const terms = document.getElementById('terms');
 
-    if (!nombre || !apellido || !correo || !passwordInput?.value.trim() || !confirmPasswordInput?.value.trim() || !telefono) {
+    if (!nombre || !correo || !passwordInput?.value.trim() || !confirmPasswordInput?.value.trim()) {
       alert('Por favor, completa todos los campos obligatorios.');
       return;
     }
@@ -164,7 +164,7 @@ if (registroForm) {
       return;
     }
 
-    if (telefono.length < 10) {
+    if (telefono && telefono.length > 0 && telefono.length < 10) {
       alert('Por favor, ingresa un número de teléfono válido.');
       return;
     }
@@ -184,6 +184,47 @@ if (registroForm) {
     const formData = new FormData(registroForm);
     console.log('Datos de registro:', Object.fromEntries(formData.entries()));
 
-    alert('¡Registro enviado! (demostración)');
+    // Si es maestro, guardar solicitud para revisión del admin
+    if (maestroRadio?.checked && comprobanteInput?.files && comprobanteInput.files.length > 0) {
+      const comprobanteFile = comprobanteInput.files[0];
+      
+      // Leer el archivo como base64 o URL
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const solicitud = {
+          id: Date.now(),
+          nombre: nombre,
+          correo: correo,
+          telefono: telefono,
+          tipo: 'maestro',
+          comprobante: {
+            nombre: comprobanteFile.name,
+            tipo: comprobanteFile.type,
+            tamaño: comprobanteFile.size,
+            url: e.target.result // Base64 o URL
+          },
+          fecha: new Date().toISOString(),
+          estado: 'pending' // pending, approved, rejected
+        };
+
+        // Guardar en localStorage
+        try {
+          const solicitudesExistentes = localStorage.getItem('clasiya_solicitudes_maestros');
+          const solicitudes = solicitudesExistentes ? JSON.parse(solicitudesExistentes) : [];
+          solicitudes.push(solicitud);
+          localStorage.setItem('clasiya_solicitudes_maestros', JSON.stringify(solicitudes));
+          localStorage.setItem('clasiya_solicitudes_updated', Date.now().toString());
+          
+          alert('¡Solicitud enviada! Tu registro será revisado por un administrador. Te notificaremos cuando sea aprobado.');
+        } catch (error) {
+          console.error('Error al guardar solicitud:', error);
+          alert('Error al guardar la solicitud. Por favor, intenta nuevamente.');
+        }
+      };
+      reader.readAsDataURL(comprobanteFile);
+    } else {
+      // Si es alumno, registro directo
+      alert('¡Registro exitoso! Ya puedes iniciar sesión.');
+    }
   });
 }
